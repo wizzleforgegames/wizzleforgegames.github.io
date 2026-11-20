@@ -1,0 +1,13 @@
+{
+  "name": "Candy Carnival — Match 3",
+  "short_name": "Candy Carnival",
+  "start_url": "../index.html",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#180b2e",
+  "theme_color": "#1b1030",
+  "icons": [
+    { "src": "favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

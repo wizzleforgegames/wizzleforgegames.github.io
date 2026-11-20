@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#0d1226" />
+<title>Флаппи Космос: тапалка-сёрфер в одну кнопку — играть онлайн без скачивания на Яндекс Игры</title>
+<meta name="description" content="Космическая тапалка-сёрфер в одну кнопку: бесконечный раннер с метеоритами, кристаллами, спасением астронавтов и прокачкой станции между полётами. Играть онлайн на телефоне и компьютере без скачивания." />
+<meta name="keywords" content="флаппи, тапалка-сёрфер, тапалки, в одну кнопку, бесконечный раннер, сайд-скроллер, космос, метеориты, астероиды, сабвей серферы, флаппи бёрд, хомяк комбат, прокачка станции, играть онлайн без скачивания" />
+<meta property="og:title" content="Флаппи Космос: тапалка-сёрфер в одну кнопку" />
+<meta property="og:description" content="Тап даёт тягу вверх, гравитация тянет вниз. Уворачивайся от метеоритов, спасай астронавтов и качай станцию между полётами." />
+<meta property="og:image" content="assets/img/promo/cover_800x470.png" />
+<link rel="icon" type="image/x-icon" href="assets/img/promo/favicon.ico" />
+<link rel="icon" type="image/png" sizes="64x64" href="assets/img/promo/favicon.png" />
+<link rel="apple-touch-icon" href="assets/img/promo/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="style.css" />
+<script>
+/* Yandex Games SDK v2 — грузим только внутри платформы (в iframe или на домене Яндекса),
+   чтобы локальные тесты не светили служебные ошибки postMessage. */
+(function(){
+  var h = location.hostname || "";
+  var onYx = /(^|\.)(yandex\.(ru|com|net|by|kz|am|md|tm|kg|tj|az|uz|ee|lt|lv|ua|ge|uk)|yandexgames\.ru)$/.test(h);
+  var framed = false; try { framed = window.self !== window.top; } catch(e){ framed = true; }
+  if (onYx || framed) document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');
+})();
+</script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="g-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
+<symbol id="g-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></symbol>
+<symbol id="g-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="g-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="g-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.4M12 18.6V21M3 12h2.4M18.6 12H21M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/></symbol>
+<symbol id="g-sound" viewBox="0 0 24 24"><path d="M4 9h3l4-4v14l-4-4H4z"/><path d="M15 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+<symbol id="g-mute" viewBox="0 0 24 24"><path d="M4 9h3l4-4v14l-4-4H4z"/><path d="M15 9l6 6M21 9l-6 6"/></symbol>
+<symbol id="g-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="g-warn" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17h.01"/></symbol>
+<symbol id="g-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 8h.01"/></symbol>
+<symbol id="g-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></symbol>
+<symbol id="g-flag" viewBox="0 0 24 24"><path d="M6 21V4M6 5h11l-2 4 2 4H6"/></symbol>
+<symbol id="g-drone" viewBox="0 0 24 24"><circle cx="12" cy="13" r="3.4"/><path d="M4 6h4M16 6h4M6 6v4M18 6v4M8.6 11.4L6 8M15.4 11.4L18 8"/></symbol>
+<symbol id="g-bolt" viewBox="0 0 24 24"><path d="M13 3l-7 9h5l-1 9 8-11h-5z"/></symbol>
+<symbol id="g-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="g-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+<symbol id="g-swap" viewBox="0 0 24 24"><path d="M4 8h13l-3.4-3.4M20 16H7l3.4 3.4"/></symbol>
+<symbol id="g-bot" viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="10" rx="3"/><path d="M12 4.2V8M9.2 13h.01M14.8 13h.01M2.6 12v3M21.4 12v3"/></symbol>
+</svg>
+<div id="app">
+  <canvas id="game"></canvas>
+  <div id="vignette"></div>
+
+  <!-- ===== HUD ===== -->
+  <div id="hud" class="hidden">
+    <div class="hud-left">
+      <div class="chip chip-score"><span class="lbl" data-i18n="score">ОЧКИ</span><b id="scoreVal">0</b></div>
+      <div class="chip chip-dist"><span class="lbl" data-i18n="dist">ДИСТАНЦИЯ</span><b id="distVal">0</b></div>
+      <div id="trialChip" class="chip chip-trial hidden"><span class="lbl" data-i18n="trial_lbl">ПРОБА СЕКТОРА</span><b id="trialVal">60</b></div>
+    </div>
+    <div class="hud-right">
+      <div class="chip chip-coins"><img class="ico" src="assets/img/icons/ic_crystal.png" alt=""><b id="coinVal">0</b></div>
+      <div class="chip chip-exp hidden" id="expChip"><img class="ico" src="assets/img/icons/ic_expedition.png" alt=""><b id="expVal"></b></div>
+      <div id="shieldChip" class="chip chip-shield hidden"><span class="bubble"></span><b id="shieldVal">1</b></div>
+    </div>
+    <div class="sector"><span id="sectorName"></span><i><b id="sectorFill"></b></i></div>
+    <div id="comboBox" class="combo hidden"><span id="comboVal">x2</span><span class="cbar"><i id="comboBar"></i></span></div>
+    <div id="zoneBanner" class="zone-banner hidden"><span id="zoneName"></span></div>
+    <button id="pauseBtn" class="icon-btn" aria-label="Pause"><svg class="gl"><use href="#g-pause"/></svg></button>
+    <div id="powerTimers" class="power-timers"></div>
+  </div>
+
+  <!-- ===== MENU ===== -->
+  <div id="menu" class="overlay">
+    <div class="brand">
+      <h1 class="title" data-i18n="title">ФЛАППИ КОСМОС</h1>
+      <p class="subtitle" data-i18n="subtitle">БЕСКОНЕЧНЫЙ РАННЕР В ОДНУ КНОПКУ</p>
+    </div>
+    <div class="panel panel-menu">
+      <div class="stat-strip">
+        <div class="stat"><img class="ico" src="assets/img/icons/ic_rank.png" alt=""><span class="lbl" data-i18n="best">Рекорд</span><b id="menuBest">0</b></div>
+        <div class="stat"><img class="ico" src="assets/img/icons/ic_crystal.png" alt=""><span class="lbl" data-i18n="wallet">Кристаллы</span><b id="menuCoins">0</b></div>
+        <div class="stat"><img class="ico" src="assets/img/icons/ic_station.png" alt=""><span class="lbl" data-i18n="stationLvl">Станция</span><b id="menuLevel">1</b></div>
+        <div class="stat"><img class="ico" src="assets/img/icons/ic_mission.png" alt=""><span class="lbl" data-i18n="missions">Задания</span><b id="menuMissions">0/3</b></div>
+      </div>
+      <button id="playBtn" class="btn btn-primary"><img class="ico" src="assets/img/icons/ic_play.png" alt=""><span data-i18n="play">ИГРАТЬ</span></button>
+      <div id="nextHint" class="next-hint hidden"></div>
+
+      <div class="btn-row">
+        <button id="stationBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_station.png" alt=""><span data-i18n="station">Станция</span><i class="badge hidden" id="stationBadge"></i></button>
+        <button id="expBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_expedition.png" alt=""><span data-i18n="expeditions">Экспедиции</span><i class="badge hidden" id="expBadge"></i></button>
+        <button id="shopBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_dock.png" alt=""><span data-i18n="shop">Ангар</span></button>
+        <button id="missionsBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_mission.png" alt=""><span data-i18n="missions">Задания</span><i class="badge hidden" id="missionBadge"></i></button>
+        <button id="dailyBtn" class="btn btn-ghost btn-daily"><img class="ico" src="assets/img/icons/ic_daily.png" alt=""><span data-i18n="daily">Награда</span></button>
+        <button id="leaderboardBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_rank.png" alt=""><span data-i18n="leaderboard">Рекорды</span></button>
+        <button id="storeBtn" class="btn btn-ghost btn-store"><img class="ico" src="assets/img/icons/ic_store.png" alt=""><span data-i18n="store">Магазин</span><i class="lbl-sm" data-i18n="storeSub">ускорители и дроны</i></button>
+      </div>
+      <div class="btn-row">
+        <button id="howBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_sector.png" alt=""><span data-i18n="howto">Как играть</span></button>
+        <button id="settingsBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_tech.png" alt=""><span data-i18n="settings">Настройки</span></button>
+      </div>
+      <div class="totals" id="menuTotals"></div>
+    </div>
+    <div class="ship-preview"><img id="previewShip" src="assets/img/ship/craft_racer.png" alt=""></div>
+  </div>
+
+  <!-- ===== STATION (tech tree, income, resources) ===== -->
+  <div id="station" class="overlay hidden">
+    <div class="panel panel-wide">
+      <div class="panel-head"><h2><img class="ico" src="assets/img/icons/ic_station.png" alt=""><span data-i18n="station">Станция</span>
+        <b class="lvl" id="stLevel"></b></h2>
+        <button id="stationCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <div class="income-box">
+        <div class="income-rate"><img class="ico" src="assets/img/icons/ic_crystal.png" alt="">
+          <b id="stRate">0</b><span class="lbl" data-i18n="perMin">/мин</span></div>
+        <div class="mbar wide"><i id="stBar"></i></div>
+        <button id="claimBtn" class="btn btn-daily"><img class="ico" src="assets/img/icons/ic_crystal.png" alt="">
+          <span id="claimTxt">0</span></button>
+        <button id="bank2Btn" class="btn btn-ghost mini-ad hidden"><svg class="gl"><use href="#g-bolt"/></svg><span>2×</span></button>
+      </div>
+      <div id="droneLine" class="drone-line hidden"></div>
+      <div id="botLine" class="bot-line hidden"></div>
+      <div id="buildBox" class="build-box hidden"></div>
+      <div id="stNext" class="next-goal hidden"></div>
+      <div id="prestigeBox" class="pr-box hidden"></div>
+      <div class="tier-head"><span data-i18n="tier">Тир</span> <b id="tierNum">1</b>
+        <span class="lbl" data-i18n="tierHint">— выбери одну технологию</span></div>
+      <div id="techList" class="tech-list"></div>
+      <div id="benchBox" class="bench-box hidden"></div>
+      <div class="res-head"><span data-i18n="resources">Ресурсы</span></div>
+      <div id="resStrip" class="res-strip"></div>
+    </div>
+  </div>
+
+  <!-- ===== EXPEDITIONS ===== -->
+  <div id="expedition" class="overlay hidden">
+    <div class="panel panel-wide">
+      <div class="panel-head"><h2><img class="ico" src="assets/img/icons/ic_expedition.png" alt=""><span data-i18n="expeditions">Экспедиции</span></h2>
+        <button id="expCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <div id="expState" class="exp-state"></div>
+      <div id="seasonBox" class="season-box hidden"></div>
+      <div id="crewBox" class="crew-box hidden"></div>
+      <div id="expList" class="exp-list"></div>
+    </div>
+  </div>
+
+  <!-- ===== STORE: rewarded speed-ups (п.12) + real-money automation (п.13) ===== -->
+  <div id="store" class="overlay hidden">
+    <div class="panel panel-wide">
+      <div class="panel-head"><h2><img class="ico" src="assets/img/icons/ic_store.png" alt=""><span data-i18n="store">Магазин</span>
+        <span class="lbl lbl-sm" data-i18n="storeSub">ускорители и дроны</span></h2>
+        <button id="storeCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <div class="tier-head"><span data-i18n="ad_go">за рекламу</span><i></i></div>
+      <div id="adList" class="iap-list"></div>
+      <div class="tier-head"><span data-i18n="iap_title">Покупки</span><i></i></div>
+      <div id="iapNote" class="hint hidden"></div>
+      <div id="iapList" class="iap-list"></div>
+    </div>
+  </div>
+
+  <!-- ===== HOW TO ===== -->
+  <div id="howto" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-head"><h2><svg class="gl"><use href="#g-info"/></svg><span data-i18n="howto">Как играть</span></h2>
+        <button id="howBackBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <ul class="how-list">
+        <li><b data-i18n="h1">Тап / клик / пробел</b> <span data-i18n="h1b">— тяга вверх, гравитация тянет вниз</span></li>
+        <li><img class="ico" src="assets/img/obs/meteor.png" alt=""> <span data-i18n="h2">Уворачивайся от метеоритов, спутников и обломков</span></li>
+        <li><img class="ico" src="assets/img/obs/rock_crystalsLargeA.png" alt=""> <span data-i18n="h3">Собирай кристаллы — за них улучшают корабли</span></li>
+        <li><img class="ico" src="assets/img/char/astronautA.png" alt=""> <span data-i18n="h4">Спасай астронавтов и пришельцев — бонус к очкам</span></li>
+        <li><img class="ico" src="assets/img/icons/ic_shield.png" alt=""> <span data-i18n="h5">Бери бусты: щит, магнит, ускорение</span></li>
+        <li><img class="ico" src="assets/img/icons/ic_rank.png" alt=""> <span data-i18n="h6">Цепочка подборов = множитель комбо до x5</span></li>
+      </ul>
+      <button id="howCloseBtn" class="btn btn-primary"><span data-i18n="gotit">Понятно</span></button>
+    </div>
+  </div>
+
+  <!-- ===== SHOP ===== -->
+  <div id="shop" class="overlay hidden">
+    <div class="panel panel-wide">
+      <div class="panel-head"><h2><img class="ico" src="assets/img/icons/ic_dock.png" alt=""><span data-i18n="shop">Ангар</span><span class="wallet"><img class="ico" src="assets/img/icons/ic_crystal.png" alt=""><b id="shopWallet">0</b></span></h2>
+        <button id="shopCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <div id="shipList" class="ship-grid"></div>
+    </div>
+  </div>
+
+  <!-- ===== MISSIONS ===== -->
+  <div id="missions" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-head"><h2><img class="ico" src="assets/img/icons/ic_mission.png" alt=""><span data-i18n="missions">Задания</span></h2>
+        <button id="missionsCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <div id="missionList" class="mission-list"></div>
+    </div>
+  </div>
+
+  <!-- ===== DAILY ===== -->
+  <div id="daily" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-head"><h2><img class="ico" src="assets/img/icons/ic_daily.png" alt=""><span data-i18n="daily">Ежедневная награда</span></h2>
+        <button id="dailyCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <div id="dailyGrid" class="daily-grid"></div>
+      <button id="dailyClaimBtn" class="btn btn-daily"><img class="ico" src="assets/img/icons/ic_crystal.png" alt=""><span data-i18n="claim">Забрать</span></button>
+    </div>
+  </div>
+
+  <!-- ===== LEADERBOARD ===== -->
+  <div id="leaderboard" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-head"><h2><img class="ico" src="assets/img/icons/ic_rank.png" alt=""><span data-i18n="leaderboard">Рекорды</span></h2>
+        <button id="leaderboardCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <div id="leaderboardList" class="lb-list"></div>
+    </div>
+  </div>
+
+  <!-- ===== SETTINGS ===== -->
+  <div id="settings" class="overlay hidden">
+    <div class="panel">
+      <div class="panel-head"><h2><svg class="gl"><use href="#g-gear"/></svg><span data-i18n="settings">Настройки</span></h2>
+        <button id="settingsCloseBtn" class="btn btn-ghost btn-back"><svg class="gl"><use href="#g-back"/></svg><span data-i18n="back">Назад</span></button></div>
+      <button id="musicToggleBtn" class="btn btn-ghost"><svg class="gl"><use href="#g-sound"/></svg><span data-i18n="music">Музыка: вкл</span></button>
+      <button id="sfxToggleBtn" class="btn btn-ghost"><svg class="gl"><use href="#g-sound"/></svg><span data-i18n="sfx">Звуки: вкл</span></button>
+      <button id="langBtn" class="btn btn-ghost"><svg class="gl"><use href="#g-globe"/></svg><span>Язык: RU / EN</span></button>
+      <button id="resetBtn" class="btn btn-ghost btn-danger"><svg class="gl"><use href="#g-warn"/></svg><span data-i18n="reset">Сбросить прогресс</span></button>
+    </div>
+  </div>
+
+  <!-- ===== PAUSE ===== -->
+  <div id="pause" class="overlay hidden">
+    <div class="panel">
+      <h2 data-i18n="paused">ПАУЗА</h2>
+      <div class="hint" id="pauseScore"></div>
+      <button id="resumeBtn" class="btn btn-primary"><svg class="gl"><use href="#g-play"/></svg><span data-i18n="resume">Продолжить</span></button>
+      <button id="pauseLeaderboardBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_rank.png" alt=""><span data-i18n="leaderboard">Рекорды</span></button>
+      <button id="pauseMenuBtn" class="btn btn-ghost"><svg class="gl"><use href="#g-home"/></svg><span data-i18n="menue">В меню</span></button>
+    </div>
+  </div>
+
+  <!-- ===== GAME OVER ===== -->
+  <div id="gameover" class="overlay hidden">
+    <div class="panel">
+      <h2 class="go-title" data-i18n="gameover">ПОРАЖЕНИЕ</h2>
+      <div class="go-grid">
+        <div class="go-cell"><span class="lbl" data-i18n="score">Очки</span><b id="goScore">0</b></div>
+        <div class="go-cell"><span class="lbl" data-i18n="dist">Дистанция</span><b id="goDist">0</b></div>
+        <div class="go-cell"><span class="lbl" data-i18n="crystals">Кристаллы</span><b id="goCoins">0</b></div>
+        <div class="go-cell"><span class="lbl" data-i18n="rescued">Спасено</span><b id="goRescued">0</b></div>
+      </div>
+      <div class="stat-row"><span data-i18n="best">Рекорд</span><b id="goBest">0</b></div>
+      <div id="goRecord" class="rec-badge hidden"><img class="ico" src="assets/img/icons/ic_rank.png" alt=""><span data-i18n="newrecord">НОВЫЙ РЕКОРД!</span></div>
+      <div id="goMission" class="go-mission"></div>
+      <button id="reviveBtn" class="btn btn-daily"><svg class="gl"><use href="#g-bolt"/></svg><span data-i18n="revive">Продолжить за рекламу</span></button>
+      <button id="doubleBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_crystal.png" alt=""><span data-i18n="double">2× кристаллы за рекламу</span></button>
+      <button id="retryBtn" class="btn btn-primary"><svg class="gl"><use href="#g-play"/></svg><span data-i18n="again">Ещё раз</span></button>
+      <div class="btn-row">
+        <button id="overLeaderboardBtn" class="btn btn-ghost"><img class="ico" src="assets/img/icons/ic_rank.png" alt=""><span data-i18n="leaderboard">Рекорды</span></button>
+        <button id="menuBtn" class="btn btn-ghost"><svg class="gl"><use href="#g-home"/></svg><span data-i18n="menue">В меню</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <div id="loading" class="loading"><div class="spinner"></div><span data-i18n="loading">Загрузка…</span></div>
+</div>
+<script src="src/i18n.js"></script>
+<script src="src/sdk.js"></script>
+<script src="src/save.js"></script>
+<script src="src/audio.js"></script>
+<script src="src/assets.js"></script>
+<script src="src/meta.js"></script>
+<script src="src/game.js"></script>
+<script src="src/ui.js"></script>
+</body>
+</html>

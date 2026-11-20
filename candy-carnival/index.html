@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#1b1030" />
+<title>Candy Carnival — Match 3</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="assets/favicon.ico" type="image/x-icon"/>
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png"/>
+<link rel="manifest" href="assets/site.webmanifest"/>
+
+<!-- Yandex Games SDK (served by the platform) -->
+<script src="/sdk.js"></script>
+</head>
+<body>
+
+<!-- shared SVG gradients: defined ONCE, referenced by every star / badge (fast, no duplicate ids) -->
+<svg id="svgdefs" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <linearGradient id="stara" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset=".5" stop-color="#ffd76a"/><stop offset="1" stop-color="#ff9a3c"/></linearGradient>
+    <linearGradient id="starb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbb8e8"/><stop offset="1" stop-color="#6b5a8a"/></linearGradient>
+    <linearGradient id="rbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5ea7"/><stop offset=".4" stop-color="#ffd76a"/><stop offset=".7" stop-color="#7ef0a0"/><stop offset="1" stop-color="#6ee7ff"/></linearGradient>
+  </defs>
+</svg>
+
+<!-- ===== background layers ===== -->
+<div id="bg">
+  <svg id="bg-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#1d0f3a"/><stop offset=".42" stop-color="#31175c"/>
+   <stop offset=".74" stop-color="#4a2278"/><stop offset="1" stop-color="#180b2e"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".5" cy=".82" r=".62">
+   <stop offset="0" stop-color="#ffb45e" stop-opacity=".40"/><stop offset=".5" stop-color="#ff5ea7" stop-opacity=".18"/>
+   <stop offset="1" stop-color="#ff5ea7" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="tent" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#6f37a8"/><stop offset="1" stop-color="#2b1450"/>
+  </linearGradient>
+  <linearGradient id="tent2" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#8c45c0"/><stop offset="1" stop-color="#3a1a63"/>
+  </linearGradient>
+  <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#33165a"/><stop offset="1" stop-color="#150a28"/>
+  </linearGradient>
+  <pattern id="stripes" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+   <rect width="26" height="26" fill="#ff6fae"/><rect width="13" height="26" fill="#ffd76a"/>
+  </pattern>
+  <pattern id="stripes2" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-10)">
+   <rect width="22" height="22" fill="#6ee7ff"/><rect width="11" height="22" fill="#2f6fb8"/>
+  </pattern>
+  <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
+ </defs>
+ <rect width="1600" height="900" fill="url(#sky)"/>
+ <g fill="#fff" opacity=".6">
+  <circle cx="120" cy="90" r="2.4"/><circle cx="300" cy="150" r="1.8"/><circle cx="470" cy="70" r="2.2"/>
+  <circle cx="640" cy="180" r="1.6"/><circle cx="820" cy="60" r="2.6"/><circle cx="980" cy="140" r="1.7"/>
+  <circle cx="1180" cy="80" r="2.2"/><circle cx="1360" cy="170" r="1.8"/><circle cx="1520" cy="100" r="2.4"/>
+  <circle cx="220" cy="240" r="1.5"/><circle cx="760" cy="260" r="1.7"/><circle cx="1290" cy="250" r="1.5"/>
+  <circle cx="60" cy="330" r="1.6"/><circle cx="1560" cy="300" r="1.6"/>
+ </g>
+ <ellipse cx="800" cy="760" rx="620" ry="240" fill="url(#glow)"/>
+
+ <!-- ferris wheel, dead centre so any crop still shows it -->
+ <g class="fwheel">
+  <g stroke="#9b78dd" stroke-width="6" opacity=".95">
+   <line x1="800" y1="330" x2="800" y2="790"/><line x1="570" y1="560" x2="1030" y2="560"/>
+   <line x1="638" y1="398" x2="962" y2="722"/><line x1="962" y1="398" x2="638" y2="722"/>
+  </g>
+  <circle cx="800" cy="560" r="230" fill="none" stroke="#c3a4f7" stroke-width="8"/>
+  <circle cx="800" cy="560" r="192" fill="none" stroke="#7b57b8" stroke-width="4"/>
+  <g fill="#ffd76a">
+   <circle cx="800" cy="330" r="10"/><circle cx="800" cy="790" r="10"/>
+   <circle cx="570" cy="560" r="10"/><circle cx="1030" cy="560" r="10"/>
+   <circle cx="638" cy="398" r="10"/><circle cx="962" cy="722" r="10"/>
+   <circle cx="962" cy="398" r="10"/><circle cx="638" cy="722" r="10"/>
+  </g>
+  <g fill="#ff6fae" stroke="#ffd76a" stroke-width="2">
+   <rect x="784" y="316" width="32" height="22" rx="7"/><rect x="784" y="782" width="32" height="22" rx="7"/>
+   <rect x="556" y="546" width="32" height="22" rx="7"/><rect x="1012" y="546" width="32" height="22" rx="7"/>
+   <rect x="624" y="384" width="32" height="22" rx="7"/><rect x="944" y="716" width="32" height="22" rx="7"/>
+   <rect x="944" y="384" width="32" height="22" rx="7"/><rect x="624" y="716" width="32" height="22" rx="7"/>
+  </g>
+  <circle cx="800" cy="560" r="28" fill="#3a1a63" stroke="#ffd76a" stroke-width="6"/>
+ </g>
+ <path d="M800 560 L716 860 M800 560 L884 860 M800 560 L800 860" stroke="#552f8c" stroke-width="11" fill="none"/>
+
+ <!-- carousel (left) -->
+ <g>
+  <path d="M120 660 L250 534 L380 660 Z" fill="url(#stripes)" stroke="#ffd76a" stroke-width="4"/>
+  <path d="M250 534 l0 -36" stroke="#ffd76a" stroke-width="4"/><path d="M250 498 l36 11 -36 11 z" fill="#ff6fae"/>
+  <rect x="136" y="660" width="228" height="130" rx="12" fill="url(#tent)" stroke="#7b57b8" stroke-width="3"/>
+  <g fill="#ffd76a"><circle cx="176" cy="722" r="13"/><circle cx="250" cy="722" r="13"/><circle cx="324" cy="722" r="13"/></g>
+  <rect x="150" y="790" width="200" height="70" fill="#1d0d38"/>
+ </g>
+ <!-- booths (right) -->
+ <g>
+  <rect x="1230" y="700" width="180" height="160" rx="12" fill="url(#tent)" stroke="#7b57b8" stroke-width="3"/>
+  <path d="M1218 700 L1320 636 L1422 700 Z" fill="url(#stripes2)" stroke="#6ee7ff" stroke-width="3"/>
+  <rect x="1262" y="744" width="48" height="48" rx="8" fill="#ffd76a" opacity=".92"/>
+  <rect x="1332" y="744" width="48" height="48" rx="8" fill="#ff6fae" opacity=".88"/>
+  <rect x="1440" y="726" width="160" height="134" rx="12" fill="url(#tent2)" stroke="#7b57b8" stroke-width="3"/>
+  <path d="M1428 726 L1520 668 L1612 726 Z" fill="url(#stripes)" stroke="#ffd76a" stroke-width="3"/>
+  <rect x="1478" y="768" width="46" height="46" rx="8" fill="#6ee7ff" opacity=".9"/>
+ </g>
+ <!-- small big-top (left back) -->
+ <path d="M420 800 L520 640 L620 800 Z" fill="url(#tent2)" stroke="#ffd76a" stroke-width="3"/>
+ <path d="M520 640 l0 -30" stroke="#ffd76a" stroke-width="3"/><path d="M520 610 l30 9 -30 9 z" fill="#6ee7ff"/>
+
+ <!-- bunting -->
+ <path d="M0 110 Q400 205 800 120 T1600 140" fill="none" stroke="#7b57b8" stroke-width="4"/>
+ <g>
+  <path d="M120 142 l17 42 17 -36 z" fill="#ff6fae"/><path d="M260 168 l17 42 17 -36 z" fill="#ffd76a"/>
+  <path d="M400 180 l17 42 17 -36 z" fill="#6ee7ff"/><path d="M540 172 l17 42 17 -36 z" fill="#7ef0a0"/>
+  <path d="M680 148 l17 42 17 -36 z" fill="#ff9a3c"/><path d="M820 128 l17 42 17 -36 z" fill="#b197ff"/>
+  <path d="M960 126 l17 42 17 -36 z" fill="#ff6fae"/><path d="M1100 132 l17 42 17 -36 z" fill="#ffd76a"/>
+  <path d="M1240 138 l17 42 17 -36 z" fill="#6ee7ff"/><path d="M1380 142 l17 42 17 -36 z" fill="#7ef0a0"/>
+ </g>
+ <rect y="858" width="1600" height="42" fill="url(#ground)"/>
+ <g fill="#ffd76a" opacity=".85" filter="url(#soft)">
+  <circle cx="180" cy="846" r="7"/><circle cx="420" cy="852" r="7"/><circle cx="660" cy="846" r="7"/>
+  <circle cx="900" cy="852" r="7"/><circle cx="1140" cy="846" r="7"/><circle cx="1380" cy="852" r="7"/>
+ </g>
+</svg>
+  <div class="bg-img"></div>
+  <div class="bg-beams"><i></i><i></i></div>
+  <div class="bg-veil"></div>
+  <div class="bg-lights"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="bg-stars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<!-- ===== game shell ===== -->
+<div id="app">
+  <header id="topbar">
+    <div class="chip chip-lvl"><span class="chip-k" data-i18n="levelShort">LVL</span><span class="chip-v" id="lvl">1</span></div>
+    <div class="stars" id="starrow" aria-hidden="true"></div>
+    <div class="grow"></div>
+    <div class="chip chip-coin"><img class="coin-ic" src="assets/tiles/coin.png" alt=""/><span class="chip-v" id="coins">0</span></div>
+    <button class="iconbtn" id="shopbtn" title="Shop" aria-label="Shop">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8Z" fill="currentColor"/><path d="M9 8a3 3 0 0 1 6 0" stroke="#2a1745" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+    </button>
+    <button class="iconbtn" id="lvlbtn" title="Levels" aria-label="Levels">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19a1 1 0 0 1 1 1v13.5a2.5 2.5 0 0 1-2.5 2.5H7.5A2.5 2.5 0 0 1 5 17.5V6.5A1.5 1.5 0 0 0 3.5 5 1 1 0 0 1 4 5.5Z" fill="currentColor"/><path d="M8 7h8M8 10.5h8M8 14h5" stroke="#2a1745" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <button class="iconbtn" id="journalbtn" title="Journal" aria-label="Journal">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4.5 4.2A1.7 1.7 0 0 1 6.2 2.5h11.6a1.7 1.7 0 0 1 1.7 1.7v15.6a1.7 1.7 0 0 1-1.7 1.7H6.2a1.7 1.7 0 0 1-1.7-1.7V4.2Z" fill="currentColor"/><path d="M12 6.6l1.5 3 3.3.5-2.4 2.3.6 3.3-3-1.6-3 1.6.6-3.3-2.4-2.3 3.3-.5 1.5-3Z" fill="#2a1745"/></svg>
+    </button>
+    <button class="iconbtn" id="setbtn" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Z" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M19.4 13.6a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.11a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.11A1.7 1.7 0 0 0 4.67 8.8a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h.08A1.7 1.7 0 0 0 10.13 3.4V3a2 2 0 1 1 4 0v.11a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08a1.7 1.7 0 0 0 1.56 1.03H21a2 2 0 1 1 0 4h-.11a1.7 1.7 0 0 0-1.49 1.03Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+    <button class="iconbtn" id="soundbtn" title="Sound" aria-label="Sound">
+      <svg class="ic-on" viewBox="0 0 24 24" width="22" height="22"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1Z" fill="currentColor"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      <svg class="ic-off" viewBox="0 0 24 24" width="22" height="22"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1Z" fill="currentColor"/><path d="M16 9.5l5 5M21 9.5l-5 5" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round"/></svg>
+    </button>
+  </header>
+
+  <div id="hud">
+    <div class="hud-score">
+      <span class="hud-k" data-i18n="score">Score</span>
+      <span class="hud-v" id="score">0</span>
+    </div>
+    <div class="prog"><div class="prog-fill" id="progfill"></div></div>
+    <div class="goals" id="goals"></div>
+    <div class="parade hidden" id="paradebox">
+      <span class="parade-k" id="paradelabel">Parade</span>
+      <div class="parade-bar"><i id="paradefill"></i></div>
+    </div>
+    <div class="gadgets hidden" id="gadgets"></div>
+    <div class="orders hidden" id="orders"></div>
+    <div class="tilt hidden" id="tiltbox"></div>
+    <div class="band hidden" id="bandbox"></div>
+  </div>
+
+  <div id="boardwrap">
+    <div class="frame" id="boardframe"><i class="bl"></i><i class="br"></i></div>
+    <div class="garland" id="garland"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div id="board"></div>
+    <div id="combo" class="combo"></div>
+    <div id="toast" class="toast"></div>
+    <div id="intro" class="intro"></div>
+  </div>
+
+  <footer id="bottombar">
+    <div class="moves" id="movesbox">
+      <div class="moves-v" id="movesleft">20</div>
+      <div class="moves-k" data-i18n="moves">moves</div>
+    </div>
+    <button class="hintbtn" id="hintbtn" title="Hint" aria-label="Hint">
+      <svg viewBox="0 0 24 24" width="24" height="24"><path d="M12 2.8a6.4 6.4 0 0 1 3.6 11.7c-.7.5-1.1 1.2-1.2 2h-4.8c-.1-.8-.5-1.5-1.2-2A6.4 6.4 0 0 1 12 2.8Z" fill="currentColor"/><path d="M9.6 18.4h4.8M10.4 21h3.2" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+      <span data-i18n="hintWord">Подсказка</span>
+    </button>
+    <div class="boosters">
+      <button class="boost" id="b-hammer" data-booster="hammer">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M4.2 19.6 12 11.8l2.2 2.2-7.8 7.8a1.6 1.6 0 0 1-2.2-2.2Z" fill="currentColor"/><path d="M10.4 4.6 13 2.6a1.5 1.5 0 0 1 2.1.2l5.4 5.6a1.5 1.5 0 0 1-.2 2.1l-2.4 1.9Z" fill="currentColor"/><path d="M12.2 12.4l3-2.4 3.6 3.7-3 2.4Z" fill="currentColor" opacity=".75"/></svg>
+        <span class="qty zero" id="q-hammer">0</span>
+        <span class="cost"><i class="ci"></i><b>40</b></span>
+      </button>
+      <button class="boost" id="b-rainbow" data-booster="rainbow">
+        <svg viewBox="0 0 24 24" width="26" height="26"><circle cx="12" cy="12" r="8.4" fill="url(#rbg)" stroke="#fff" stroke-width="1.2"/><circle cx="9.2" cy="9.2" r="2.2" fill="#fff" opacity=".85"/></svg>
+        <span class="qty zero" id="q-rainbow">0</span>
+        <span class="cost"><i class="ci"></i><b>80</b></span>
+      </button>
+      <button class="boost" id="b-shuffle" data-booster="shuffle">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M4 7h4.5l8 10H21M4 17h4.5l2.2-2.8M14.6 9.1 16.5 7H21" stroke="currentColor" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.6 4.4 21.4 7l-2.8 2.6M18.6 14.4l2.8 2.6-2.8 2.6" stroke="currentColor" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="qty zero" id="q-shuffle">0</span>
+        <span class="cost"><i class="ci"></i><b>30</b></span>
+      </button>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== splash ===== -->
+<div id="splash">
+  <div class="splash-art"></div>
+  <div class="splash-float" aria-hidden="true">
+    <img src="assets/tiles/p0_0.png" style="left:6%;top:12%;--s:74px;--d:0s" alt=""/>
+    <img src="assets/tiles/p0_3.png" style="right:7%;top:16%;--s:86px;--d:.6s" alt=""/>
+    <img src="assets/tiles/p0_4.png" style="left:10%;bottom:16%;--s:80px;--d:1.1s" alt=""/>
+    <img src="assets/tiles/p0_1.png" style="right:9%;bottom:12%;--s:70px;--d:.3s" alt=""/>
+    <img src="assets/tiles/coin.png" style="left:44%;top:5%;--s:56px;--d:.9s" alt=""/>
+    <img src="assets/tiles/p0_2.png" style="right:34%;bottom:4%;--s:60px;--d:1.4s" alt=""/>
+  </div>
+  <div class="splash-inner">
+    <div class="splash-bunting"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="logo">
+      <span class="logo-a">Candy</span><span class="logo-b">Carnival</span>
+    </div>
+    <div class="logo-tiles"><img src="assets/tiles/p0_0.png" alt=""/><img src="assets/tiles/p0_1.png" alt=""/><img src="assets/tiles/p0_4.png" alt=""/><img src="assets/tiles/p0_2.png" alt=""/><img src="assets/tiles/p0_3.png" alt=""/></div>
+    <p class="splash-sub" data-i18n="tagline">Сладкие матч-3 на ночном карнавале</p>
+    <button id="playbtn" class="splash-play"><span id="playlabel" data-i18n="playbtn">Играть</span></button>
+    <p class="splash-hint" id="playsub"></p>
+    <button id="dailybtn" class="daily-plaque hidden" type="button">
+      <span class="daily-tag" data-i18n="dailyTag">Атракцион дня</span>
+      <span class="daily-name" id="dailyname"></span>
+      <span class="daily-note" id="dailynote"></span>
+    </button>
+    <div class="splash-row">
+      <button id="wheelbtn" class="ghostbtn gold" data-i18n="wheel">Колесо фортуны</button>
+      <button id="howbtn" class="ghostbtn" data-i18n="howto">Как играть</button>
+    </div>
+    <div class="splash-foot">
+      <button id="soundbtn2" class="ghostbtn" data-i18n="sound">Звук: вкл</button>
+      <span class="ver">v6.4 · candy art: Ville Seppänen, CC BY 4.0</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== how to play ===== -->
+<div id="howto" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card howto-card">
+    <div class="modal-head"><span data-i18n="howto">Как играть</span><button class="xbtn" id="howclose" aria-label="close">✕</button></div>
+    <ul class="how-list">
+      <li><img src="assets/tiles/p0_0.png" alt=""/><span data-i18n="how1">Меняй соседние лакомства местами — собирай 3 и больше в ряд.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><circle cx="12" cy="12" r="9" fill="none" stroke="#6ee7ff" stroke-width="2.4" stroke-dasharray="8 5"/><path d="M12 4v16M4 12h16" stroke="#6ee7ff" stroke-width="2.2" stroke-linecap="round"/></svg></span><span data-i18n="how2">4 в ряд — «Спираль» сметает линию, 5 в ряд — «Радуга» убирает весь цвет.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><circle cx="12" cy="13.5" r="7" fill="#ff9a3c"/><path d="M15 6.5c1.6-1.8 3.4-2 4.6-1.2" stroke="#ffd76a" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="9.6" cy="11" r="2" fill="#fff" opacity=".7"/></svg></span><span data-i18n="how3">Фигура L или T — «Бомба» взрывает область 3×3.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><rect x="4" y="4" width="16" height="16" rx="5" fill="rgba(160,220,255,.75)" stroke="#eaf6ff" stroke-width="1.6"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="1.6" opacity=".8"/></svg></span><span data-i18n="how5">Лакомства во льду: разбивай лёд совпадениями рядом или взрывами.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><g fill="none" stroke="#cbb8e8" stroke-width="2.6" stroke-linecap="round"><ellipse cx="8" cy="8" rx="4.2" ry="3.2" transform="rotate(-40 8 8)"/><ellipse cx="12.4" cy="12.2" rx="4.2" ry="3.2" transform="rotate(-40 12.4 12.2)"/><ellipse cx="16.8" cy="16.4" rx="4.2" ry="3.2" transform="rotate(-40 16.8 16.4)"/></g></svg></span><span data-i18n="how6">Цепи держат лакомство на месте — строй совпадение вокруг него.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M4 10c0-3.4 3.6-5.6 8-5.6s8 2.2 8 5.6v6.4c0 1.6-1.2 2.8-2.8 2.8H6.8C5.2 19.2 4 18 4 16.4V10Z" fill="#8a4a1e" stroke="#ffd76a" stroke-width="1.6"/><path d="M8 14.4h8" stroke="#ff9a3c" stroke-width="1.8" stroke-linecap="round"/></svg></span><span data-i18n="how7">Карамель не двигается и расползается, если её не трогать. Сожги её взрывами.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M4 8h16M20 16H4M16 4l4 4-4 4M8 12l-4 4 4 4" fill="none" stroke="#ffd76a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span data-i18n="how8">Карусель: верхний и нижний ряды поля едут после каждого хода.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 16.8 6.6 19.6l1.2-6L3.3 9.4l6.1-.8Z" fill="url(#rbg)" stroke="#fff" stroke-width="1.2"/></svg></span><span data-i18n="how9">Наполни шкалу парада — и карнавал сам выдаст спец-фигуры и удвоит очки.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 2.5l3.4 7.6 7.6 3.4-7.6 3.4L12 24.5l-3.4-7.6L1 13.5l7.6-3.4z" fill="#ffd76a" opacity=".9"/><circle cx="12" cy="13.5" r="3.4" fill="#fff"/></svg></span><span data-i18n="how10">По полю бродит луч прожектора: совпадения в свете дают тройные очки.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><circle cx="12" cy="9" r="7" fill="none" stroke="#ff9a3c" stroke-width="2.6"/><circle cx="12" cy="9" r="3" fill="#ffd76a"/><path d="M12 16v5.4" stroke="#c9b8e8" stroke-width="2.4" stroke-linecap="round"/></svg></span><span data-i18n="how11">Мишени прикручены к полю — сбивай лакомство прямо с них.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><ellipse cx="10" cy="8.6" rx="5.6" ry="6.6" fill="#ff5ea7" stroke="#ffd0e4" stroke-width="1.4"/><ellipse cx="8" cy="6.4" rx="1.7" ry="2.2" fill="#fff" opacity=".75"/><path d="M10 17.4c1.6 1.4-1.6 2.4 0 4" stroke="#c9b8e8" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></span><span data-i18n="how12">Шары поднимаются на ряд каждый ход. Улетит — минус ход.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M12 3v18M12 3l-4 4M12 3l4 4" stroke="#6ee7ff" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M4 21h16" stroke="#ffd76a" stroke-width="2.4" stroke-linecap="round"/></svg></span><span data-i18n="how13">На перевёрнутом аттракционе гравитация меняется каждые несколько ходов.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M4 18V7l12-3v10" fill="none" stroke="#7ef0a0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="18.5" r="2.6" fill="#7ef0a0"/><circle cx="16" cy="15.5" r="2.6" fill="#7ef0a0"/></svg></span><span data-i18n="how14">Серия результативных ходов: оркестр выдаст спираль, а потом радугу.</span></li>
+      <li><span class="how-ic"><svg viewBox="0 0 24 24" width="34" height="34"><path d="M3 16c3-6 7-9 9-9s6 3 9 9" fill="none" stroke="#ff5ea7" stroke-width="2.4" stroke-linecap="round"/><path d="M8 20l1.6-3.4M16 20l-1.6-3.4M12 20.5v-4" stroke="#ffd76a" stroke-width="2.2" stroke-linecap="round"/></svg></span><span data-i18n="how15">Наполни шкалу парада и нажми на неё — парад в твой момент.</span></li>
+      <li><img src="assets/tiles/coin.png" alt=""/><span data-i18n="how4">Выигрывай уровни, получай билеты и открывай бустеры в магазине.</span></li>
+    </ul>
+    <div class="modal-foot"><button class="bigbtn" id="howok" data-i18n="gotit">Понятно</button></div>
+  </div>
+</div>
+
+<!-- ===== level select ===== -->
+<div id="journal" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card journal-card">
+    <div class="modal-head"><span data-i18n="journalTitle">Carnival journal</span><button class="xbtn" id="journalclose" aria-label="close">✕</button></div>
+    <div class="journal-grid" id="journalgrid"></div>
+    <p class="journal-foot" id="journalfoot"></p>
+  </div>
+</div>
+
+<div id="lvlsel" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card lvl-card">
+    <div class="modal-head"><span data-i18n="levels">Уровни</span><button class="xbtn" id="lvlselclose" aria-label="close">✕</button></div>
+    <div class="lvl-sum" id="lvlsum"></div>
+    <button class="ghostbtn ppbtn" id="ppbtn" data-i18n="ppWord">Паспорт</button>
+    <div class="lvl-scroll"><div id="lvlselgrid" class="lvl-grid"></div></div>
+  </div>
+</div>
+
+<!-- ===== shop ===== -->
+<div id="shop" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card">
+    <div class="modal-head"><span data-i18n="shop">Магазин</span><button class="xbtn" id="shopclose" aria-label="close">✕</button></div>
+    <div class="chip chip-coin" style="margin:0 auto 12px;width:max-content"><img class="coin-ic" src="assets/tiles/coin.png" alt=""/><span class="chip-v" id="shopcoins">0</span></div>
+    <div class="shop-grid" id="shopgrid"></div>
+    <p class="shop-note" data-i18n="shopnote">Бустеры остаются в инвентаре и не сгорают между уровнями.</p>
+    <div class="modal-foot"><button class="adbtn" id="shopad" data-i18n="shopad">Видео — бесплатный бустер</button></div>
+  </div>
+</div>
+
+<!-- ===== carnival passport (chapter stamps) ===== -->
+<div id="passport" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card">
+    <div class="modal-head"><span data-i18n="passport">Паспорт карнавала</span><button class="xbtn" id="ppclose" aria-label="close">✕</button></div>
+    <div class="pp-sum" id="ppsum"></div>
+    <div class="pp-grid" id="ppgrid"></div>
+    <p class="shop-note" data-i18n="ppNote">Пройди все десять уровней главы — и печать павильона твоя.</p>
+  </div>
+</div>
+
+<!-- ===== settings ===== -->
+<div id="settings" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card set-card">
+    <div class="modal-head"><span data-i18n="settings">Настройки</span><button class="xbtn" id="setclose" aria-label="close">✕</button></div>
+    <div class="set-row"><span data-i18n="musicWord">Музыка</span><button class="tgl" id="setmusic" aria-pressed="true"></button></div>
+    <div class="set-row"><span data-i18n="soundWord">Звук</span><button class="tgl" id="setsound" aria-pressed="true"></button></div>
+    <div class="set-row"><span data-i18n="vibrateWord">Вибрация</span><button class="tgl" id="setvibe" aria-pressed="true"></button></div>
+    <div class="set-row"><span data-i18n="skipStore">Пропускалки серии</span><b class="set-v" id="setskips">0</b></div>
+    <p class="shop-note" data-i18n="setNote">Музыка и звук включаются отдельно. Вибрация — только на телефоне.</p>
+    <div class="modal-foot">
+      <button class="ghostbtn set-share hidden" id="setshare" data-i18n="shareWord">Поделиться игрой</button>
+      <button class="ghostbtn set-reset" id="setreset" data-i18n="resetWord">Сбросить прогресс</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== wheel of fortune ===== -->
+<div id="wheel" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card" style="text-align:center">
+    <div class="modal-head"><span data-i18n="wheel">Колесо фортуны</span><button class="xbtn" id="wheelclose" aria-label="close">✕</button></div>
+    <p id="wheelline" style="margin:0 0 10px;color:var(--ink-dim);font-weight:800"></p>
+    <div class="daycal" id="daycal"></div>
+    <button class="ghostbtn skipbtn hidden" id="skipbtn"></button>
+    <p class="skipnote" id="skipnote"></p>
+    <div class="wheel-body">
+    <div class="wheel-wrap">
+      <div class="wheel" id="wheeldisc">
+        <div class="pin"></div>
+        <div class="disc" id="wheelrot"></div>
+        <div class="hub" id="wheelhub">?</div>
+      </div>
+    </div>
+    <div class="modal-foot wheel-foot"><button class="bigbtn" id="wheelspin" data-i18n="spin">Крутить</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== end-of-level / daily overlay ===== -->
+<div id="overlay" class="modal hidden">
+  <div class="modal-back"></div>
+  <div class="modal-card end-card">
+    <div class="end-ribbon" id="ovribbon"></div>
+    <h2 id="ovtitle"></h2>
+    <p id="ovtext"></p>
+    <div class="end-stars" id="ovstars"></div>
+    <div class="end-tier hidden" id="ovtier"></div>
+    <div class="end-stats hidden" id="ovstats"></div>
+    <div class="end-coins" id="ovcoins"><img src="assets/tiles/coin.png" alt=""/><b id="ovcoinval">+0</b></div>
+    <div class="ov-chest hidden" id="ovchest"></div>
+    <div class="ov-next hidden" id="ovnext"></div>
+    <div class="ovbtns">
+      <button id="ovbtn" class="bigbtn"></button>
+      <button id="ovbtn2" class="ghostbtn"></button>
+      <button id="ovbtn3" class="adbtn"></button>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

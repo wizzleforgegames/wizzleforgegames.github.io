@@ -1,0 +1,98 @@
+<svg id="bg-scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#1d0f3a"/><stop offset=".42" stop-color="#31175c"/>
+   <stop offset=".74" stop-color="#4a2278"/><stop offset="1" stop-color="#180b2e"/>
+  </linearGradient>
+  <radialGradient id="glow" cx=".5" cy=".82" r=".62">
+   <stop offset="0" stop-color="#ffb45e" stop-opacity=".40"/><stop offset=".5" stop-color="#ff5ea7" stop-opacity=".18"/>
+   <stop offset="1" stop-color="#ff5ea7" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="tent" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#6f37a8"/><stop offset="1" stop-color="#2b1450"/>
+  </linearGradient>
+  <linearGradient id="tent2" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#8c45c0"/><stop offset="1" stop-color="#3a1a63"/>
+  </linearGradient>
+  <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+   <stop offset="0" stop-color="#33165a"/><stop offset="1" stop-color="#150a28"/>
+  </linearGradient>
+  <pattern id="stripes" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(8)">
+   <rect width="26" height="26" fill="#ff6fae"/><rect width="13" height="26" fill="#ffd76a"/>
+  </pattern>
+  <pattern id="stripes2" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-10)">
+   <rect width="22" height="22" fill="#6ee7ff"/><rect width="11" height="22" fill="#2f6fb8"/>
+  </pattern>
+  <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
+ </defs>
+ <rect width="1600" height="900" fill="url(#sky)"/>
+ <g fill="#fff" opacity=".6">
+  <circle cx="120" cy="90" r="2.4"/><circle cx="300" cy="150" r="1.8"/><circle cx="470" cy="70" r="2.2"/>
+  <circle cx="640" cy="180" r="1.6"/><circle cx="820" cy="60" r="2.6"/><circle cx="980" cy="140" r="1.7"/>
+  <circle cx="1180" cy="80" r="2.2"/><circle cx="1360" cy="170" r="1.8"/><circle cx="1520" cy="100" r="2.4"/>
+  <circle cx="220" cy="240" r="1.5"/><circle cx="760" cy="260" r="1.7"/><circle cx="1290" cy="250" r="1.5"/>
+  <circle cx="60" cy="330" r="1.6"/><circle cx="1560" cy="300" r="1.6"/>
+ </g>
+ <ellipse cx="800" cy="760" rx="620" ry="240" fill="url(#glow)"/>
+
+ <!-- ferris wheel, dead centre so any crop still shows it -->
+ <g class="fwheel">
+  <g stroke="#9b78dd" stroke-width="6" opacity=".95">
+   <line x1="800" y1="330" x2="800" y2="790"/><line x1="570" y1="560" x2="1030" y2="560"/>
+   <line x1="638" y1="398" x2="962" y2="722"/><line x1="962" y1="398" x2="638" y2="722"/>
+  </g>
+  <circle cx="800" cy="560" r="230" fill="none" stroke="#c3a4f7" stroke-width="8"/>
+  <circle cx="800" cy="560" r="192" fill="none" stroke="#7b57b8" stroke-width="4"/>
+  <g fill="#ffd76a">
+   <circle cx="800" cy="330" r="10"/><circle cx="800" cy="790" r="10"/>
+   <circle cx="570" cy="560" r="10"/><circle cx="1030" cy="560" r="10"/>
+   <circle cx="638" cy="398" r="10"/><circle cx="962" cy="722" r="10"/>
+   <circle cx="962" cy="398" r="10"/><circle cx="638" cy="722" r="10"/>
+  </g>
+  <g fill="#ff6fae" stroke="#ffd76a" stroke-width="2">
+   <rect x="784" y="316" width="32" height="22" rx="7"/><rect x="784" y="782" width="32" height="22" rx="7"/>
+   <rect x="556" y="546" width="32" height="22" rx="7"/><rect x="1012" y="546" width="32" height="22" rx="7"/>
+   <rect x="624" y="384" width="32" height="22" rx="7"/><rect x="944" y="716" width="32" height="22" rx="7"/>
+   <rect x="944" y="384" width="32" height="22" rx="7"/><rect x="624" y="716" width="32" height="22" rx="7"/>
+  </g>
+  <circle cx="800" cy="560" r="28" fill="#3a1a63" stroke="#ffd76a" stroke-width="6"/>
+ </g>
+ <path d="M800 560 L716 860 M800 560 L884 860 M800 560 L800 860" stroke="#552f8c" stroke-width="11" fill="none"/>
+
+ <!-- carousel (left) -->
+ <g>
+  <path d="M120 660 L250 534 L380 660 Z" fill="url(#stripes)" stroke="#ffd76a" stroke-width="4"/>
+  <path d="M250 534 l0 -36" stroke="#ffd76a" stroke-width="4"/><path d="M250 498 l36 11 -36 11 z" fill="#ff6fae"/>
+  <rect x="136" y="660" width="228" height="130" rx="12" fill="url(#tent)" stroke="#7b57b8" stroke-width="3"/>
+  <g fill="#ffd76a"><circle cx="176" cy="722" r="13"/><circle cx="250" cy="722" r="13"/><circle cx="324" cy="722" r="13"/></g>
+  <rect x="150" y="790" width="200" height="70" fill="#1d0d38"/>
+ </g>
+ <!-- booths (right) -->
+ <g>
+  <rect x="1230" y="700" width="180" height="160" rx="12" fill="url(#tent)" stroke="#7b57b8" stroke-width="3"/>
+  <path d="M1218 700 L1320 636 L1422 700 Z" fill="url(#stripes2)" stroke="#6ee7ff" stroke-width="3"/>
+  <rect x="1262" y="744" width="48" height="48" rx="8" fill="#ffd76a" opacity=".92"/>
+  <rect x="1332" y="744" width="48" height="48" rx="8" fill="#ff6fae" opacity=".88"/>
+  <rect x="1440" y="726" width="160" height="134" rx="12" fill="url(#tent2)" stroke="#7b57b8" stroke-width="3"/>
+  <path d="M1428 726 L1520 668 L1612 726 Z" fill="url(#stripes)" stroke="#ffd76a" stroke-width="3"/>
+  <rect x="1478" y="768" width="46" height="46" rx="8" fill="#6ee7ff" opacity=".9"/>
+ </g>
+ <!-- small big-top (left back) -->
+ <path d="M420 800 L520 640 L620 800 Z" fill="url(#tent2)" stroke="#ffd76a" stroke-width="3"/>
+ <path d="M520 640 l0 -30" stroke="#ffd76a" stroke-width="3"/><path d="M520 610 l30 9 -30 9 z" fill="#6ee7ff"/>
+
+ <!-- bunting -->
+ <path d="M0 110 Q400 205 800 120 T1600 140" fill="none" stroke="#7b57b8" stroke-width="4"/>
+ <g>
+  <path d="M120 142 l17 42 17 -36 z" fill="#ff6fae"/><path d="M260 168 l17 42 17 -36 z" fill="#ffd76a"/>
+  <path d="M400 180 l17 42 17 -36 z" fill="#6ee7ff"/><path d="M540 172 l17 42 17 -36 z" fill="#7ef0a0"/>
+  <path d="M680 148 l17 42 17 -36 z" fill="#ff9a3c"/><path d="M820 128 l17 42 17 -36 z" fill="#b197ff"/>
+  <path d="M960 126 l17 42 17 -36 z" fill="#ff6fae"/><path d="M1100 132 l17 42 17 -36 z" fill="#ffd76a"/>
+  <path d="M1240 138 l17 42 17 -36 z" fill="#6ee7ff"/><path d="M1380 142 l17 42 17 -36 z" fill="#7ef0a0"/>
+ </g>
+ <rect y="858" width="1600" height="42" fill="url(#ground)"/>
+ <g fill="#ffd76a" opacity=".85" filter="url(#soft)">
+  <circle cx="180" cy="846" r="7"/><circle cx="420" cy="852" r="7"/><circle cx="660" cy="846" r="7"/>
+  <circle cx="900" cy="852" r="7"/><circle cx="1140" cy="846" r="7"/><circle cx="1380" cy="852" r="7"/>
+ </g>
+</svg>

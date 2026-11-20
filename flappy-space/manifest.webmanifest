@@ -1,0 +1,26 @@
+{
+  "name": "Флаппи Космос: тапалка-сёрфер в одну кнопку",
+  "short_name": "Флаппи Космос",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "background_color": "#070b18",
+  "theme_color": "#0d1226",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/img/promo/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/promo/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/img/promo/android-chrome-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
