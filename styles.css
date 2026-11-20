@@ -20,3 +20,13 @@ nav a:hover{color:#fff}
 section{max-width:1100px;margin:0 auto;padding:22px 20px}
 h2{font-size:24px;margin:0 0 10px}
 footer{padding:26px 20px;color:#7d84a8;text-align:center;border-top:1px solid #1d2140;margin-top:20px}
+.game-head{padding:40px 20px 10px;max-width:1100px;margin:0 auto}
+.game-head h1{margin:0 0 8px;font-size:32px}
+.lead{color:var(--mut);max-width:760px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:1100px;margin:0 auto;padding:18px 20px}
+.shots figure{margin:0;background:var(--card);border-radius:14px;padding:10px}
+.shots img{width:100%;border-radius:10px;display:block}
+.shots figcaption{color:#8f97bd;font-size:13px;margin-top:8px}
+ul.clean{padding-left:18px;color:var(--mut)}
+ul.clean li{margin:6px 0}
+.brand a{display:flex;gap:10px;align-items:center}

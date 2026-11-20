@@ -3,74 +3,97 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wizzle Forge Games — бесплатные HTML5-игры: арбуз, космос, конфеты</title>
-<meta name="description" content="Wizzle Forge Games — студия браузерных игр. Играть бесплатно в браузере: Арбуз: Соединяй Фрукты, Cosmic Defender, Флаппи Космос, Candy Carnival. Без установки и регистрации.">
-<meta property="og:title" content="Wizzle Forge Games — бесплатные игры в браузере">
-<meta property="og:description" content="Четыре игры студии: merge-фрукты, космический шутер, тапалка-сёрфер и match-3. Играть сразу, без установки.">
+<title>Wizzle Forge Games — студия браузерных игр: арбуз, космос, конфеты</title>
+<meta name="description" content="Wizzle Forge Games — студия бесплатных браузерных игр. Описания, скриншоты и где играть: Арбуз: Соединяй Фрукты, Cosmic Defender, Флаппи Космос, Candy Carnival. VK Игры, Яндекс Игры, RuStore, Google Play.">
+<meta property="og:title" content="Wizzle Forge Games — студия браузерных игр">
+<meta property="og:description" content="Четыре игры студии: merge-фрукты, космический шутер, тапалка-сёрфер и match-3. Описания, скриншоты, где играть.">
 <meta property="og:type" content="website">
+<link rel="canonical" href="https://wizzleforgegames.github.io/">
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Wizzle Forge Games",
+"email":"wizzleforgegames@gmail.com","url":"https://wizzleforgegames.github.io/",
+"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"VideoGame","name":"Арбуз: Соединяй Фрукты","genre":"Пазл"}},
+{"@type":"Offer","itemOffered":{"@type":"VideoGame","name":"Cosmic Defender","genre":"Шутер"}},
+{"@type":"Offer","itemOffered":{"@type":"VideoGame","name":"Флаппи Космос","genre":"Аркада"}},
+{"@type":"Offer","itemOffered":{"@type":"VideoGame","name":"Candy Carnival","genre":"Три в ряд"}}]}
+</script>
 </head>
 <body>
 <header class="top">
   <div class="brand"><span class="logo">WZ</span><b>Wizzle Forge Games</b></div>
-  <nav><a href="#games">Игры</a><a href="#about">Студия</a><a href="#contacts">Контакты</a></nav>
+  <nav><a href="#games">Игры</a><a href="#platforms">Где играть</a><a href="#about">Студия</a><a href="#contacts">Контакты</a></nav>
 </header>
 
 <main>
   <section class="hero">
-    <h1>Игры, в которые играют прямо сейчас</h1>
-    <p>Браузерные аркады от студии Wizzle Forge Games. Без установки, без регистрации —
-       открыл и играешь. Работают на телефоне и компьютере.</p>
-    <a class="cta" href="#games">Выбрать игру</a>
+    <h1>Лёгкие аркады, которые запускаются сразу</h1>
+    <p>Студия Wizzle Forge Games делает игры, в которые не нужно «входить и разбираться»:
+       открыл — играешь. Работают на телефоне и компьютере, бесплатно, без регистрации.</p>
+    <a class="cta" href="#games">Смотреть игры</a>
   </section>
 
   <section id="games" class="grid">
     <article class="card">
-      <a href="watermelon-merge/"><img src="watermelon-merge/assets/sprites/10_watermelon.png" alt="Арбуз: Соединяй Фрукты"></a>
-      <h2><a href="watermelon-merge/">Арбуз: Соединяй Фрукты</a></h2>
-      <p>Merge-аркада: капай фрукты, соединяй одинаковые и дорасти до арбуза. Комбо, квесты,
-         забег дня, дзен-режим и рекорды.</p>
-      <span class="tags">головоломка · казуальная · для телефона</span>
+      <a href="watermelon-merge.html"><img src="screenshots/watermelon-merge-gameplay.png" alt="Арбуз: Соединяй Фрукты — геймплей"></a>
+      <h2><a href="watermelon-merge.html">Арбуз: Соединяй Фрукты</a></h2>
+      <p>Merge-аркада про фрукты: капай, соединяй одинаковые и дорасти до арбуза. Комбо, квесты,
+         забег дня, дзен-режим, уровни и рекорды.</p>
+      <span class="tags">пазл · казуальная · один палец</span>
     </article>
 
     <article class="card">
-      <a href="cosmic-defender/"><img src="cosmic-defender/assets/ships/spaceShips_001.png" alt="Cosmic Defender"></a>
-      <h2><a href="cosmic-defender/">Cosmic Defender</a></h2>
-      <p>Вертикальный космический шутер: сражайся с роем, покупай корабли, улучшай оружие
-         и гонись за рекордом.</p>
+      <a href="cosmic-defender.html"><img src="screenshots/cosmic-defender-gameplay.png" alt="Cosmic Defender — геймплей"></a>
+      <h2><a href="cosmic-defender.html">Cosmic Defender</a></h2>
+      <p>Вертикальный космический шутер: рой врагов, метеоры, девять кораблей, апгрейды оружия
+         и погоня за рекордом.</p>
       <span class="tags">шутер · аркада · космос</span>
     </article>
 
     <article class="card">
-      <a href="flappy-space/"><img src="flappy-space/assets/icon.png" alt="Флаппи Космос" onerror="this.style.display='none'"></a>
-      <h2><a href="flappy-space/">Флаппи Космос</a></h2>
-      <p>Тапалка-сёрфер в одну кнопку: лети сквозь космос, уклоняйся от препятствий и
-         открывай новых персонажей.</p>
+      <a href="flappy-space.html"><img src="screenshots/flappy-space-gameplay.png" alt="Флаппи Космос — геймплей"></a>
+      <h2><a href="flappy-space.html">Флаппи Космос</a></h2>
+      <p>Тапалка-сёрфер в одну кнопку: полёт сквозь космос, препятствия, миссии, ангар
+         и экипаж. Один тап — и ты в игре.</p>
       <span class="tags">аркада · один тап · хардкор</span>
     </article>
 
     <article class="card">
-      <a href="candy-carnival/"><img src="candy-carnival/assets/favicon-192.png" alt="Candy Carnival"></a>
-      <h2><a href="candy-carnival/">Candy Carnival</a></h2>
-      <p>Match-3 карнавал: меняй конфеты местами, собирай каскады и проходи уровень за уровнем.</p>
+      <a href="candy-carnival.html"><img src="screenshots/candy-carnival-gameplay.png" alt="Candy Carnival — геймплей"></a>
+      <h2><a href="candy-carnival.html">Candy Carnival</a></h2>
+      <p>Match-3 на ночном карнавале: меняй конфеты местами, собирай каскады, проходи уровни
+         и открывай бонусы.</p>
       <span class="tags">три в ряд · головоломка · уровни</span>
     </article>
   </section>
 
+  <section id="platforms">
+    <h2>Где играть</h2>
+    <ul class="clean">
+      <li><b>VK Игры</b> — запуск прямо в ВКонтакте и в приложении VK Play.</li>
+      <li><b>Яндекс Игры</b> — игра без установки, с сохранением прогресса аккаунта Яндекса.</li>
+      <li><b>RuStore</b> и <b>Google Play</b> — мобильные версии для Android.</li>
+      <li><b>Этот сайт</b> — браузерные сборки: <a href="watermelon-merge/">Арбуз</a>,
+          <a href="cosmic-defender/">Cosmic Defender</a>, <a href="flappy-space/">Флаппи Космос</a>,
+          <a href="candy-carnival/">Candy Carnival</a>.</li>
+    </ul>
+  </section>
+
   <section id="about">
     <h2>Студия</h2>
-    <p>Wizzle Forge Games делает лёгкие аркады, которые запускаются мгновенно: без установки,
-       аккаунтов и ожидания. Все игры бесплатные, с рекламой и покупками внутри — так студия
-       живёт и выпускает новые проекты.</p>
-    <p>Игры доступны в VK Играх, Яндекс Играх, RuStore и Google Play.</p>
+    <p>Wizzle Forge Games — небольшая студия, которая делает казуальные HTML5-игры.
+       Все проекты объединяет одно: мгновенный старт, управление в один палец и честная
+       монетизация — реклама и покупки внутри игры, без обязательных платежей.</p>
+    <p>Мы делаем игры так, чтобы в них было приятно вернуться через день: короткие сессии,
+       ежедневные задания, прогрессия и рекорды.</p>
   </section>
 
   <section id="contacts">
     <h2>Контакты</h2>
-    <p>Почта: <a href="mailto:wizzleforgegames@gmail.com">wizzleforgegames@gmail.com</a></p>
+    <p>Вопросы, баги и предложения: <a href="mailto:wizzleforgegames@gmail.com">wizzleforgegames@gmail.com</a></p>
   </section>
 </main>
 
-<footer>© 2026 Wizzle Forge Games · бесплатные браузерные игры</footer>
+<footer>© 2026 Wizzle Forge Games · бесплатные браузерные игры · <a href="privacy.html">конфиденциальность</a></footer>
 </body>
 </html>
