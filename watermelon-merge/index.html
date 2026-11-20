@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#ffd9b8">
+<link rel="icon" type="image/png" href="assets/sprites/10_watermelon.png">
+<link rel="apple-touch-icon" href="assets/sprites/10_watermelon.png">
+<title>Арбуз: Соединяй Фрукты</title>
+<meta name="description" content="Капай фрукты, соединяй одинаковые и дорасти до арбуза: комбо, квесты, забег дня, дзен и рекорды.">
+<meta property="og:title" content="Арбуз: Соединяй Фрукты">
+<meta property="og:description" content="Фруктовый merge: соединяй одинаковые фрукты и собери арбуз.">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/icons/icons.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ MENU ============ -->
+  <div id="menu" class="screen">
+    <div class="bg-deco" id="bg-deco"></div>
+    <div class="menu-wrap">
+      <div class="logo-box">
+        <div class="logo-fruits" id="logo-fruits"></div>
+        <h1 class="logo"><b id="logo-a" data-i18n="logoA">Арбуз</b><span id="logo-b" data-i18n="logoB">Соединяй Фрукты</span></h1>
+        <p class="tag" data-i18n="tag">Капай · Сливай · Расти</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-chip"><span class="chip-ic ic-trophy"></span><b id="m-best">0</b><i data-i18n="best">Best</i></div>
+        <div class="stat-chip"><span class="chip-ic ic-coin"></span><b id="m-coins">0</b><i data-i18n="coins">Coins</i></div>
+        <div class="stat-chip"><span class="chip-ic ic-level"></span><b id="m-level">1</b><i data-i18n="level">Level</i></div>
+      </div>
+
+      <div class="xp-row"><span class="ic ic-level"></span><span data-i18n="levelShort">Уровень</span>
+        <div class="xp-bar"><i id="xp-fill"></i></div><b id="xp-txt">0/0</b></div>
+      <div class="lg-row" id="lg-row"><span class="ic ic-award"></span><b id="lg-name">—</b>
+        <div class="xp-bar"><i id="lg-fill"></i></div><b id="lg-txt">0/0</b></div>
+      <div class="streak" id="streak"><span class="ic ic-fire"></span><span id="streak-txt"></span></div>
+
+      <div class="cal" id="cal">
+        <div class="cal-cells" id="cal-cells"></div>
+        <button id="btn-cal" class="cal-btn"><span class="ic ic-gift"></span><b id="cal-lbl">—</b></button>
+      </div>
+
+      <button id="btn-play" class="btn btn-primary big"><span class="ic ic-play"></span><span data-i18n="play">Play</span></button>
+
+      <div class="mode-row">
+        <button id="btn-quest" class="btn btn-soft"><span class="ic ic-flag"></span><span data-i18n="quest">Quests</span><em id="quest-badge">1/12</em></button>
+        <button id="btn-daily" class="btn btn-soft"><span class="ic ic-cal"></span><span data-i18n="dmode">Daily run</span><em id="daily-badge">!</em></button>
+        <button id="btn-zen" class="btn btn-soft"><span class="ic ic-heart"></span><span data-i18n="zen">Zen</span></button>
+      </div>
+
+      <div class="mini-row">
+        <button id="btn-shop" class="icon-btn" title="Shop"><span class="ic ic-basket"></span></button>
+        <button id="btn-achv" class="icon-btn" title="Achievements"><span class="ic ic-award"></span></button>
+        <button id="btn-lead" class="icon-btn" title="Leaderboard"><span class="ic ic-trophy"></span></button>
+        <button id="btn-how" class="icon-btn" title="How to play"><span class="ic ic-info"></span></button>
+        <button id="btn-settings" class="icon-btn" title="Settings"><span class="ic ic-gear"></span></button>
+      </div>
+
+      <div class="daily" id="daily">
+        <span class="ic ic-cal"></span>
+        <div class="daily-txt"><b data-i18n="daily">Daily task</b><span id="daily-desc">—</span></div>
+        <div class="daily-prog" id="daily-prog"><i></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ GAME ============ -->
+  <div id="game" class="screen hidden">
+    <div class="hud">
+      <div class="hud-col">
+        <div class="hud-lbl" data-i18n="score">Score</div>
+        <div id="score" class="hud-score">0</div>
+        <div class="combo-bar" id="combo-bar"><i></i></div>
+      </div>
+      <div class="hud-mid">
+        <div class="next-box">
+          <div class="next-lbl" data-i18n="next">Next</div>
+          <div id="cur-preview" class="next-preview cur"></div>
+          <div id="next-preview" class="next-preview"></div>
+          <div id="next2-preview" class="next-preview small"></div>
+        </div>
+        <div class="goal-box" id="goal-box"><span id="goal-txt"></span><div class="goal-prog" id="goal-prog"><i></i></div></div>
+      </div>
+      <div class="hud-col right">
+        <div class="hud-lbl" data-i18n="best">Best</div>
+        <div id="best-score" class="hud-best">0</div>
+        <div class="coin-chip"><span class="ic ic-coin"></span><b id="hud-coins">0</b></div>
+      </div>
+      <button id="btn-pause" class="icon-btn hud-pause" title="Pause"><span class="ic ic-pause"></span></button>
+    </div>
+
+    <div class="stage">
+      <canvas id="cv"></canvas>
+      <div class="combo" id="combo"></div>
+      <div id="tut" class="tut hidden"><span class="tut-hand"></span><span class="tut-tx"></span></div>
+
+    </div>
+
+    <div class="bottom-bar">
+      <div class="hint" id="hint" data-i18n="hint">Drag to aim · tap to drop</div>
+      <div class="powerups">
+        <button id="pw-bomb" class="pw" title="Bomb"><span class="ic ic-bomb"></span><b>0</b></button>
+        <button id="pw-swap" class="pw" title="Swap"><span class="ic ic-swap"></span><b>0</b></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ OVERLAYS ============ -->
+  <div id="ov-pause" class="ov hidden">
+    <div class="card">
+      <h2 data-i18n="pause">Pause</h2>
+      <button id="btn-resume" class="btn btn-primary"><span class="ic ic-play"></span><span data-i18n="resume">Continue</span></button>
+      <div class="run-stats" id="run-stats"></div>
+      <button id="btn-p-restart" class="btn btn-soft"><span class="ic ic-replay"></span><span data-i18n="restart">Restart</span></button>
+      <button id="btn-p-menu" class="btn btn-ghost"><span class="ic ic-home"></span><span data-i18n="menu">Menu</span></button>
+    </div>
+  </div>
+
+  <div id="ov-over" class="ov hidden">
+    <div class="card">
+      <div class="ov-emoji" id="ov-fruits"></div>
+      <h2 data-i18n="over">Game Over</h2>
+      <div class="newrec hidden" id="newrec" data-i18n="newrec">New record!</div>
+      <div class="ov-grid">
+        <div><i data-i18n="score">Score</i><b id="ov-score">0</b></div>
+        <div><i data-i18n="best">Best</i><b id="ov-best">0</b></div>
+        <div><i data-i18n="maxfruit">Best fruit</i><span id="ov-fruit"></span></div>
+        <div><i data-i18n="coins">Coins</i><b id="ov-coins">+0</b></div>
+      </div>
+      <div class="ov-stats" id="ov-stats"></div>
+      <div class="ov-goal" id="ov-goal"><div class="ov-goal-tx"><b id="ov-goal-tx"></b><i id="ov-goal-n"></i></div>
+        <div class="goal-prog"><i id="ov-goal-bar"></i></div><span id="ov-goal-sub"></span></div>
+      <button id="btn-x2" class="btn btn-gold hidden"><span class="ic ic-ad"></span><span class="lbl" id="x2-lbl"></span></button>
+      <button id="btn-revive" class="btn btn-gold"><span class="ic ic-ad" id="revive-ic"></span><span class="lbl" id="revive-lbl" data-i18n="revive">Revive (ad)</span></button>
+      <button id="btn-revive-coin" class="alt-link hidden"><span class="ic ic-coin"></span><span class="lbl" id="revive-coin-lbl"></span></button>
+      <button id="btn-d-cta" class="btn btn-gold hidden"><span class="ic ic-cal"></span><span class="lbl" id="d-cta-lbl"></span></button>
+      <div class="ov-foot">
+      <button id="btn-retry" class="btn btn-primary"><span class="ic ic-replay"></span><span data-i18n="again">Play again</span></button>
+      <div class="row2">
+        <button id="btn-share" class="btn btn-ghost small"><span class="ic ic-share"></span><span data-i18n="share">Share</span></button>
+        <button id="btn-o-menu" class="btn btn-ghost small"><span class="ic ic-home"></span><span data-i18n="menu">Menu</span></button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ov-shop" class="ov hidden">
+    <div class="card wide">
+      <div class="card-head"><h2 data-i18n="shop">Shop</h2><button class="x" data-close><span class="ic ic-x"></span></button></div>
+      <div class="shop-coins"><span class="ic ic-coin"></span><b id="shop-coins">0</b></div>
+      <div class="shop-list" id="shop-list"></div>
+      <div class="sub-head"><span class="ic ic-palette"></span><b data-i18n="themes">Themes</b><i id="theme-hint"></i></div>
+      <div class="theme-list" id="theme-list"></div>
+      <div class="sub-head"><span class="ic ic-gift"></span><b data-i18n="iapT">Real money</b><i id="iap-hint"></i></div>
+      <div class="shop-list iap-list" id="iap-list"></div>
+      <button id="btn-shop-ad" class="btn btn-gold"><span class="ic ic-ad"></span><span id="shop-ad-lbl" data-i18n="freecoins">+100 coins (watch ad)</span></button>
+    </div>
+  </div>
+
+  <div id="ov-achv" class="ov hidden">
+    <div class="card wide">
+      <div class="card-head"><h2 data-i18n="achv">Achievements</h2><button class="x" data-close><span class="ic ic-x"></span></button></div>
+      <div class="achv-list" id="achv-list"></div>
+    </div>
+  </div>
+
+  <div id="ov-lead" class="ov hidden">
+    <div class="card wide">
+      <div class="card-head"><h2 data-i18n="lead">Leaderboard</h2><button class="x" data-close><span class="ic ic-x"></span></button></div>
+      <div class="lead-body" id="lead-body"></div>
+      <button id="lead-auth" class="btn btn-soft small hidden"></button>
+    </div>
+  </div>
+
+  <div id="ov-how" class="ov hidden">
+    <div class="card">
+      <div class="card-head"><h2 data-i18n="howTitle">How to play</h2><button class="x" data-close><span class="ic ic-x"></span></button></div>
+      <div class="how-grid">
+        <div class="how-item"><span class="ic ic-drop"></span><p data-i18n="how1">Drag left/right to aim, release to drop a fruit.</p></div>
+        <div class="how-item"><span class="ic ic-merge"></span><p data-i18n="how2">Two equal fruits merge into a bigger one.</p></div>
+        <div class="how-item"><span class="ic ic-chain"></span><p data-i18n="how3">Chain merges for combo multipliers.</p></div>
+        <div class="how-item"><span class="ic ic-warn"></span><p data-i18n="how4">Don't let the pile cross the red line.</p></div>
+      </div>
+      <div class="chain" id="chain"></div>
+    </div>
+  </div>
+
+  <div id="ov-set" class="ov hidden">
+    <div class="card">
+      <div class="card-head"><h2 data-i18n="settings">Settings</h2><button class="x" data-close><span class="ic ic-x"></span></button></div>
+      <div class="set-row"><span data-i18n="music">Music</span><button id="tg-music" class="tg on"></button></div>
+      <div class="set-row"><span data-i18n="sfx">Sound effects</span><button id="tg-sfx" class="tg on"></button></div>
+      <div class="set-row"><span data-i18n="vib">Vibration</span><button id="tg-vib" class="tg on"></button></div>
+      <div class="set-row"><span data-i18n="lang">Language</span>
+        <div class="lang-btns">
+          <button class="lang" data-lang="ru">RU</button><button class="lang" data-lang="en">EN</button>
+        </div>
+      </div>
+      <div class="auth-box">
+        <button id="btn-auth" class="btn btn-soft hidden">Войти с Яндекс ID</button>
+        <p id="auth-hint" class="auth-hint"></p>
+      </div>
+      <button id="btn-reset" class="btn btn-ghost small" data-i18n="reset">Reset progress</button>
+    </div>
+  </div>
+
+  <div id="ov-quest" class="ov hidden">
+    <div class="card wide">
+      <div class="card-head"><h2 data-i18n="quests">Quests</h2><button class="x" data-close><span class="ic ic-x"></span></button></div>
+      <div class="quest-list" id="quest-list"></div>
+      <button id="btn-quest-go" class="btn btn-primary"><span class="ic ic-play"></span><span data-i18n="goalRun">Идти к этой цели</span></button>
+    </div>
+  </div>
+
+  <div id="ov-chest" class="ov hidden">
+    <div class="card">
+      <div class="ch-head"><span class="ic ic-gift"></span><h2 id="ch-title">Сундук этапа</h2></div>
+      <div id="ch-body"></div>
+      <button id="btn-chest" class="btn btn-gold"><span class="ic ic-gift"></span><span>Открыть</span></button>
+    </div>
+  </div>
+
+  <div id="ov-levelup" class="ov hidden">
+    <div class="card">
+      <div class="lu-fruit" id="lu-fruit"></div>
+      <h2 id="lu-title">Level up!</h2>
+      <p id="lu-desc"></p>
+      <button id="btn-lu-next" class="btn btn-primary"><span data-i18n="continue">Continue</span></button>
+    </div>
+  </div>
+
+  <div id="toasts" class="toasts"></div>
+  <div id="loader" class="loader"><div class="spin"></div><span data-i18n="loading">Loading…</span></div>
+</div>
+
+<script src="https://yandex.com/games/sdk/v2"></script>
+<script src="game.js"></script>
+</body>
+</html>
