@@ -21,7 +21,7 @@
       tagline: "Blast the swarm, buy ships, chase the score.",
       play: "PLAY", shop: "SHOP", upgrades: "UPGRADES", settings: "SETTINGS",
       back: "BACK", gold: "GOLD", best: "BEST", lv: "LV", flights: "FLIGHTS",
-      daily: "🎁 DAILY +50◈",
+      daily: "DAILY +50◈",
       controls: "Move: drag / arrows · Select ship: ◄ ► · Pause: Esc",
       paused: "PAUSED", resume: "RESUME", quit: "QUIT TO MENU",
       gameover: "GAME OVER", earned: "EARNED", new_record: "NEW!", record: "RECORD",
@@ -33,6 +33,7 @@
       reduced_motion: "REDUCED MOTION", reduced_motion_sub: "Less shake & flashes",
       language: "LANGUAGE", on: "ON", off: "OFF", max: "MAX",
       damage: "DAMAGE", fire_rate: "FIRE RATE", speed: "SPEED", life: "LIFE",
+      dmg: "DMG", fire: "FIRE", spd: "SPD", hp: "HP",
       selected: "SELECTED", select: "SELECT", need_gold: "NEED GOLD",
       ready_to_buy: "◈ Ready to buy ", ready_to_upgrade: "◈ Ready to upgrade ",
       save_for: "Save for ",
@@ -56,7 +57,7 @@
       tagline: "Уничтожай рой, покупай корабли, бей рекорды.",
       play: "ИГРАТЬ", shop: "МАГАЗИН", upgrades: "УЛУЧШЕНИЯ", settings: "НАСТРОЙКИ",
       back: "НАЗАД", gold: "ЗОЛОТО", best: "РЕКОРД", lv: "УР", flights: "ЗАБЕГОВ",
-      daily: "🎁 БОНУС +50◈",
+      daily: "БОНУС +50◈",
       controls: "Движение: свайп / стрелки · Выбор корабля: ◄ ► · Пауза: Esc",
       paused: "ПАУЗА", resume: "ПРОДОЛЖИТЬ", quit: "В МЕНЮ",
       gameover: "ИГРА ОКОНЧЕНА", earned: "ЗАРАБОТАНО", new_record: "НОВЫЙ!", record: "РЕКОРД",
@@ -68,6 +69,7 @@
       reduced_motion: "МЕНЬШЕ АНИМАЦИИ", reduced_motion_sub: "Меньше тряски и вспышек",
       language: "ЯЗЫК", on: "ВКЛ", off: "ВЫКЛ", max: "МАКС",
       damage: "УРОН", fire_rate: "СКОРОСТРЕЛЬНОСТЬ", speed: "СКОРОСТЬ", life: "ЖИЗНИ",
+      dmg: "УРОН", fire: "ОГОНЬ", spd: "СКОР", hp: "ЖИЗН",
       selected: "ВЫБРАН", select: "ВЫБРАТЬ", need_gold: "НУЖНО ЗОЛОТО",
       ready_to_buy: "◈ Можно купить ", ready_to_upgrade: "◈ Можно улучшить ",
       save_for: "Копите на ",
@@ -91,7 +93,7 @@
       tagline: "Sürüyü patlat, gemi al, rekoru kır.",
       play: "OYNA", shop: "MAĞAZA", upgrades: "YÜKSELT", settings: "AYARLAR",
       back: "GERİ", gold: "ALTIN", best: "REKOR", lv: "SV", flights: "UÇUŞ",
-      daily: "🎁 GÜNLÜK +50◈",
+      daily: "GÜNLÜK +50◈",
       controls: "Hareket: sürükle / oklar · Gemi: ◄ ► · Duraklat: Esc",
       paused: "DURAKLADI", resume: "DEVAM", quit: "MENÜYE DÖN",
       gameover: "OYUN BİTTİ", earned: "KAZANILAN", new_record: "YENİ!", record: "REKOR",
@@ -103,6 +105,7 @@
       reduced_motion: "AZ HAREKET", reduced_motion_sub: "Daha az sarsıntı",
       language: "DİL", on: "AÇIK", off: "KAPALI", max: "MAX",
       damage: "HASAR", fire_rate: "ATEŞ HIZI", speed: "HIZ", life: "CAN",
+      dmg: "HASAR", fire: "ATEŞ", spd: "HIZ", hp: "CAN",
       selected: "SEÇİLİ", select: "SEÇ", need_gold: "ALTIN GEREKLİ",
       ready_to_buy: "◈ Almaya hazır: ", ready_to_upgrade: "◈ Yükseltmeye hazır: ",
       save_for: "Biriktir: ",
@@ -126,7 +129,7 @@
       tagline: "Destruye el enjambre, compra naves, supera tu récord.",
       play: "JUGAR", shop: "TIENDA", upgrades: "MEJORAS", settings: "AJUSTES",
       back: "ATRÁS", gold: "ORO", best: "RÉCORD", lv: "NV", flights: "VUELOS",
-      daily: "🎁 DIARIO +50◈",
+      daily: "DIARIO +50◈",
       controls: "Mover: arrastra / flechas · Nave: ◄ ► · Pausa: Esc",
       paused: "PAUSA", resume: "CONTINUAR", quit: "AL MENÚ",
       gameover: "FIN DEL JUEGO", earned: "GANADO", new_record: "¡NUEVO!", record: "RÉCORD",
@@ -138,6 +141,7 @@
       reduced_motion: "MENOS MOVIMIENTO", reduced_motion_sub: "Menos sacudidas",
       language: "IDIOMA", on: "SÍ", off: "NO", max: "MÁX",
       damage: "DAÑO", fire_rate: "CADENCIA", speed: "VELOCIDAD", life: "VIDA",
+      dmg: "DAÑO", fire: "CAD.", spd: "VEL.", hp: "VIDA",
       selected: "SELECCIONADA", select: "ELEGIR", need_gold: "FALTA ORO",
       ready_to_buy: "◈ Listo para comprar ", ready_to_upgrade: "◈ Listo para mejorar ",
       save_for: "Ahorra para ",
@@ -161,7 +165,7 @@
       tagline: "Zerstöre den Schwarm, kaufe Schiffe, schlage den Rekord.",
       play: "SPIELEN", shop: "SHOP", upgrades: "UPGRADES", settings: "EINSTELLUNGEN",
       back: "ZURÜCK", gold: "GOLD", best: "BESTE", lv: "LV", flights: "FLÜGE",
-      daily: "🎁 TÄGLICH +50◈",
+      daily: "TÄGLICH +50◈",
       controls: "Bewegen: ziehen / Pfeile · Schiff: ◄ ► · Pause: Esc",
       paused: "PAUSE", resume: "FORTSETZEN", quit: "ZUM MENÜ",
       gameover: "GAME OVER", earned: "VERDIENT", new_record: "NEU!", record: "REKORD",
@@ -173,6 +177,7 @@
       reduced_motion: "WENIGER BEWEGUNG", reduced_motion_sub: "Weniger Wackeln",
       language: "SPRACHE", on: "AN", off: "AUS", max: "MAX",
       damage: "SCHADEN", fire_rate: "FEUERRATE", speed: "TEMPO", life: "LEBEN",
+      dmg: "SCHAD", fire: "FEUER", spd: "TEMP", hp: "LEB",
       selected: "GEWÄHLT", select: "WÄHLEN", need_gold: "ZU WENIG GOLD",
       ready_to_buy: "◈ Kaufen: ", ready_to_upgrade: "◈ Upgraden: ",
       save_for: "Sparen für ",
@@ -196,7 +201,7 @@
       tagline: "Détruis l'essaim, achète des vaisseaux, bats ton record.",
       play: "JOUER", shop: "BOUTIQUE", upgrades: "AMÉLIORATIONS", settings: "OPTIONS",
       back: "RETOUR", gold: "OR", best: "RECORD", lv: "NIV", flights: "VOLS",
-      daily: "🎁 QUOTIDIEN +50◈",
+      daily: "QUOTIDIEN +50◈",
       controls: "Déplacer : glisser / flèches · Vaisseau : ◄ ► · Pause : Esc",
       paused: "PAUSE", resume: "REPRENDRE", quit: "MENU",
       gameover: "PARTIE TERMINÉE", earned: "GAGNÉ", new_record: "NOUVEAU !", record: "RECORD",
@@ -208,6 +213,7 @@
       reduced_motion: "MOINS D'ANIMATION", reduced_motion_sub: "Moins de secousses",
       language: "LANGUE", on: "OUI", off: "NON", max: "MAX",
       damage: "DÉGÂTS", fire_rate: "CADENCE", speed: "VITESSE", life: "VIE",
+      dmg: "DÉGÂT", fire: "TIR", spd: "VIT", hp: "VIE",
       selected: "CHOISI", select: "CHOISIR", need_gold: "OR INSUFFISANT",
       ready_to_buy: "◈ À acheter : ", ready_to_upgrade: "◈ À améliorer : ",
       save_for: "Économiser pour ",
@@ -235,11 +241,13 @@
     var langs = [];
     if (navigator.languages && navigator.languages.length) langs = navigator.languages;
     else if (navigator.language) langs = [navigator.language];
+    // аудитория площадок — русскоязычная: ru по умолчанию,
+    // прочие языки только если браузер явно на них
     for (var i = 0; i < langs.length; i++) {
       var code = String(langs[i]).toLowerCase().split("-")[0];
-      if (I18N[code]) return code;
+      if (code !== "ru" && code !== "en" && I18N[code]) return code;
     }
-    return "en";
+    return "ru";
   }
 
   var LANG = detectLang();
@@ -487,13 +495,15 @@
 
   function bar(norm){
     var n = Math.max(0, Math.min(1, norm));
-    var full = 6, filled = Math.round(n*full);
-    return new Array(filled+1).join("▮") + new Array(full-filled+1).join("▯");
+    var full = 6, filled = Math.round(n*full), h = "";
+    for (var i = 0; i < full; i++) h += '<s class="' + (i < filled ? "on" : "") + '"></s>';
+    return '<i class="pbar">' + h + "</i>";
   }
   function shipStatsText(s){
-    return "DMG ×"+s.dmg.toFixed(2)+" · "+s.shots+" "+t("shots")+" · "+
-           "FIRE "+bar((1.2 - s.cd) / 0.9)+" · SPD "+bar((s.spd - 0.6))+
-           " · ♥ "+bar(s.lp / 10);
+    return '<span class="st-l">' + t("dmg") + "</span> ×" + s.dmg.toFixed(2) +
+           ' <span class="st-l">' + t("fire") + "</span> " + bar((1.2 - s.cd) / 0.9) +
+           ' <span class="st-l">' + t("spd") + "</span> " + bar((s.spd - 0.6)) +
+           ' <span class="st-l">' + t("hp") + "</span> " + bar(s.lp / 10);
   }
 
   // =========================================================
@@ -524,6 +534,7 @@
   }
   function preloadAssets(){
     var jobs = [];
+    jobs.push(loadImg("bg_space","bg/space_bg.jpg"));
     jobs.push(loadImg("hero","ships/spaceShips_001.png"));
     jobs.push(loadImg("enemy","ships/spaceShips_006.png"));
     for (var k=1;k<=9;k++) jobs.push(loadImg("ship"+k, "ships/spaceShips_"+pad3(k)+".png"));
@@ -1417,10 +1428,20 @@
       }
     });
   }
+  var bgScroll = 0;
   function drawBackground(){
     var g = ctx.createLinearGradient(0,0,0,LOG_H);
     g.addColorStop(0,"#0a1230"); g.addColorStop(0.55,"#070a1c"); g.addColorStop(1,"#05060f");
     ctx.fillStyle = g; ctx.fillRect(0,0,LOG_W,LOG_H);
+
+    var bg = assets.images["bg_space"];
+    if (bg && bg.width) {
+      bgScroll = (bgScroll + dt * 0.012) % LOG_H;
+      ctx.globalAlpha = 0.85;
+      ctx.drawImage(bg, 0, bgScroll - LOG_H, LOG_W, LOG_H);
+      ctx.drawImage(bg, 0, bgScroll, LOG_W, LOG_H);
+      ctx.globalAlpha = 1;
+    }
 
     ctx.globalCompositeOperation = "lighter";
     var tV = visualTime * 0.00005;

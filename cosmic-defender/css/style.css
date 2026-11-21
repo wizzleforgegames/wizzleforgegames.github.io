@@ -36,7 +36,13 @@ html, body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: radial-gradient(ellipse at center, #0a1230 0%, #05060f 70%);
+  background:
+    url("../assets/bg/space_bg.jpg") center/cover no-repeat,
+    radial-gradient(ellipse at center, #0a1230 0%, #05060f 70%);
+}
+#app::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at center, rgba(5,6,15,.05) 0%, rgba(5,6,15,.45) 100%);
 }
 
 /* Звёздный декор за canvas (виден на планшетах по бокам) */
@@ -429,3 +435,9 @@ html, body {
 .carousel-img.gold {
   filter: drop-shadow(0 0 14px rgba(255,207,74,0.9)) sepia(0.3) saturate(1.4);
 }
+
+/* --- полосы характеристик (без юникод-блоков, чтобы не было квадратов) --- */
+.pbar{display:inline-flex;gap:2px;vertical-align:middle;margin:0 2px}
+.pbar s{width:7px;height:9px;border-radius:2px;background:rgba(160,190,225,.22);display:inline-block}
+.pbar s.on{background:linear-gradient(180deg,#7fe6ff,#38c8ee)}
+.st-l{color:#9fbfe0;font-weight:700;letter-spacing:.5px}
