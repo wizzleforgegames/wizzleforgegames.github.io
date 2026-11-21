@@ -3477,7 +3477,8 @@ function localSDK() {
   const calls = (window.__sdkCalls = []);
   const mark = n => () => { calls.push(n); };
   const read = () => { try { return JSON.parse(localStorage.getItem(key)) || {}; } catch (e) { return {}; } };
-  const lang = ((typeof navigator !== 'undefined' && navigator.language) || 'en').slice(0, 2).toLowerCase();
+  const nl = ((typeof navigator !== 'undefined' && navigator.language) || 'ru').slice(0, 2).toLowerCase();
+  const lang = (nl !== 'ru' && nl !== 'en' && L[nl]) ? nl : 'ru';
   const cb = o => (o && o.callbacks) || o || {};
   return {
     environment: { i18n: { lang }, appInfo: { appId: 'local' }, paymentsExists: false },

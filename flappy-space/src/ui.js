@@ -1078,6 +1078,12 @@ function bindUI(){
   requestAnimationFrame(frame);
 })();
 function detectLang(){
-  try { const n = (navigator.language || "en").toLowerCase(); return n.indexOf("ru") === 0; } catch(e){ return true; }
+  /* аудитория площадок русскоязычная: ru по умолчанию,
+     прочие языки — только если браузер явно на них (и это не en) */
+  try {
+    const ls = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "ru"];
+    for (const l of ls) { const c = String(l).toLowerCase().split("-")[0]; if (c === "ru") return true; }
+    return true;
+  } catch(e){ return true; }
 }
 
