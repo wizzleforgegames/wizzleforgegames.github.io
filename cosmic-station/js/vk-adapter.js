@@ -13,18 +13,21 @@
   function info() { try { console.log.apply(console, [LOG].concat([].slice.call(arguments))); } catch (e) {} }
 
   /* ---------- определение площадки ---------- */
+  function qp(k) { try { return new URLSearchParams(location.search).get(k); } catch (e) { return null; } }
   function appId() {
-    var q; try { q = new URLSearchParams(location.search); } catch (e) { q = { get: function () { return null; } }; }
-    var id = parseInt(q.get('vk_app_id') || q.get('app_id') || q.get('appid') || window.VK_PLAY_APP_ID || 0, 10) || 0;
+    var id = parseInt(qp('vk_app_id') || qp('app_id') || qp('appid') || window.VK_PLAY_APP_ID || 0, 10) || 0;
     if (!id) { try { var m = (document.referrer || '').match(/vkplay\.ru\/app\/(\d+)/); if (m) id = +m[1]; } catch (e) {} }
     return id;
   }
+  /* Признаки именно VK Play: referrer домена площадки, UA, явный ?vk=1 или vk_app_id.
+     Просто «мы во фрейме» — НЕ признак (в Яндекс Играх тоже фрейм). */
   function inVKPlay() {
     if (window.self === window.top) return false;
     var r = ''; try { r = document.referrer || ''; } catch (e) {}
     if (/vkplay\.ru|play\.vk\.com|game\.mail\.ru|odnoklassniki\.ru/.test(r)) return true;
     if (/vkplay|VKApp|vkWebView|MyGamesApp/i.test(navigator.userAgent || '')) return true;
-    return !!appId();
+    if (qp('vk') === '1' || qp('vk_app_id') || qp('app_id') || qp('appid')) return true;
+    return false;
   }
   var APP = appId();
   if (!inVKPlay()) { window.VK_PLAY = { active: false, appId: APP }; return; }
