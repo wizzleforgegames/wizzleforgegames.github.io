@@ -154,8 +154,10 @@ let hintCells=[];
 let spawnCells=[];
 let tension=99;
 function resize(){
-  const r=cv.getBoundingClientRect(); W=r.width;H=r.height;
-  DPR=Math.min(window.devicePixelRatio||1,(window.BG&&BG.quality===0)?1.25:2);
+  const r=cv.getBoundingClientRect();
+  const dpr=Math.min(window.devicePixelRatio||1,(window.BG&&BG.quality===0)?1.25:2);
+  if(W===r.width&&H===r.height&&cv.width===Math.round(r.width*dpr)&&cv.height===Math.round(r.height*dpr))return;
+  W=r.width;H=r.height;DPR=dpr;
   cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
   ctx.setTransform(DPR,0,0,DPR,0,0);
   for(const k in SPR)delete SPR[k];
@@ -935,8 +937,9 @@ function drawThemeSwatch(el,id){
 }
 /* ---------- block sprites ---------- */
 const SPR={};
+const SPR_BASE=128;
 function blockSprite(ci,size){
-  const S=Math.max(6,Math.round(size)), k=ci+'|'+S+'|'+SKIN;
+  const S=SPR_BASE, k=ci+'|'+SKIN;
   let sp=SPR[k]; if(sp)return sp;
   const pal=PAL[ci]||PAL[0], sk=skinById(SKIN);
   const pad=Math.ceil(S*(0.22+sk.gb*0.6));
@@ -952,10 +955,10 @@ function blockSprite(ci,size){
   return SPR[k];
 }
 function drawCell(px,py,s,pal,sc,al){
-  const S=Math.max(4,Math.round(s*sc));
-  const sp=blockSprite(pal._i!=null?pal._i:0,S);
+  const sp=blockSprite(pal._i!=null?pal._i:0,s);
+  const k=Math.max(0.02,(s*(sc==null?1:sc))/sp.S), t=sp.t*k, o=(sp.p+sp.S/2)*k;
   ctx.save();ctx.globalAlpha=al;
-  ctx.drawImage(sp.c,px+s/2-sp.p-sp.S/2,py+s/2-sp.p-sp.S/2,sp.t,sp.t);
+  ctx.drawImage(sp.c,px+s/2-o,py+s/2-o,t,t);
   ctx.restore();
 }
 function pieceBox(p,cell){
@@ -1194,6 +1197,8 @@ cv.addEventListener('pointercancel',()=>{drag=null});
 cv.addEventListener('pointerleave',()=>{pointer.in=false});
 requestAnimationFrame(draw);
 window.addEventListener('resize',resize);
+if(window.ResizeObserver){let _rr=0;
+  new ResizeObserver(()=>{if(_rr)cancelAnimationFrame(_rr);_rr=requestAnimationFrame(()=>{_rr=0;resize();});}).observe(cv);}
 window.addEventListener('orientationchange',()=>setTimeout(resize,250));
 
 window.BB={

@@ -1827,11 +1827,15 @@ function showTut(){
   if(!ring){ring=document.createElement('div');ring.id='coach';stage.appendChild(ring)}
   if(!tip){tip=document.createElement('div');tip.id='coachTip';stage.appendChild(tip)}
   const L=BB.getLayout();
+  // координаты BB.getLayout() — внутри <canvas>; тултип/кольцо позиционируются в #stage:
+  const _cv=document.getElementById('cv'), _sr=stage.getBoundingClientRect(), _cr=_cv.getBoundingClientRect();
+  const OX=Math.round(_cr.left-_sr.left), OY=Math.round(_cr.top-_sr.top);
+  const Lx=(x)=>x+OX, Ly=(y)=>y+OY;
   const steps=[
-    {x:L.slots[0].x+L.slots[0].w/2,y:L.slots[0].y+L.slots[0].h/2,ic:'hand-finger',t:I18N.t('tut.1'),below:false},
-    {x:L.bx+L.bs/2,y:L.by+L.bs*0.55,ic:'layout-grid',t:I18N.t('tut.2'),below:true},
-    {x:L.bx+L.bs/2,y:L.by+L.bs*0.55,ic:'flame',t:I18N.t('tut.3'),below:true},
-    (()=>{const L2=BB.getLayout();return {x:L2.bx+L2.bs/2,y:L2.by+L2.bs+10,ic:'sparkles',t:I18N.t('tut.4'),below:false}})()
+    {x:Lx(L.slots[0].x+L.slots[0].w/2),y:Ly(L.slots[0].y+L.slots[0].h/2),ic:'hand-finger',t:I18N.t('tut.1'),below:false},
+    {x:Lx(L.bx+L.bs/2),y:Ly(L.by+L.bs*0.55),ic:'layout-grid',t:I18N.t('tut.2'),below:true},
+    {x:Lx(L.bx+L.bs/2),y:Ly(L.by+L.bs*0.55),ic:'flame',t:I18N.t('tut.3'),below:true},
+    (()=>{const L2=BB.getLayout();return {x:Lx(L2.bx+L2.bs/2),y:Ly(L2.by+L2.bs+10),ic:'sparkles',t:I18N.t('tut.4'),below:false}})()
   ];
   const st=steps[Math.min(TUT.on-1,3)];
   const sw=stage.clientWidth, sh=stage.clientHeight;
@@ -1845,8 +1849,8 @@ function showTut(){
     const tw=tip.offsetWidth,th=tip.offsetHeight;
     const s0=L.slots[0]||{x:0,w:0}, s2=L.slots[2]||s0;
     const trayL=s0.x, trayR=s2.x+s2.w, trayCx=(trayL+trayR)/2;
-    const boardR={l:L.bx,t:L.by,r:L.bx+L.bs,b:L.by+L.bs};
-    const trayR2={l:trayL,t:L.trayY,r:trayR,b:L.trayY+L.trayH};
+    const boardR={l:Lx(L.bx),t:Ly(L.by),r:Lx(L.bx+L.bs),b:Ly(L.by+L.bs)};
+    const trayR2={l:Lx(trayL),t:Ly(L.trayY),r:Lx(trayR),b:Ly(L.trayY+L.trayH)};
     const ov=(a,b)=>Math.max(0,Math.min(a.r,b.r)-Math.max(a.l,b.l))*Math.max(0,Math.min(a.b,b.b)-Math.max(a.t,b.t));
     const rectOf=e=>{if(!e)return null;const r=e.getBoundingClientRect(),s=stage.getBoundingClientRect();
       if(r.width<2||r.height<2||getComputedStyle(e).display==='none'||getComputedStyle(e).visibility==='hidden')return null;
@@ -1856,26 +1860,30 @@ function showTut(){
     const boxOf=rs=>rs.length?rs.reduce((a,b)=>({l:Math.min(a.l,b.l),t:Math.min(a.t,b.t),r:Math.max(a.r,b.r),b:Math.max(a.b,b.b)})):null;
     const hudBox=boxOf(obs.slice(0,2));
     const cands=[
-      [(sw-tw)/2, L.by-th-16],
-      [trayCx-tw/2, L.trayY-th-12],
-      [trayL-tw-14, L.trayY+(L.trayH-th)/2],
-      [trayR+14, L.trayY+(L.trayH-th)/2],
-      [L.bx-tw-12, L.by+(L.bs-th)/2],
-      [L.bx+L.bs+14, L.by+(L.bs-th)/2],
-      [L.bx+L.bs+14, L.by+8],
-      [sw-tw-12, L.by+8],
-      [(sw-tw)/2, L.trayY+L.trayH+12],
+      [(sw-tw)/2, Ly(L.by)-th-16],
+      [Lx(trayCx)-tw/2, Ly(L.trayY)-th-12],
+      [Lx(trayL)-tw-14, Ly(L.trayY+(L.trayH-th)/2)],
+      [Lx(trayR)+14, Ly(L.trayY+(L.trayH-th)/2)],
+      [Lx(L.bx)-tw-12, Ly(L.by+(L.bs-th)/2)],
+      [Lx(L.bx+L.bs)+14, Ly(L.by+(L.bs-th)/2)],
+      [Lx(L.bx+L.bs)+14, Ly(L.by+8)],
+      [sw-tw-12, Ly(L.by+8)],
+      [(sw-tw)/2, Ly(L.trayY+L.trayH)+12],
       [(sw-tw)/2, sh-th-14],
       [(sw-tw)/2, 12]
     ].concat(hudBox?[[hudBox.l,hudBox.b+12],[hudBox.l,hudBox.t-th-12],[hudBox.r+12,hudBox.t],[hudBox.r+12,hudBox.b-th-12]]:[])
      .map(c=>({x:Math.round(c[0]),y:Math.round(c[1])}))
      .filter(c=>c.x>=10&&c.x+tw<=sw-10&&c.y>=10&&c.y+th<=sh-10);
+    let emptyBoard=false;
+    try{const g=BB.G.grid;emptyBoard=true;for(let i=0;i<g.length;i++){if(g[i]){emptyBoard=false;break}}}catch(e){}
+    const wBoard=emptyBoard?150:1000;
+    if(emptyBoard)cands.push([(sw-tw)/2, Ly(L.by+L.bs/2-th/2)]);
     let best=null,bs=1e18,bi=-1;
     cands.forEach((c,ci)=>{c._i=ci});
     for(const c of cands){
       const r={l:c.x,t:c.y,r:c.x+tw,b:c.y+th};
       const d=Math.hypot(c.x+tw/2-st.x,c.y+th/2-st.y);
-      let sc=ov(r,boardR)*1000+ov(r,trayR2)*400+d;
+      let sc=ov(r,boardR)*wBoard+ov(r,trayR2)*400+d;
       obs.forEach(o=>{sc+=ov(r,o)*700});
       if(sc<bs){bs=sc;best=c;bi=c._i}
     }

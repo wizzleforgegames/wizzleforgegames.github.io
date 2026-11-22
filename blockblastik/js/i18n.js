@@ -312,8 +312,8 @@ let lang = 'ru';
 try{
   const p=new URLSearchParams(location.search);
   const pl=(p.get('language')||p.get('lang')||'').toLowerCase();
-  const nav=(navigator.languages&&navigator.languages[0]||navigator.language||'ru').toLowerCase();
-  const src=pl||nav;
+  // аудитория русскоязычная: включаем en ТОЛЬКО если язык явно пришёл с платформы (?language=..)
+  const src=pl;
   lang = (src.startsWith('en')||src.startsWith('de')||src.startsWith('tr')||src.startsWith('es')||src.startsWith('fr'))?'en':'ru';
 }catch(e){}
 const I18N={
