@@ -1437,10 +1437,14 @@
     var bg = assets.images["bg_space"];
     if (bg && bg.width) {
       bgScroll = (bgScroll + dt * 0.012) % LOG_H;
-      ctx.globalAlpha = 0.85;
+      ctx.globalAlpha = 0.6;
       ctx.drawImage(bg, 0, bgScroll - LOG_H, LOG_W, LOG_H);
       ctx.drawImage(bg, 0, bgScroll, LOG_W, LOG_H);
       ctx.globalAlpha = 1;
+      var vg = ctx.createLinearGradient(0, 0, 0, LOG_H);
+      vg.addColorStop(0, "rgba(5,6,15,0.55)"); vg.addColorStop(0.5, "rgba(5,6,15,0.30)");
+      vg.addColorStop(1, "rgba(5,6,15,0.6)");
+      ctx.fillStyle = vg; ctx.fillRect(0, 0, LOG_W, LOG_H);
     }
 
     ctx.globalCompositeOperation = "lighter";

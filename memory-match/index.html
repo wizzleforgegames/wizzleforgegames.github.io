@@ -10,7 +10,11 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <!-- Yandex Games SDK -->
-  <script src="https://sdk.games.s3.yandex.net/sdk.js"></script>
+  <script>window.VK_PLAY_APP_ID=52004;window.VK_PLAY_PRODUCTS={};</script>
+<script src="js/vk-adapter.js"></script>
+<script>/* в VK Play Яндекс.SDK не грузим — его роль берёт vk-adapter */
+(function(){try{if(window.VK_PLAY&&window.VK_PLAY.active)return;}catch(e){}
+document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');})();</script>
 </head>
 <body>
   <div id="app">

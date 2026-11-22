@@ -17,6 +17,11 @@
 <link rel="manifest" href="assets/site.webmanifest"/>
 
 <!-- Yandex Games SDK (served by the platform) -->
+<script>window.VK_PLAY_APP_ID=51964;window.VK_PLAY_PRODUCTS={};</script>
+<script src="js/vk-adapter.js"></script>
+<script>/* в VK Play Яндекс.SDK не грузим — его роль берёт vk-adapter */
+(function(){try{if(window.VK_PLAY&&window.VK_PLAY.active)return;}catch(e){}
+document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');})();</script>
 <script src="/sdk.js"></script>
 </head>
 <body>

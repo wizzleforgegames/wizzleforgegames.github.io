@@ -71,10 +71,13 @@
       return Promise.race([pr, to]);
     } catch (e) { return Promise.resolve({ ok: false, err: String(e) }); }
   }
+  function withTimeout(pr, ms) {
+    return Promise.race([pr, new Promise(function (r) { setTimeout(function () { r(false); }, ms); })]);
+  }
   async function supportsM(m) {
     if (!bridge) return false;
     if (m in sup) return sup[m];
-    try { if (bridge.supportsAsync) { sup[m] = await bridge.supportsAsync(m); return sup[m]; } } catch (e) {}
+    try { if (bridge.supportsAsync) { sup[m] = await withTimeout(Promise.resolve(bridge.supportsAsync(m)), 4000); return sup[m]; } } catch (e) {}
     try { if (bridge.supports) { sup[m] = !!bridge.supports(m); return sup[m]; } } catch (e) {}
     sup[m] = true; return true;
   }

@@ -89,6 +89,11 @@
 
 <div id="toasts" class="toasts"></div>
 
+<script>window.VK_PLAY_APP_ID=52003;window.VK_PLAY_PRODUCTS={};</script>
+<script src="js/vk-adapter.js"></script>
+<script>/* в VK Play Яндекс.SDK не грузим — его роль берёт vk-adapter */
+(function(){try{if(window.VK_PLAY&&window.VK_PLAY.active)return;}catch(e){}
+document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');})();</script>
 <script src="js/sdk.js"></script>
 <script src="js/game.js"></script>
 <script src="js/ui.js"></script>
