@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#070a18">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Звёздная Станция — Cosmic Station Idle</title>
+<meta name="description" content="Idle-игра: построй звёздную станцию, добывай ресурсы, исследуй планеты и совершай варп-прыжки.">
+<link rel="icon" href="assets/img/icons/1f680.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="bg">
+  <div class="bg-photo"></div>
+  <div class="bg-stars s1"></div>
+  <div class="bg-stars s2"></div>
+  <div class="bg-neb"></div>
+  <div class="bg-vign"></div>
+</div>
+
+<div id="app">
+  <header id="topbar">
+    <div class="resbar" id="resbar"></div>
+    <div class="top-act">
+      <button class="ibtn" id="btn-help" title="Как играть"><img src="assets/img/icons/2753.png" alt="?"></button>
+      <button class="ibtn" id="btn-menu" title="Меню"><img src="assets/img/icons/2699.png" alt="*"></button>
+    </div>
+  </header>
+
+  <main id="stage">
+    <div class="stage-head">
+      <div class="stage-title">ОРБИТАЛЬНАЯ СТАНЦИЯ <span id="skinName">«ГОРИЗОНТ»</span></div>
+      <div class="stage-lvl" id="stationLevel">Ур. 1</div>
+      <div class="lvlwrap"><div class="lvlbar"><i id="lvlBar"></i></div><div class="lvltxt" id="lvlTxt"></div></div>
+    </div>
+
+    <div id="clickArea" class="click-area">
+      <div class="scene-planet" id="scenePlanet"><img id="scenePlanetImg" data-src="" src="assets/img/planets/planet4.png" alt=""></div>
+      <div class="orbit o1"><img src="assets/img/space/satellite_A.png" alt=""></div>
+      <div class="orbit o2"><img src="assets/img/space/satellite_C.png" alt=""></div>
+      <div class="orbit o3"><img src="assets/img/space/meteor_large.png" alt=""></div>
+            <div class="halo"></div>
+      <div class="lvlring"></div>
+      <div class="ring r1"></div><div class="ring r2"></div>
+      <img id="stationImg" class="hero" src="assets/img/rocket.webp" alt="Станция">
+      <div class="tap-hint" id="tapHint">ТАПАЙ</div>
+    </div>
+
+    <div class="scene-name" id="sceneName">Луна Станции</div>
+    <div class="stage-stats">
+      <div class="chip"><img src="assets/img/icons/1f44a.png" alt=""><b id="clickPower">1</b>&nbsp;за тап</div>
+      <div class="chip"><img src="assets/img/icons/26a1.png" alt=""><b id="dps">0</b>&nbsp;/сек</div>
+      <div class="chip mult"><img src="assets/img/icons/1f9ec.png" alt="">×<b id="multVal">1.0</b></div>
+    </div>
+            <div id="soon" class="soon"></div>
+    <div id="nudge" class="nudge hidden"></div>
+    <div class="bars">
+      <div id="flareBar" class="flare-bar hidden"></div>
+      <div id="boostBar" class="boost-bar hidden"><img id="boostIcon" src="assets/img/icons/1f525.png" alt=""><span id="boostTxt"></span></div>
+    </div>
+    <div id="streak" class="streak"></div>
+    <button id="btn-harvest" class="harvest">ГЕНЕРИРОВАТЬ</button>
+  </main>
+
+  <nav id="tabs"></nav>
+
+  <section id="panels">
+    <div id="objective" class="objective hidden"></div>
+    <div class="panel" data-panel="modules"><div class="pin" id="modulesList"></div></div>
+    <div class="panel" data-panel="upgrades"><div class="pin" id="upgradesList"></div></div>
+    <div class="panel" data-panel="explore"><div class="pin" id="exploreList"></div></div>
+    <div class="panel" data-panel="quests"><div class="pin" id="questsList"></div></div>
+    <div class="panel" data-panel="achieve"><div class="pin" id="achieveList"></div></div>
+    <div class="panel" data-panel="more"><div class="pin" id="moreList"></div></div>
+  </section>
+</div>
+
+<div id="fx"></div>
+<div id="coach"></div>
+
+<div id="modal" class="modal hidden">
+  <div class="mcard">
+    <div class="mhead"><img id="mIcon" src="assets/img/icons/1f6f8.png" alt=""><h2 id="mTitle"></h2></div>
+    <div class="mbody" id="mBody"></div>
+    <div class="mactions" id="mActions"></div>
+  </div>
+</div>
+
+<div id="toasts" class="toasts"></div>
+
+<script src="js/sdk.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

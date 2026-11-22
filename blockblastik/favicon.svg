@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B1226"/><stop offset="1" stop-color="#05070F"/></linearGradient>
+<linearGradient id="c1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3FE3FF"/><stop offset="1" stop-color="#1E7FB8"/></linearGradient>
+<linearGradient id="c2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF5BD4"/><stop offset="1" stop-color="#8E2A8E"/></linearGradient>
+<linearGradient id="c3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC13D"/><stop offset="1" stop-color="#A86A10"/></linearGradient>
+<linearGradient id="c4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9BFF4D"/><stop offset="1" stop-color="#3E8F22"/></linearGradient>
+<filter id="gl"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="64" height="64" rx="14" fill="url(#bg)"/>
+<g filter="url(#gl)">
+<rect x="10" y="10" width="19" height="19" rx="5" fill="url(#c1)"/>
+<rect x="31" y="10" width="19" height="19" rx="5" fill="url(#c2)"/>
+<rect x="10" y="31" width="19" height="19" rx="5" fill="url(#c4)"/>
+<rect x="31" y="31" width="19" height="19" rx="5" fill="url(#c3)"/>
+</g>
+<g fill="#fff" opacity=".92"><path d="M32 20.5l2.1 4.4 4.4 2.1-4.4 2.1L32 33.5l-2.1-4.4-4.4-2.1 4.4-2.1z"/></g>
+</svg>

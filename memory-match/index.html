@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Найди Пары: Картинки на Память — игра на память и внимание</title>
+  <meta name="description" content="Логическая игра на память и внимание: переворачивай карточки и собирай одинаковые пары. 88 уровней, 22 колоды с фотографиями, звёзды за скорость, облачные сохранения. Бесплатно, без регистрации.">
+  <meta name="author" content="Найди Пары">
+  <meta name="copyright" content="Найди Пары">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Yandex Games SDK -->
+  <script src="https://sdk.games.s3.yandex.net/sdk.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- ===== ГЛАВНОЕ МЕНЮ ===== -->
+    <section id="screen-menu" class="screen active">
+      <div class="menu-bg"></div>
+      <header class="menu-head">
+        <div class="logo">🧠<span id="logo-brand">Найди&nbsp;Пары</span></div>
+        <p class="tagline" id="tagline">Найди все пары! Тренируй память и наслаждайся картинками.</p>
+      </header>
+      <div id="menu-top" class="menu-top"></div>
+      <div id="decks" class="decks"></div>
+      <footer class="menu-foot">
+        <button id="btn-lang" class="icon-btn quiet" title="Language / Язык">RU</button>
+        <button id="btn-sound" class="icon-btn" title="Звук">🔊</button>
+        <button id="btn-fullscreen" class="icon-btn" title="Полный экран">⛶</button>
+        <button id="btn-ach" class="icon-btn quiet" title="Достижения">🏅</button>
+        <button id="btn-backs" class="icon-btn quiet" title="Рубашки карт">🎴</button>
+        <button id="btn-tutorial" class="icon-btn quiet" title="Как играть">?</button>
+        <button id="btn-reset" class="icon-btn quiet" title="Сброс прогресса">↺</button>
+      </footer>
+    </section>
+
+    <!-- ===== ВЫБОР УРОВНЕЙ ===== -->
+    <section id="screen-levels" class="screen screen-levels">
+      <div class="menu-bg"></div>
+      <header class="lv-head">
+        <button id="btn-levels-back" class="soft-btn lv-back" aria-label="Назад к колодам"><span class="lv-ic">&#8249;</span><span class="lv-lbl">Колоды</span></button>
+        <div class="lv-mid">
+          <div class="lv-title" id="levels-title"></div>
+          <div class="lv-sub" id="choose-hint"></div>
+        </div>
+        <button id="btn-lv-play" class="lv-play"><span class="lv-lab">Играть</span><span class="lv-arr">&#9654;</span></button>
+      </header>
+      <div class="lv-prog"><div class="bar" id="lv-prog-bar"></div></div>
+      <div id="levels" class="levels"></div>
+    </section>
+
+    <!-- ===== ИГРА ===== -->
+    <section id="screen-game" class="screen">
+      <div class="game-bg"><div class="gb-img"></div></div>
+      <header class="game-hud">
+        <button id="btn-back" class="soft-btn">‹ Меню</button>
+        <div class="hud-stats">
+          <div class="stat"><span class="stat-label" id="lbl-moves">Ходы</span><span id="stat-moves" class="stat-val">0</span></div>
+          <div class="stat"><span class="stat-label" id="lbl-time">Время</span><span id="stat-time" class="stat-val">0:00</span></div>
+          <div class="stat"><span class="stat-label" id="lbl-score">Счёт</span><span id="stat-score" class="stat-val">0</span></div>
+          <div class="stat combo-box"><span id="combo" class="combo-val">x1</span></div>
+          <div class="stat"><span class="stat-label" id="lbl-coins">Монеты</span><span id="coins" class="stat-val">0</span></div>
+        </div>
+        <button id="btn-sound2" class="icon-btn" title="Звук">🔊</button>
+      </header>
+      <div id="powerups" class="powerups"></div>
+      <div class="hud-mode-wrap"><span id="hud-mode" class="hud-mode">Классика</span><span id="hud-pairs" class="hud-pairs">0/0</span></div>
+      <div id="board" class="board"></div>
+      <div class="game-controls">
+        <button id="btn-restart" class="soft-btn">⟳ Заново</button>
+        <div id="deck-title" class="deck-title"></div>
+      </div>
+    </section>
+
+    <!-- ===== АЧИВКИ ===== -->
+    <div id="ach-modal" class="modal">
+      <div class="modal-card wide">
+        <div id="ach-body"></div>
+        <div class="modal-actions"><button id="btn-ach-close" class="primary-btn secondary">Закрыть</button></div>
+      </div>
+    </div>
+
+    <!-- ===== РУБАШКИ ===== -->
+    <div id="back-modal" class="modal">
+      <div class="modal-card wide">
+        <div id="back-body"></div>
+        <div class="modal-actions"><button id="btn-backs-close" class="primary-btn secondary">Закрыть</button></div>
+      </div>
+    </div>
+
+    <!-- ===== ВРЕМЯ ВЫШЛО (блиц) ===== -->
+    <div id="timeup-modal" class="modal">
+      <div class="modal-card">
+        <div class="stars-row big">⏱️</div>
+        <h2 id="timeup-title">Время вышло!</h2>
+        <p class="result-detail" id="timeup-sub"></p>
+        <div class="modal-actions">
+          <button id="btn-timeup-ad" class="primary-btn gold">📺 +20 сек</button>
+          <button id="btn-timeup-end" class="soft-btn">Завершить</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ПОДТВЕРЖДЕНИЕ (свой диалог вместо window.confirm) ===== -->
+    <div id="confirm-modal" class="modal">
+      <div class="modal-card">
+        <h2 id="confirm-title">Подтвердите</h2>
+        <p class="result-detail" id="confirm-text"></p>
+        <div class="modal-actions">
+          <button id="btn-confirm-yes" class="primary-btn">Да</button>
+          <button id="btn-confirm-no" class="soft-btn">Отмена</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ТУТОРИАЛ ===== -->
+    <div id="tutorial-modal" class="modal"><div class="modal-card"></div></div>
+
+    <!-- ===== РЕЗУЛЬТАТ ===== -->
+    <div id="result-modal" class="modal">
+      <div class="modal-card">
+        <div class="stars-row" id="result-stars"></div>
+        <h2 id="result-title">Готово!</h2>
+        <p class="result-detail"><span id="result-moves">0</span> <span id="result-moves-lab">ходов</span> · <span id="result-time">0:00</span></p>
+        <p class="result-detail big"><span id="result-score">0</span> <span id="result-score-lab">очков</span></p>
+        <div class="result-coins-wrap"><span id="result-coins" class="result-coins">+0 🪙</span></div>
+        <div class="mem-wrap" id="result-mem"></div>
+        <div class="result-stars-info" id="result-best"></div>
+        <div class="modal-actions">
+          <button id="btn-reward-x2" class="primary-btn gold">📺 x2 🪙</button>
+          <button id="btn-again" class="primary-btn">Ещё раз</button>
+          <button id="btn-next" class="primary-btn">Следующий уровень</button>
+          <button id="btn-menu-result" class="soft-btn">Меню</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data/i18n.js"></script>
+  <script src="js/data/meta.js"></script>
+  <script src="js/data/decks.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/sdk.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
