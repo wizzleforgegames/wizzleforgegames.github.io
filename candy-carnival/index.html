@@ -21,6 +21,7 @@
 <script src="js/vk-adapter.js"></script>
 <script>/* в VK Play Яндекс.SDK не грузим — его роль берёт vk-adapter */
 (function(){try{if(window.VK_PLAY&&window.VK_PLAY.active)return;}catch(e){}
+try{if(window.WizzleNative)return;}catch(e){}
 document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');})();</script>
 <script src="/sdk.js"></script>
 </head>
