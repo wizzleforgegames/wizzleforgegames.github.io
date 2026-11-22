@@ -1,0 +1,75 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Тест оплаты — Wizzle Forge Games</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="pay.css">
+<style>
+input,select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #2a2f55;background:#10132a;color:var(--ink);font:inherit;margin-bottom:10px}
+label{display:block;text-align:left;font-size:13px;color:var(--mut);margin-bottom:4px}
+.row{display:flex;gap:10px}.row>div{flex:1}
+code{display:block;text-align:left;background:#10132a;border:1px solid #2a2f55;border-radius:10px;padding:10px;font-size:12px;color:#9fd0ff;word-break:break-all;margin:8px 0}
+.chk{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:14px;margin:6px 0 14px}
+.chk input{width:auto;margin:0}
+</style></head>
+<body class="wait"><div class="box">
+<div class="mark">₽</div><h1>Тест приёма оплаты</h1>
+<p>Страница сама считает подпись Robokassa (MD5) и открывает форму. Открывать нужно с российского IP: из-за границы robokassa.ru уводит на <b>auth.robokassa.kz</b> и отдаёт «Код ошибки 26».</p>
+<div class="row">
+  <div><label>Сумма, ₽</label><input id="sum" value="1.00" inputmode="decimal"></div>
+  <div><label>InvId (уникальный)</label><input id="inv"></div>
+</div>
+<label>Название товара (для чека)</label><input id="desc" value="Тест оплаты Wizzle Forge">
+<label>Shp_prod (идентификатор товара)</label><input id="prod" value="test">
+<div class="chk"><input type="checkbox" id="rcpt" checked><span>передать чек Receipt (нужен для самозанятого и части способов оплаты)</span></div>
+<div class="chk"><input type="checkbox" id="istest"><span>тестовый режим IsTest=1 (подпись по Паролю №2)</span></div>
+<a class="btn" id="go" href="#">Открыть форму оплаты</a>
+<a class="btn alt" id="copy" href="#">Скопировать ссылку</a>
+<code id="src"></code>
+<code id="url"></code>
+<small>Пароль №1 подставлен в страницу для теста. Для боевой интеграции подпись должна считаться на сервере или внутри приложения, а не в открытом JS.</small>
+</div>
+<script src="md5.js"></script>
+<script>
+var LOGIN = 'wizzleforgegames';
+var PASS1 = 'TK2WLN14OM4P12MR';   /* Пароль №1 */
+var PASS2 = 'PUXBUWBQ3UDX5XYO';   /* Пароль №2 — тестовый */
+var $ = function (id) { return document.getElementById(id); };
+$('inv').value = String(Date.now()).slice(0, 10);
+function clean(s) { return String(s).replace(/[^\p{L}\p{N}._-]/gu, '-').replace(/-+/g, '-').slice(0, 100); }
+function build() {
+  var sum = $('sum').value.trim().replace(',', '.');
+  var inv = $('inv').value.trim().replace(/[^0-9]/g, '');
+  var desc = $('desc').value.trim() || 'Игровая покупка';
+  var prod = $('prod').value.trim().replace(/[^A-Za-z0-9_]/g, '');
+  var pass = $('istest').checked ? PASS2 : PASS1;
+  var parts = [LOGIN, sum, inv];
+  var q = 'MerchantLogin=' + encodeURIComponent(LOGIN) + '&OutSum=' + encodeURIComponent(sum) +
+          '&InvId=' + encodeURIComponent(inv) + '&Description=' + encodeURIComponent(desc);
+  if ($('rcpt').checked) {
+    var r = '{"items":[{"name":"' + clean(desc) + '","quantity":1,"sum":' + sum +
+            ',"payment_method":"full_payment","payment_object":"commodity","tax":"none"}]}';
+    parts.push(encodeURIComponent(r));
+    q += '&Receipt=' + encodeURIComponent(r);
+  }
+  parts.push(pass);
+  if (prod) { parts.push('Shp_prod=' + prod); q += '&Shp_prod=' + encodeURIComponent(prod); }
+  if ($('istest').checked) q += '&IsTest=1';
+  var src = parts.join(':'), sig = MD5(src);
+  var url = 'https://auth.robokassa.ru/Merchant/Index.aspx?' + q + '&SignatureValue=' + sig + '&Encoding=UTF-8';
+  $('src').textContent = 'Строка подписи: ' + src + '\nMD5: ' + sig;
+  $('url').textContent = url;
+  $('go').href = url;
+  return url;
+}
+$('go').addEventListener('click', function () { build(); });
+$('copy').addEventListener('click', function (e) {
+  e.preventDefault();
+  var u = build();
+  try { navigator.clipboard.writeText(u); $('copy').textContent = 'Ссылка скопирована'; }
+  catch (err) { window.prompt('Скопируй ссылку:', u); }
+  setTimeout(function () { $('copy').textContent = 'Скопировать ссылку'; }, 1500);
+});
+['sum', 'inv', 'desc', 'prod'].forEach(function (id) { $(id).addEventListener('input', build); });
+[$('rcpt'), $('istest')].forEach(function (c) { c.addEventListener('change', build); });
+build();
+</script></body></html>
