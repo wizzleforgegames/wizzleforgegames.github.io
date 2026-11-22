@@ -1,0 +1,28 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Результат оплаты — Wizzle Forge Games</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="pay.css"></head>
+<body class="wait"><div class="box">
+<div class="mark">?</div><h1 id="t">Проверяем платёж…</h1>
+<p id="d">Robokassa вернула результат оплаты ниже.</p>
+<table id="kv"></table>
+<a class="btn alt" href="/" >На сайт игр</a>
+<small>Wizzle Forge Games</small>
+</div>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search), o={};
+  q.forEach(function(v,k){o[k]=v});
+  var ok = o.OutcomeID==='10' || o.OutcomeID===undefined && /success/i.test(location.pathname);
+  var rows=['InvId','OutSum','PaymentMethod','OutcomeID','IntId','Email'].filter(function(k){return o[k]!==undefined});
+  var t=document.getElementById('kv');
+  rows.forEach(function(k){var tr=document.createElement('tr');tr.innerHTML='<td>'+k+'</td><td>'+String(o[k]).slice(0,80)+'</td>';t.appendChild(tr)});
+  try{localStorage.setItem('wz_pay', JSON.stringify({t:Date.now(),q:o}));}catch(e){}
+  document.body.className = ok?'ok':'bad';
+  document.querySelector('.mark').textContent = ok?'✓':'✕';
+  document.getElementById('t').textContent = ok?'Оплата прошла':'Оплата не прошла';
+  document.getElementById('d').textContent = ok?'Спасибо! Бонусы появятся в игре в течение минуты.':'Платёж отклонён — деньги не списаны, попробуй ещё раз.';
+  try{ if(window.parent&&window.parent!==window) window.parent.postMessage({wzpay:ok,q:o},'*'); }catch(e){}
+})();
+</script></body></html>

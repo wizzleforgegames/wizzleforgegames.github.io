@@ -1,0 +1,19 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оплата не прошла — Wizzle Forge Games</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="pay.css"></head>
+<body class="bad"><div class="box">
+<div class="mark">✕</div><h1>Оплата не прошла</h1>
+<p>Деньги не списаны. Проверь данные карты и попробуй ещё раз — или выбери другой способ оплаты.</p>
+<table id="kv"></table>
+<a class="btn" href="/">Вернуться в игру</a>
+<small>Wizzle Forge Games</small>
+</div>
+<script>
+(function(){var q=new URLSearchParams(location.search),o={};q.forEach(function(v,k){o[k]=v});
+try{localStorage.setItem('wz_pay',JSON.stringify({t:Date.now(),ok:false,q:o}));}catch(e){}
+var t=document.getElementById('kv');
+['InvId','OutSum','ErrorCode','PaymentMethod'].forEach(function(k){if(o[k]===undefined)return;var tr=document.createElement('tr');tr.innerHTML='<td>'+k+'</td><td>'+String(o[k]).slice(0,80)+'</td>';t.appendChild(tr)});
+try{if(window.parent&&window.parent!==window)window.parent.postMessage({wzpay:false,q:o},'*');}catch(e){}})();
+</script></body></html>
