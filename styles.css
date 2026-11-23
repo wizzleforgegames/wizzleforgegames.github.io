@@ -45,3 +45,5 @@ ul.clean li{margin:6px 0}
 .news li{margin:10px 0;color:var(--mut)}
 .news time{color:#8f97bd;font-size:13px;display:block}
 .badge{display:inline-block;padding:2px 8px;border-radius:99px;background:#20264a;color:#9fd0ff;font-size:12px;margin-left:6px}
+
+@media(max-width:760px){.top{flex-wrap:wrap;gap:6px}.top nav{width:100%;text-align:right}nav a{margin-left:12px;font-size:14px}.hero h1{font-size:26px}}
