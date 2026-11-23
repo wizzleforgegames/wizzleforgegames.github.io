@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /pay/
+Sitemap: https://wizzleforgegames.github.io/sitemap.xml
