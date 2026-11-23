@@ -33,7 +33,11 @@ ul.clean li{margin:6px 0}
 
 .logoimg{width:38px;height:38px;border-radius:10px;display:block}
 .hero{position:relative;overflow:hidden}
-.hero .banner{max-width:760px;margin:0 auto 18px;border-radius:18px;width:100%;display:block}
+.hero .banner{width:150px;height:150px;margin:0 auto 12px;display:block}
+.strip{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;max-width:860px;margin:20px auto 6px}
+.strip img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:10px;display:block;background:#0b0d1c}
+.strip a:hover img{outline:2px solid var(--acc2)}
+@media(max-width:760px){.strip{grid-template-columns:repeat(4,1fr)}}
 .plat{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 4px}
 .plat a{padding:10px 16px;border-radius:12px;background:#20264a;color:#e8ecff;font-weight:600;font-size:15px}
 .plat a:hover{background:#2a3160}
