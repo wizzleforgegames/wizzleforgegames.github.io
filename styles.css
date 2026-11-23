@@ -47,3 +47,10 @@ ul.clean li{margin:6px 0}
 .badge{display:inline-block;padding:2px 8px;border-radius:99px;background:#20264a;color:#9fd0ff;font-size:12px;margin-left:6px}
 
 @media(max-width:760px){.top{flex-wrap:wrap;gap:6px}.top nav{width:100%;text-align:right}nav a{margin-left:12px;font-size:14px}.hero h1{font-size:26px}}
+
+.play{max-width:1100px;margin:0 auto;padding:6px 20px 18px}
+.frame{position:relative;border-radius:16px;overflow:hidden;background:#0b0d1c;aspect-ratio:16/9;cursor:pointer}
+.frame img{width:100%;height:100%;object-fit:cover;opacity:.85;display:block}
+.frame .playbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);padding:14px 26px;border-radius:14px;border:0;background:var(--acc2);color:#0c2016;font-weight:800;font-size:17px;cursor:pointer}
+.frame:hover .playbtn{background:#5ff0b0}
+.play iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:16px;background:#000;display:block}

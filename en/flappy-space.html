@@ -32,7 +32,13 @@
     <p class="tags">Genre: Arcade, Casual · browser · phone and desktop · free</p>
     <a class="cta" href="../flappy-space/">Play now in your browser</a>
   </section>
-  <section class="shots">
+  <section class="play">
+    <div class="frame" data-src="/flappy-space/" data-title="Флаппи Космос">
+      <picture><source type="image/webp" srcset="../screenshots/flappy-space-gameplay.webp"><img src="../screenshots/flappy-space-gameplay.png" alt="Флаппи Космос"></picture>
+      <button class="playbtn" type="button">Play</button>
+    </div>
+  </section>
+
     <figure><picture><source type="image/webp" srcset="../screenshots/flappy-space-gameplay.webp"><img src="../screenshots/flappy-space-gameplay.png" loading="lazy" alt="Flappy Cosmos — one tap space arcade gameplay screenshot"></picture><figcaption>Flappy Cosmos — one tap space arcade — gameplay</figcaption></figure>
     <figure><picture><source type="image/webp" srcset="../screenshots/flappy-space-menu.webp"><img src="../screenshots/flappy-space-menu.png" loading="lazy" alt="Flappy Cosmos — one tap space arcade main menu screenshot"></picture><figcaption>Flappy Cosmos — one tap space arcade — main menu</figcaption></figure>
   </section>
@@ -57,5 +63,14 @@
   </section>
 </main>
 <footer>© 2026 Wizzle Forge Games · <a href="../privacy.html">privacy</a> · <a href="../">Русская версия</a></footer>
-</body>
+<script>
+document.querySelectorAll('.frame').forEach(function (f) {
+  f.addEventListener('click', function () {
+    var i = document.createElement('iframe');
+    i.src = f.getAttribute('data-src'); i.allow = 'fullscreen; autoplay; gamepad';
+    i.setAttribute('allowfullscreen', 'true'); i.title = f.getAttribute('data-title') || 'Игра';
+    f.replaceWith(i);
+  }, { once: true });
+});
+</script></body>
 </html>

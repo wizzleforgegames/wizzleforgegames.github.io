@@ -32,7 +32,13 @@
     <p class="tags">Genre: Puzzle, Block · browser · phone and desktop · free</p>
     <a class="cta" href="../blockblastik/">Play now in your browser</a>
   </section>
-  <section class="shots">
+  <section class="play">
+    <div class="frame" data-src="/blockblastik/" data-title="Блок Блиц">
+      <picture><source type="image/webp" srcset="../screenshots/blockblastik-gameplay.webp"><img src="../screenshots/blockblastik-gameplay.png" alt="Блок Блиц"></picture>
+      <button class="playbtn" type="button">Play</button>
+    </div>
+  </section>
+
     <figure><picture><source type="image/webp" srcset="../screenshots/blockblastik-gameplay.webp"><img src="../screenshots/blockblastik-gameplay.png" loading="lazy" alt="Block Blitz — 8x8 block puzzle gameplay screenshot"></picture><figcaption>Block Blitz — 8x8 block puzzle — gameplay</figcaption></figure>
     <figure><picture><source type="image/webp" srcset="../screenshots/blockblastik-menu.webp"><img src="../screenshots/blockblastik-menu.png" loading="lazy" alt="Block Blitz — 8x8 block puzzle main menu screenshot"></picture><figcaption>Block Blitz — 8x8 block puzzle — main menu</figcaption></figure>
   </section>
@@ -57,5 +63,14 @@
   </section>
 </main>
 <footer>© 2026 Wizzle Forge Games · <a href="../privacy.html">privacy</a> · <a href="../">Русская версия</a></footer>
-</body>
+<script>
+document.querySelectorAll('.frame').forEach(function (f) {
+  f.addEventListener('click', function () {
+    var i = document.createElement('iframe');
+    i.src = f.getAttribute('data-src'); i.allow = 'fullscreen; autoplay; gamepad';
+    i.setAttribute('allowfullscreen', 'true'); i.title = f.getAttribute('data-title') || 'Игра';
+    f.replaceWith(i);
+  }, { once: true });
+});
+</script></body>
 </html>

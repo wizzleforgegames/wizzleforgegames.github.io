@@ -39,7 +39,13 @@
     <a class="cta" href="watermelon-merge/">Играть прямо сейчас</a>
   </section>
 
-  <section class="shots">
+  <section class="play">
+    <div class="frame" data-src="/watermelon-merge/" data-title="Арбуз 2048">
+      <picture><source type="image/webp" srcset="screenshots/watermelon-merge-gameplay.webp"><img src="screenshots/watermelon-merge-gameplay.png" alt="Арбуз 2048"></picture>
+      <button class="playbtn" type="button">Играть</button>
+    </div>
+  </section>
+
     <figure><picture><source type="image/webp" srcset="screenshots/watermelon-merge-gameplay.webp"><img src="screenshots/watermelon-merge-gameplay.png" loading="lazy" decoding="async" alt="Арбуз: Соединяй Фрукты — скриншот"></picture><figcaption>Скриншот: Арбуз: Соединяй Фрукты</figcaption></figure>
     <figure><picture><source type="image/webp" srcset="screenshots/watermelon-merge-menu.webp"><img src="screenshots/watermelon-merge-menu.png" loading="lazy" decoding="async" alt="Арбуз: Соединяй Фрукты — скриншот"></picture><figcaption>Скриншот: Арбуз: Соединяй Фрукты</figcaption></figure>
   </section>
@@ -77,5 +83,14 @@
   </section>
 </main>
 <footer>© 2026 Wizzle Forge Games · <a href="privacy.html">конфиденциальность</a></footer>
-</body>
+<script>
+document.querySelectorAll('.frame').forEach(function (f) {
+  f.addEventListener('click', function () {
+    var i = document.createElement('iframe');
+    i.src = f.getAttribute('data-src'); i.allow = 'fullscreen; autoplay; gamepad';
+    i.setAttribute('allowfullscreen', 'true'); i.title = f.getAttribute('data-title') || 'Игра';
+    f.replaceWith(i);
+  }, { once: true });
+});
+</script></body>
 </html>

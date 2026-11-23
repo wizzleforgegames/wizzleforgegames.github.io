@@ -39,7 +39,13 @@
     <a class="cta" href="cosmic-station/">Играть прямо сейчас</a>
   </section>
 
-  <section class="shots">
+  <section class="play">
+    <div class="frame" data-src="/cosmic-station/" data-title="Звёздная станция">
+      <picture><source type="image/webp" srcset="screenshots/cosmic-station-gameplay.webp"><img src="screenshots/cosmic-station-gameplay.png" alt="Звёздная станция"></picture>
+      <button class="playbtn" type="button">Играть</button>
+    </div>
+  </section>
+
     <figure><picture><source type="image/webp" srcset="screenshots/cosmic-station-gameplay.webp"><img src="screenshots/cosmic-station-gameplay.png" loading="lazy" decoding="async" alt="Звёздная станция: Космический Idle — геймплей"></picture><figcaption>Скриншот: Звёздная станция: Космический Idle</figcaption></figure>
     <figure><picture><source type="image/webp" srcset="screenshots/cosmic-station-menu.webp"><img src="screenshots/cosmic-station-menu.png" loading="lazy" decoding="async" alt="Звёздная станция: Космический Idle — меню"></picture><figcaption>Скриншот: Звёздная станция: Космический Idle</figcaption></figure>
   </section>
@@ -75,5 +81,14 @@
   </section>
 </main>
 <footer>© 2026 Wizzle Forge Games · <a href="privacy.html">конфиденциальность</a></footer>
-</body>
+<script>
+document.querySelectorAll('.frame').forEach(function (f) {
+  f.addEventListener('click', function () {
+    var i = document.createElement('iframe');
+    i.src = f.getAttribute('data-src'); i.allow = 'fullscreen; autoplay; gamepad';
+    i.setAttribute('allowfullscreen', 'true'); i.title = f.getAttribute('data-title') || 'Игра';
+    f.replaceWith(i);
+  }, { once: true });
+});
+</script></body>
 </html>
