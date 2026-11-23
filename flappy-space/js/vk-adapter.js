@@ -210,6 +210,15 @@
           return r;
         });
       },
+      requestPurchase: function (arg) {
+        var id = (arg && arg.item && (arg.item.id || arg.item.productId)) || (arg && arg.id) ||
+                 (typeof arg === 'string' ? arg : '');
+        if (!id) { var e0 = new Error('no item'); e0.code = 'PURCHASE_UNAVAILABLE'; return Promise.reject(e0); }
+        return payments.purchase(id).then(function (r) {
+          if (r && r.success) return { id: id, itemKey: id, purchaseToken: r.purchaseToken || ('vk-' + Date.now()) };
+          var e = new Error('purchase canceled'); e.code = 'PURCHASE_CANCELED'; throw e;
+        });
+      },
       consumePurchase: function () { return Promise.resolve(); }
     };
     var ysdk = {
