@@ -91,10 +91,18 @@
 
 <script>window.VK_PLAY_APP_ID=52003;window.VK_PLAY_PRODUCTS={};</script>
 <script src="js/vk-adapter.js"></script>
-<script>/* в VK Play Яндекс.SDK не грузим — его роль берёт vk-adapter */
-(function(){try{if(window.VK_PLAY&&window.VK_PLAY.active)return;}catch(e){}
-try{if(window.WizzleNative)return;}catch(e){}
-document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');})();</script>
+<script>/* Яндекс.SDK — только внутри Яндекс Игр (домен/iframe+referrer/явный ?yandex=1) */
+(function(){
+  try{ if(window.VK_PLAY&&window.VK_PLAY.active) return; }catch(e){}
+  try{ if(window.WizzleNative) return; }catch(e){}
+  var h = location.hostname || "";
+  var onYx = /(^|\.)(yandex\.(ru|com|net|by|kz|am|md|tm|kg|tj|az|uz|ee|lt|lv|ua|ge|uk)|games\.yandex\.ru|yandexgames\.ru)$/.test(h);
+  var framed = false; try { framed = window.self !== window.top; } catch(e){ framed = true; }
+  var ref = ""; try { ref = document.referrer || ""; } catch(e){}
+  var refYx = /yandex\.[a-z]{2,3}/i.test(ref);
+  var want = /[?&](yandex|ysdk)=1/.test(location.search);
+  if (want || onYx || (framed && refYx)) document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');
+})();</script>
 <script src="js/sdk.js"></script>
 <script src="js/game.js"></script>
 <script src="js/ui.js"></script>

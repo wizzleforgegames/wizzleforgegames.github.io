@@ -17,10 +17,6 @@
 <link rel="stylesheet" href="style.css" />
 <script>window.VK_PLAY_APP_ID=51963;window.VK_PLAY_PRODUCTS={"theme_neon": {"amount": 99, "title": "Тема «Неон»"}, "theme_night": {"amount": 99, "title": "Тема «Ночь»"}, "noads": {"amount": 149, "title": "Без рекламы"}};</script>
 <script src="js/vk-adapter.js"></script>
-<script>/* в VK Play Яндекс.SDK не грузим — его роль берёт vk-adapter */
-(function(){try{if(window.VK_PLAY&&window.VK_PLAY.active)return;}catch(e){}
-try{if(window.WizzleNative)return;}catch(e){}
-document.write('<scr'+'ipt src="https://yandex.ru/games/sdk/v2"><\/scr'+'ipt>');})();</script>
 <script>
 /* Yandex Games SDK v2 — грузим только внутри платформы (в iframe или на домене Яндекса),
    чтобы локальные тесты не светили служебные ошибки postMessage. */
