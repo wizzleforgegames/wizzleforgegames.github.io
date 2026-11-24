@@ -96,15 +96,21 @@ const YA={
     try{
       const pm=ysdk.payments;
       let ps=null;
-      if(pm.getCatalog) ps=await pm.getCatalog();
-      if(!ps&&pm.getProducts) ps=await pm.getProducts();
+      const ok=x=>!!(x&&((x.products&&x.products.length)||x.length));
+      if(pm.getPrices) { try{ ps=await pm.getPrices() }catch(e){ ps=null } }
+      if(!ok(ps)&&pm.getCatalog) { try{ ps=await pm.getCatalog() }catch(e){} }
+      if(!ok(ps)&&pm.getProducts) { try{ ps=await pm.getProducts() }catch(e){} }
+      if(!ok(ps)&&pm.getCatalogItems) { try{ ps=await pm.getCatalogItems() }catch(e){} }
       yproducts=(ps&&ps.products)||ps||[];
       return yproducts;
     }catch(e){ return [] }
   },
   async purchase(id){
     try{
-      const p=await ysdk.payments.purchase({id:String(id)});
+      const pm=ysdk.payments; let p=null;
+      if(pm.requestPurchase){ try{ const r=await pm.requestPurchase({item:{id:String(id)}}); p=(r&&r.purchase)||r }catch(e){ p=null } }
+      if(!p||!(p.purchaseToken||p.productID)){ try{ p=await pm.purchase({id:String(id)}) }catch(e){ p=null } }
+      if(!p) return {ok:false,err:'no purchase'};
       const tok=p&&p.purchaseToken;
       if(CONSUMABLE.indexOf(String(id))>=0&&tok){ try{ await ysdk.payments.consumePurchase(tok) }catch(e){} }
       return {ok:true,data:{productID:p&&p.productID||id,token:tok}};

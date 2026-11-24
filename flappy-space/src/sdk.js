@@ -101,6 +101,13 @@ async function getPurchases(){
 }
 async function buyProduct(id){
   const pay = payObj(); if (!hasPayments() || !pay) return { err:"off" };
+  try {
+    if (typeof pay.requestPurchase === "function") {
+      const r = await pay.requestPurchase({ item: { id: String(id) } });
+      const pr = (r && r.purchase) || r;
+      if (pr && (purchaseToken(pr) || purchaseId(pr))) return { ok:true, token: purchaseToken(pr) };
+    }
+  } catch(e){}
   const fn = (typeof pay.purchase === "function") ? pay.purchase : pay.purchaseItem;
   if (typeof fn !== "function") return { err:"off" };
   try { const r = await fn.call(pay, { id:id });
@@ -121,8 +128,16 @@ async function grantAndConsume(id, token){
 }
 /* п.1.13.2 / 1.13.4: цена и иконка портальной валюты берутся из каталога SDK */
 async function loadCatalog(){
-  const pay = payObj(); if (!hasPayments() || !pay || typeof pay.getCatalog !== "function") return {};
-  try { const list = await pay.getCatalog();
+  const pay = payObj(); if (!hasPayments() || !pay) return {};
+  let list = null;
+  const ok = x => Array.isArray(x) && x.length > 0;
+  for (const m of ["getPrices","getCatalogItems","getCatalog","getProducts"]) {
+    if (typeof pay[m] !== "function") continue;
+    try { const r = await pay[m](); const l = (r && Array.isArray(r.products)) ? r.products : r;
+      if (ok(l)) { list = l; break; } } catch(e){}
+  }
+  if (!list) return {};
+  {
     (Array.isArray(list) ? list : []).forEach(p => {
       const id = purchaseId(p); if (!id) return;
       let img = "";
