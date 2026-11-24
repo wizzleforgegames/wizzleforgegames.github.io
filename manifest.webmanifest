@@ -1,0 +1,16 @@
+{
+  "name": "Wizzle Forge Games — браузерные и мобильные игры",
+  "short_name": "Wizzle Forge",
+  "description": "Игровая студия: мерж-аркады, блок-пазлы, космические шутеры, idle-стратегии. Играй в браузере или скачай из магазина.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "icons": [
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/logo.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
