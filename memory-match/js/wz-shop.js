@@ -157,6 +157,8 @@
     var y = null;
     try { y = (typeof ysdk !== 'undefined' && ysdk) ? ysdk : (window.YSDK && window.YSDK.sdk) ? window.YSDK.sdk : null; } catch (e) {}
     if (!y && window.YaGames && window.YaGames.__ysdk) y = window.YaGames.__ysdk;
+    if (!y) { try { if (typeof YandexGames !== 'undefined' && YandexGames) y = (typeof YandexGames.sdk === 'function' ? YandexGames.sdk() : (typeof YandexGames.monetization === 'function' ? YandexGames.monetization() : null)); } catch (e) {} }
+    if (!y) { try { if (typeof YSDK !== 'undefined' && YSDK && YSDK.sdk) y = YSDK.sdk; } catch (e) {} }
     var pr = Promise.resolve(null);
     if (y && y.payments && (y.payments.requestPurchase || y.payments.purchase)) {
       pr = Promise.resolve(y.payments.requestPurchase ? y.payments.requestPurchase({ item: id }) : y.payments.purchase(id))
@@ -198,6 +200,7 @@
       put(LBSTORE, lb); put('wz_me', { score: lb[0].score, date: ds });
       try {
         var y = (typeof ysdk !== 'undefined' && ysdk) ? ysdk : (window.YSDK && window.YSDK.sdk) ? window.YSDK.sdk : null;
+        if (!y) { try { if (typeof YandexGames !== 'undefined' && YandexGames) y = (typeof YandexGames.sdk === 'function' ? YandexGames.sdk() : null); } catch (e) {} }
         if (y && y.leaderboards && y.leaderboards.setScore) y.leaderboards.setScore('best', n).catch(function () {});
       } catch (e) {}
     },
@@ -220,10 +223,12 @@
       return;
     }
     var bar = document.createElement('div'); bar.className = 'wz-btn';
-    bar.innerHTML = '<button type="button" id="wzshopBtn">' + T.shop + '</button><button type="button" id="wzachBtn">' + T.ach + '</button>';
+    bar.innerHTML = '<button type="button" id="wzshopBtn">' + T.shop + '</button><button type="button" id="wzachBtn">' + T.ach +
+      '</button><button type="button" id="wzlbBtn">' + T.lb + '</button>';
     document.body.appendChild(bar);
     bar.querySelector('#wzshopBtn').onclick = function () { overlay('shop'); };
     bar.querySelector('#wzachBtn').onclick = function () { overlay('ach'); };
+    bar.querySelector('#wzlbBtn').onclick = function () { overlay('lb'); };
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
 })();
