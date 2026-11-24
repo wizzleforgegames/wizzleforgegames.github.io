@@ -49,6 +49,7 @@
       ready: "Ready", loading: "Loading assets…", launching: "Launching…",
       shots: "shot",
       purchase: "PURCHASE", premium_label: "PREMIUM SHIP — BUY IN SHOP",
+      ach: "ACHIEVEMENTS", records: "RECORDS",
       purchase_success: "UNLOCKED!", purchase_failed: "PURCHASE FAILED",
       purchase_canceled: "CANCELED", purchase_loading: "PROCESSING…",
       purchase_tap: "Tap to buy"
@@ -85,6 +86,7 @@
       ready: "Готово", loading: "Загрузка…", launching: "Запуск…",
       shots: "выстр",
       purchase: "КУПИТЬ", premium_label: "ПРЕМИУМ-КОРАБЛЬ — В МАГАЗИНЕ",
+      ach: "ДОСТИЖЕНИЯ", records: "РЕКОРДЫ",
       purchase_success: "ОТКРЫТО!", purchase_failed: "ОШИБКА ПОКУПКИ",
       purchase_canceled: "ОТМЕНЕНО", purchase_loading: "ОБРАБОТКА…",
       purchase_tap: "Нажмите, чтобы купить"
@@ -254,6 +256,7 @@
   function t(key){
     return (I18N[LANG] && I18N[LANG][key]) || I18N.en[key] || key;
   }
+  try { window.CDUI = { t: t, lang: function(){ return LANG; } }; } catch(e){}
   function setLang(code){
     if (!I18N[code]) return;
     LANG = code;
@@ -390,6 +393,7 @@
     if (window.NativeAds) { try { NativeAds.hideBanner(); } catch(e){} }
   }
   function adsInterstitial(){
+    try { if (window.WzMeta && WzMeta.has('noads')) return; } catch(e){}
     if (window.NativeAds) {
       try {
         NativeAds.showInterstitial();
@@ -1116,6 +1120,15 @@
     } catch (e) { console.error("gameOver save error:", e); }
 
     try { SFX.levelup(); } catch(e){}
+    try {
+      if (window.WzMeta) WzMeta.onRun({
+        score: game.score || 0, best: persistent.best || 0, level: game.level || 1,
+        kills: game.kills || 0, gold: game.gold || 0,
+        plays: persistent.totalPlays || 1,
+        premium: !!persistent.ships[PREMIUM_SHIP_ID],
+        noads: !!(window.NativeBilling && NativeBilling._noads)
+      });
+    } catch(e){}
     adsInterstitial();
     hideHUD();
     showGameOver(isNewBest);
@@ -1864,6 +1877,10 @@
         '<button class="btn ghost" id="btn-grades">' + t("upgrades") + '</button>' +
         '<button class="btn ghost" id="btn-settings">⚙</button>' +
       '</div>' +
+      '<div class="btn-row">' +
+        '<button class="btn ghost" id="btn-ach">' + t("ach") + '</button>' +
+        '<button class="btn ghost" id="btn-lb">' + t("records") + '</button>' +
+      '</div>' +
       '<div class="controls-hint">' + t("controls") + '</div>';
 
     renderCenter(html);
@@ -1876,6 +1893,11 @@
     document.getElementById("ship-prev").onclick    = function(){ SFX.hover(); selectPrevShip(); };
     document.getElementById("ship-next").onclick    = function(){ SFX.hover(); selectNextShip(); };
     if (daily) document.getElementById("btn-daily").onclick = function(){ claimDaily(); showTitle(); };
+    if (window.WzMeta) {
+      var _ba = document.getElementById("btn-ach"), _bl = document.getElementById("btn-lb");
+      if (_ba) _ba.onclick = function(){ SFX.click(); WzMeta.openAch(); };
+      if (_bl) _bl.onclick = function(){ SFX.click(); WzMeta.openLb(); };
+    }
   }
 
   function refreshCarousel(){
