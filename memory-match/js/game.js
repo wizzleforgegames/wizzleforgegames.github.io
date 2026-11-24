@@ -1364,6 +1364,7 @@
     on('#btn-levels-back', () => { stopTimer(); show('#screen-menu'); renderDecks(); });
     on('#btn-restart', restartCurrent);
     on('#btn-again', () => { hideResult(); restartCurrent(); });
+    on('#btn-share-result', () => shareResult());
     on('#btn-next', () => {
       hideResult();
       const deck = State.current.deck, lv = State.current.level;
@@ -1481,6 +1482,7 @@
     if (State.currentDeck && $('#screen-levels').classList.contains('active')) openLevels(State.currentDeck.id);
     set('#btn-restart', L('restart'));
     set('#btn-again', L('again'));
+    set('#btn-share-result', L('share'));
     set('#btn-next', L('next'));
     set('#btn-menu-result', L('menu'));
     set('#logo-brand', L('brand'));
@@ -1492,6 +1494,18 @@
     set('#btn-backs-close', L('closeLab'));
     document.documentElement.lang = State.lang;
     document.title = L('title');
+  }
+
+  // ---------- Поделиться результатом ----------
+  async function shareResult() {
+    const url = 'https://wizzleforgegames.github.io/memory-match/';
+    const sc = ($('#result-score') && $('#result-score').textContent) || '0';
+    const text = L('shareMsg') + ': ' + sc;
+    try {
+      if (navigator.share) { await navigator.share({ title: L('brand'), text: text + ' ' + url, url }); return; }
+    } catch (e) { return; }
+    try { await navigator.clipboard.writeText(text + ' ' + url); if (window.YandexGames && YandexGames.toast) YandexGames.toast(L('copied')); }
+    catch (e) { if (window.YandexGames && YandexGames.toast) YandexGames.toast(url); }
   }
 
   // ---------- Пересчёт сетки (поворот, ресайз, клавиатура) ----------
