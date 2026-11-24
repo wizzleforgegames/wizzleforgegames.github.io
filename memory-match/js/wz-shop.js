@@ -140,12 +140,13 @@
     var u = 'https://auth.robokassa.ru/Merchant/Index.aspx?MerchantLogin=' + login + '&OutSum=' + sum + '&InvId=' + inv +
       '&Description=' + encodeURIComponent(p.title) + '&Receipt=' + encodeURIComponent(rec) + '&Shp_prod=' + p.id +
       '&SignatureValue=' + sig + '&Encoding=UTF-8';
+    try { localStorage.setItem('wz_back', JSON.stringify({url: location.href, t: Date.now()})); } catch (e) {}
     var w = null; try { w = window.open(u, '_blank'); } catch (e) {}
     return new Promise(function (res) {
       var t0 = Date.now();
       var iv = setInterval(function () {
         var st = ls('wz_pay', {});
-        if (st && st.ok && st.prod === p.id) { clearInterval(iv); res(true); }
+        if (st && st.ok && String(st.prod || (st.q && st.q.Shp_prod) || '') === String(p.id)) { clearInterval(iv); res(true); }
         else if (Date.now() - t0 > 120000) { clearInterval(iv); res(false); }
       }, 1200);
       if (!w) { clearInterval(iv); res(false); }

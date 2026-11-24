@@ -25,7 +25,7 @@
 </div>
 <script>
 (function(){var q=new URLSearchParams(location.search),o={};q.forEach(function(v,k){o[k]=v});
-try{localStorage.setItem('wz_pay',JSON.stringify({t:Date.now(),ok:true,q:o}));}catch(e){}
+var pid=(o.Shp_prod||o.prod||'');try{localStorage.setItem('wz_pay',JSON.stringify({t:Date.now(),ok:true,prod:pid,q:o}));}catch(e){}try{var bk=JSON.parse(localStorage.getItem('wz_back')||'null');if(bk&&bk.url&&Date.now()-bk.t<3600000){var a=document.querySelector('a.btn');if(a){a.href=bk.url;a.textContent='Вернуться в игру';}}}catch(e){}
 try{ if(window.ym){ var sum=parseFloat(o.OutSum||0)||0, pid=(o.Shp_prod||o.prod||'iap');
   window.dataLayer=window.dataLayer||[];
   window.dataLayer.push({ecommerce:{currency:'RUB',purchase:{actionField:{id:String(o.InvId||('wz'+Date.now())),revenue:String(sum)},products:[{id:pid,name:pid,price:sum,quantity:1}]}}});
