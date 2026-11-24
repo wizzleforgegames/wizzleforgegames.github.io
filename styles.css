@@ -61,3 +61,6 @@ ul.clean li{margin:6px 0}
 
 .video video{width:100%;height:auto;border-radius:14px;background:#000;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .video .cap{color:var(--mut);font-size:14px;margin:10px 0 0}
+
+.howto ol{margin:0;padding-left:22px}
+.howto li{margin:0 0 10px;line-height:1.5}
