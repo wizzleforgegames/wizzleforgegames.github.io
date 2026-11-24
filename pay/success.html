@@ -26,6 +26,10 @@
 <script>
 (function(){var q=new URLSearchParams(location.search),o={};q.forEach(function(v,k){o[k]=v});
 try{localStorage.setItem('wz_pay',JSON.stringify({t:Date.now(),ok:true,q:o}));}catch(e){}
+try{ if(window.ym){ var sum=parseFloat(o.OutSum||0)||0, pid=(o.Shp_prod||o.prod||'iap');
+  window.dataLayer=window.dataLayer||[];
+  window.dataLayer.push({ecommerce:{currency:'RUB',purchase:{actionField:{id:String(o.InvId||('wz'+Date.now())),revenue:String(sum)},products:[{id:pid,name:pid,price:sum,quantity:1}]}}});
+  ym(114655120,'reachGoal','purchase'); } }catch(e){}
 var t=document.getElementById('kv');
 ['InvId','OutSum','PaymentMethod'].forEach(function(k){if(o[k]===undefined)return;var tr=document.createElement('tr');tr.innerHTML='<td>'+k+'</td><td>'+String(o[k]).slice(0,80)+'</td>';t.appendChild(tr)});
 try{if(window.parent&&window.parent!==window)window.parent.postMessage({wzpay:true,q:o},'*');}catch(e){}})();
