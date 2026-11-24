@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+<title>Wizzle Forge Games — блог</title>
+<link>https://wizzleforgegames.github.io/</link>
+<description>Статьи о жанрах браузерных и мобильных игр от студии Wizzle Forge Games</description>
+<language>ru</language>
+  <item>
+    <title>Блок-пазлы онлайн: как играть и почему они затягивают</title>
+    <link>https://wizzleforgegames.github.io/blog/blok-pazly-onlayn.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/blok-pazly-onlayn.html</guid>
+    <pubDate>2026-11-24T12:00:00+03:00</pubDate>
+    <description>Блок-пазл — это поле 8×8, три фигуры в лотке и одна мысль: куда поставить, чтобы сгорела линия. Разбираем жанр и объясняем три приёма, после которых счёт вырастет вдвое.</description>
+  </item>
+  <item>
+    <title>Игры на память: как тренировать внимание карточками</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-na-pamyat.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/igry-na-pamyat.html</guid>
+    <pubDate>2026-11-24T12:00:00+03:00</pubDate>
+    <description>Правила на десять секунд: переверни две карты, совпало — забираешь. Но держится всё в голове: где какая карта и в каком порядке её искать. Разбираем, как устроен жанр и почему 88 уровней не надоедают.</description>
+  </item>
+  <item>
+    <title>Idle-игры: что это и как расти, пока ты не играешь</title>
+    <link>https://wizzleforgegames.github.io/blog/idle-igry.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/idle-igry.html</guid>
+    <pubDate>2026-11-24T12:00:00+03:00</pubDate>
+    <description>Idle-игра — это игра, которая зарабатывает ресурсы даже с закрытым экраном. Заходишь на минуту, покупаешь улучшение, и станция растёт сама. Объясняем механики на примере «Звёздной станции».</description>
+  </item>
+  <item>
+    <title>Игры «три в ряд»: почему они затягивают</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-tri-v-ryad.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/igry-tri-v-ryad.html</guid>
+    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
+    <description>Подборка match-3 игр студии: менять конфеты местами, собирать каскады и бонусные фигуры. Запускаются в браузере на телефоне и компьютере, работают без интернета, аккаунт не нужен.</description>
+  </item>
+  <item>
+    <title>Игры 2048 и мерж-аркады: как дорасти до арбуза</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-2048.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/igry-2048.html</guid>
+    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
+    <description>Во всех играх подборки механика одна: соединять одинаковые объекты в следующий по размеру. Это merge-головоломки — самые засидчивые жанры в браузере.</description>
+  </item>
+  <item>
+    <title>Логические игры для детей: что развивать игрой</title>
+    <link>https://wizzleforgegames.github.io/blog/logicheskie-igry-dlya-detey.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/logicheskie-igry-dlya-detey.html</guid>
+    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
+    <description>Игры, которые развивают память, внимание и пространственное мышление и при этом не требуют интернета. Управляются одним пальцем, подходят для дороги и очереди.</description>
+  </item>
+  <item>
+    <title>Космические игры онлайн: шутеры и idle</title>
+    <link>https://wizzleforgegames.github.io/blog/kosmicheskie-igry-onlayn.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/kosmicheskie-igry-onlayn.html</guid>
+    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
+    <description>Две космические игры студии: быстрый вертикальный шутер и неторопливый идл про станцию. Обе запускаются в браузере, без установки и регистрации.</description>
+  </item>
+  <item>
+    <title>Игры на один тап: аркады в одну кнопку</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-na-odin-tap.html</link>
+    <guid>https://wizzleforgegames.github.io/blog/igry-na-odin-tap.html</guid>
+    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
+    <description>Игры, где нужно только тапать или тянуть: флаппи-сёрфер, блок-пазл и merge-аркада. Идеальны для дороги — одна рука, никаких правил.</description>
+  </item>
+</channel></rss>

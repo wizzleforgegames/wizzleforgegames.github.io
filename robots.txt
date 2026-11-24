@@ -3,3 +3,4 @@ Allow: /
 Disallow: /pay/
 Sitemap: https://wizzleforgegames.github.io/sitemap.xml
 Sitemap: https://wizzleforgegames.github.io/sitemap-video.xml
+Sitemap: https://wizzleforgegames.github.io/rss.xml
