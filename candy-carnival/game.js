@@ -3384,7 +3384,11 @@ function buyIap(id, btn, done) {
     else bad('NO_PURCHASE_API');
   } catch (e) { bad(e); }
 }
+function onVkPlay() { try { return !!(window.VK_PLAY && window.VK_PLAY.active); } catch (e) { return false; } }
 function renderIAP(grid) {
+  /* VK Play: платежи через paymentFrame ещё не проверены на реальном товаре —
+     карточку показываем после проверки, чтобы не ловить отказ модерации. */
+  if (onVkPlay()) return;
   for (const item of IAP_ITEMS) {
     const owned = hasIap(item.id);
     const d = document.createElement('div');

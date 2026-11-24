@@ -283,5 +283,15 @@
       return true;
     })
   };
+  /* window.YaGames ставим СРАЗУ, не дожидаясь bridge/iframeApi: игра вполне
+     может вызвать YaGames.init() раньше. init() сам дождётся готовности. */
+  if (!window.YaGames) {
+    window.YaGames = {
+      init: function () {
+        return window.VK_PLAY.ready.catch(function () { return null; }).then(function () { return makeYsdk(); });
+      }
+    };
+    info('window.YaGames установлен синхронно (VK-фасад)');
+  }
   if (window.VK_PLAY_AUTOINIT !== false) { window.VK_PLAY.ready.catch(function () {}); }
 })();
