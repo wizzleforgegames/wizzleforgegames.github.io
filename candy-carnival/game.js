@@ -3336,9 +3336,72 @@ function showShop() {
     grid.appendChild(d);
   }
   renderBundles(grid);
+  renderIAP(grid);
   el('shopcoins').textContent = coins;
   el('shop').classList.remove('hidden');
 }
+
+/* ---------------- real-money IAP (Yandex/VK Play purchases) ----------------
+   «Без рекламы» — one-time purchase. The flag lives in localStorage so the
+   interstitial stays off even before the platform re-confirms the purchase;
+   syncIAP() re-checks the platform catalogue on boot and repairs it. */
+const IAP_STORE = 'candy_iap_v1';
+const IAP_ITEMS = [{ id: 'noads', price: 149, cur: 'RUB' }];
+let iapFlags = {};
+try { iapFlags = JSON.parse(localStorage.getItem(IAP_STORE) || '{}') || {}; } catch (e) { iapFlags = {}; }
+function hasIap(id) { return !!iapFlags[id]; }
+function saveIap() { try { localStorage.setItem(IAP_STORE, JSON.stringify(iapFlags)); } catch (e) {} }
+function grantIap(id) { if (!iapFlags[id]) { iapFlags[id] = 1; saveIap(); } }
+function iapTitle(id) { return id === 'noads' ? (lang === 'ru' ? 'Игра без рекламы' : 'Game without ads') : id; }
+function syncIAP() {
+  try {
+    const p = ysdk && ysdk.payments;
+    if (!p || !p.getPurchases) return;
+    p.getPurchases().then(list => {
+      const arr = (list && list.purchases) || list || [];
+      let changed = false;
+      for (const it of arr) { const id = it && (it.id || it.product_id); if (id && IAP_ITEMS.some(x => x.id === id)) { grantIap(id); changed = true; } }
+      if (changed) { try { updateHUD(); } catch (e) {} }
+    }).catch(() => {});
+  } catch (e) {}
+}
+function buyIap(id, btn, done) {
+  const item = IAP_ITEMS.filter(x => x.id === id)[0];
+  if (!item) return;
+  if (hasIap(id)) { done && done(true); return; }
+  const p = ysdk && ysdk.payments;
+  if (!p) { done && done(false); return; }
+  const ok = () => { grantIap(id); play('reward', .8); analytics.track('iap_ok', { id }); try { showShop(); } catch (e) {} done && done(true); };
+  const bad = (err) => { analytics.track('iap_fail', { id, err: String(err && err.code || err) }); if (btn) { btn.disabled = false; btn.textContent = T('buy'); } done && done(false); };
+  if (btn) { btn.disabled = true; btn.textContent = '…'; }
+  try {
+    if (p.requestPurchase) {
+      p.requestPurchase({ item: id }).then(res => {
+        if (res && res.purchase && typeof p.confirmPurchase === 'function') return p.confirmPurchase(res.purchase).then(() => res);
+        return res;
+      }).then(ok).catch(bad);
+    } else if (p.purchase) { p.purchase(id).then(ok).catch(bad); }
+    else bad('NO_PURCHASE_API');
+  } catch (e) { bad(e); }
+}
+function renderIAP(grid) {
+  for (const item of IAP_ITEMS) {
+    const owned = hasIap(item.id);
+    const d = document.createElement('div');
+    d.className = 'shop-item iap' + (owned ? ' owned' : '');
+    const ic = '<svg viewBox="0 0 24 24" width="34" height="34"><path d="M4 4h16v16H4z" fill="none" stroke="#ffd76a" stroke-width="2"/><path d="M8 12l3 3 5-6" fill="none" stroke="#6ee7ff" stroke-width="2.4" stroke-linecap="round"/></svg>';
+    d.innerHTML = '<div class="si-ic">' + ic + '</div><h4>' + (lang === 'ru' ? 'Без рекламы' : 'Remove ads') + '</h4>' +
+      '<p>' + (lang === 'ru' ? 'Отключает межстраничную рекламу. Вознаграждаемое видео остаётся — бонусы за просмотр.'
+                              : 'Turns interstitial ads off. Rewarded videos stay — keep the bonuses.') + '</p>' +
+      '<span class="qty-have">' + (owned ? (lang === 'ru' ? 'Куплено' : 'Owned') : (lang === 'ru' ? 'Разово' : 'One-time')) + '</span>' +
+      '<button class="buybtn">' + (owned ? T('have') : item.price + ' ₽') + '</button>';
+    const btn = d.querySelector('.buybtn');
+    btn.disabled = owned;
+    btn.onclick = () => { buyIap(item.id, btn); };
+    grid.appendChild(d);
+  }
+}
+
 const BUNDLES = [
   { id: 'mix3', kind: 'mix', n: 1, price: 150, save: 20 },
   { id: 'hammer3', kind: 'hammer', n: 3, price: 100, save: 20 },
@@ -3536,6 +3599,7 @@ function rewarded(btn, cb) {
   setTimeout(() => finish(false), AD_WATCHDOG_MS);
 }
 function maybeInterstitial(cb) {
+  if (hasIap('noads')) { cb(); return; }
   sinceInterstitial++;
   const every = 3;
   if (level < 3 || !ysdk || !ysdk.adv || !ysdk.adv.showFullscreenAdv || sinceInterstitial < every) { cb(); return; }
@@ -3866,6 +3930,7 @@ async function initSDK() {
       window.YaGames = { init: () => Promise.resolve(localSDK()) };
     }
     ysdk = await YaGames.init();
+    syncIAP();
     const lg = ysdk.environment && ysdk.environment.i18n && ysdk.environment.i18n.lang;
     if (lg && L[lg]) lang = lg;
   } catch (e) { console.warn('SDK init', e); }
