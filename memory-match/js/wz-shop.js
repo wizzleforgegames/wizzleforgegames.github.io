@@ -28,48 +28,56 @@
   var owned = ls(STORE, []);
   var achs = ls(ACHSTORE, {});
 
-  /* ---------- md5 (для Robokassa на сайте) ---------- */
-  var md5 = (function () {
-    function a(x, y) { var z = (x & 0xFFFF) + (y & 0xFFFF); return ((x >> 16) + (y >> 16) + (z >> 16) << 16) | (z & 0xFFFF); }
-    function r(x, c) { return (x << c) | (x >>> (32 - c)); }
-    function f(x, y, z) { return (x & y) | (~x & z); } function g(x, y, z) { return (x & z) | (y & ~z); }
-    function h(x, y, z) { return x ^ y ^ z; } function i(x, y, z) { return y ^ (x | ~z); }
-    function o(v, x, s, t) { return a(r(a(v, a(a(x, t), s)), 0), 0); }
-    function A(x, k, s, t, m) { return o(f(x[0], x[1], x[2]), x[m], s, t); }
-    function B(x, k, s, t, m) { return o(g(x[0], x[1], x[2]), x[m], s, t); }
-    function C2(x, k, s, t, m) { return o(h(x[0], x[1], x[2]), x[m], s, t); }
-    function D(x, k, s, t, m) { return o(i(x[0], x[1], x[2]), x[m], s, t); }
-    function s2b(s) { var b = []; for (var n = 0; n < s.length; n++) { var c = s.charCodeAt(n);
-        if (c < 128) b.push(c); else if (c < 2048) { b.push(192 | (c >> 6), 128 | (c & 63)); }
-        else { b.push(224 | (c >> 12), 128 | ((c >> 6) & 63), 128 | (c & 63)); } } return b; }
-    function hex(n) { var s = ''; for (var j = 0; j < 4; j++) s += ('0' + ((n >> (j * 8 + 4)) & 15).toString(16) + ((n >> (j * 8)) & 15).toString(16)); return s; }
-    return function (str) {
-      var x = s2b(str), n = x.length, words = [];
-      for (var q = 0; q < n; q += 4) words.push(x[q] + (x[q + 1] << 8) + (x[q + 2] << 16) + (x[q + 3] << 24));
-      words[n >> 2] = words[n >> 2] | (0x80 << ((n % 4) * 8));
-      while (words.length % 16 !== 14) words.push(0);
-      words.push(n * 8); words.push(0);
-      var A0 = 1732584193, B0 = -271733879, C0 = -1732584194, D0 = 271733878, x2 = [A0, B0, C0, D0];
-      var K = [7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,
-               4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
-      var S = [5,0,4,7,6,1,11,2,13,8,10,3,12,15,9,14,0,4,7,6,11,2,13,8,10,3,12,15,9,14,5,1,
-               5,9,3,7,0,13,1,8,10,6,14,2,12,4,15,11,0,6,13,1,8,10,4,15,14,2,12,4,15,11,5,9,3,7,
-               7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22];
-      for (var off = 0; off < words.length; off += 16) {
-        var blk = words.slice(off, off + 16), X = x2.slice();
-        for (var s3 = 0; s3 < 64; s3++) {
-          var t;
-          if (s3 < 16) t = A(X, blk, K[s3], -680876936, s3);
-          else if (s3 < 32) t = B(X, blk, K[s3 + 1], -389564586, [1,6,11,0,5,10,15,4,9,14,3,8,13,2,7,12][s3 % 16]);
-          else if (s3 < 48) t = C2(X, blk, K[s3 + 2], 328289091, [5,8,11,14,1,4,7,10,13,0,3,6,9,12,15,2][s3 % 16]);
-          else t = D(X, blk, K[s3 + 3], -627311912, [0,7,14,5,12,3,10,1,8,15,6,13,4,11,2,9][s3 % 16]);
-          X = [t, X[0], X[1], X[2]];
+    /* ---------- md5 (для подписи Robokassa на сайте) ---------- */
+  var MD5 = (function () {
+    var S = [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+             5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
+             4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+             6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21];
+    var K = new Uint32Array(64);
+    for (var i = 0; i < 64; i++) K[i] = Math.floor(Math.abs(Math.sin(i + 1)) * 4294967296) >>> 0;
+    function rotl(x, c) { return ((x << c) | (x >>> (32 - c))) >>> 0; }
+    function utf8(str) {
+      var out = [], s = unescape(encodeURIComponent(str));
+      for (var i = 0; i < s.length; i++) out.push(s.charCodeAt(i) & 0xff);
+      return out;
+    }
+    function core(b) {
+      var a0 = 0x67452301, b0 = 0xefcdab89, c0 = 0x98badcfe, d0 = 0x10325476;
+      for (var off = 0; off < b.length; off += 64) {
+        var M = new Uint32Array(16);
+        for (var j = 0; j < 16; j++)
+          M[j] = (b[off + j * 4] | (b[off + j * 4 + 1] << 8) | (b[off + j * 4 + 2] << 16) | (b[off + j * 4 + 3] << 24)) >>> 0;
+        var A = a0, B = b0, C = c0, D = d0;
+        for (var i = 0; i < 64; i++) {
+          var F, g;
+          if (i < 16) { F = (B & C) | (~B & D); g = i; }
+          else if (i < 32) { F = (D & B) | (~D & C); g = (5 * i + 1) % 16; }
+          else if (i < 48) { F = B ^ C ^ D; g = (3 * i + 5) % 16; }
+          else { F = C ^ (B | ~D); g = (7 * i) % 16; }
+          F = (F + A + K[i] + M[g]) >>> 0;
+          A = D; D = C; C = B;
+          B = (B + rotl(F, S[i])) >>> 0;
         }
-        x2 = [a(x2[0], X[0]), a(x2[1], X[1]), a(x2[2], X[2]), a(x2[3], X[3])];
+        a0 = (a0 + A) >>> 0; b0 = (b0 + B) >>> 0; c0 = (c0 + C) >>> 0; d0 = (d0 + D) >>> 0;
       }
-      return hex(x2[0]) + hex(x2[1]) + hex(x2[2]) + hex(x2[3]);
+      return [a0, b0, c0, d0];
+    }
+    return function (str) {
+      var b = utf8(str), len = b.length * 8;
+      b.push(0x80);
+      while (b.length % 64 !== 56) b.push(0);
+      var lo = len >>> 0, hi = Math.floor(len / 4294967296) >>> 0;
+      b.push(lo & 0xff, (lo >>> 8) & 0xff, (lo >>> 16) & 0xff, (lo >>> 24) & 0xff,
+             hi & 0xff, (hi >>> 8) & 0xff, (hi >>> 16) & 0xff, (hi >>> 24) & 0xff);
+      var h = core(b), hex = '';
+      for (var i = 0; i < 4; i++)
+        for (var sh = 0; sh < 32; sh += 8)
+          hex += ((h[i] >>> sh) & 0xff).toString(16).padStart(2, '0');
+      return hex;
     };
   })();
+  var md5 = MD5;
 
   /* ---------- стили и разметка ---------- */
   var CSS = '.wz-btn{position:fixed;right:10px;bottom:10px;z-index:9990;display:flex;gap:6px}' +
@@ -171,16 +179,18 @@
     } else if (window.NativeBilling && window.NativeBilling.purchase) {
       pr = Promise.resolve(window.NativeBilling.purchase(id)).then(function (r) { return !!(r && r.success); });
     } else { pr = rbk(p); }
-    pr.then(function (ok) {
+    return pr.then(function (ok) {
       if (btn) btn.disabled = false;
       if (ok) { if (owned.indexOf(id) < 0) owned.push(id); put(STORE, owned); toast(T.thanks); overlay('shop'); fire(id); }
       else toast(T.fail);
-    }, function () { if (btn) btn.disabled = false; toast(T.fail); });
+      return !!ok;
+    }, function () { if (btn) btn.disabled = false; toast(T.fail); return false; });
   }
   function fire(id) { try { window.dispatchEvent(new CustomEvent('wz-purchase', { detail: { id: id } })); } catch (e) {} }
 
   /* ---------- API ---------- */
   var API = {
+    md5: md5,
     owned: function (id) { return owned.indexOf(id) >= 0; },
     buy: buy,
     open: overlay,
