@@ -145,7 +145,7 @@ async function loadCatalog(){
       iapCatalog[id] = { price: String(p.price || p.priceValue || ""), value: String(p.priceValue || ""),
                          code: String(p.priceCurrencyCode || ""), img: img || "" };
     });
-  } catch(e){}
+  }
   return iapCatalog;
 }
 function iapPriceLabel(id){
