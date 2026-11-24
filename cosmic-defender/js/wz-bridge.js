@@ -59,6 +59,7 @@
               '&FailURL=' + encodeURIComponent('https://wizzleforgegames.github.io/pay/fail.html') +
               '&SignatureValue=' + sig + '&Encoding=UTF-8';
     try { localStorage.setItem('wz_pay_wait', productId + '|' + Date.now()); } catch (e) {}
+    try { localStorage.setItem('wz_back', JSON.stringify({url: location.href, t: Date.now()})); } catch (e) {}
     var w = null;
     try { w = window.open(url, '_blank'); } catch (e) {}
     return new Promise(function (res) {

@@ -163,22 +163,35 @@
   function buy(id, btn) {
     var p = PRODUCTS.filter(function (x) { return x.id === id; })[0]; if (!p) return;
     if (btn) btn.disabled = true;
-    var y = null;
-    try { y = (typeof ysdk !== 'undefined' && ysdk) ? ysdk : (window.YSDK && window.YSDK.sdk) ? window.YSDK.sdk : null; } catch (e) {}
-    if (!y && window.YaGames && window.YaGames.__ysdk) y = window.YaGames.__ysdk;
-    if (!y) { try { if (typeof YandexGames !== 'undefined' && YandexGames) y = (typeof YandexGames.sdk === 'function' ? YandexGames.sdk() : (typeof YandexGames.monetization === 'function' ? YandexGames.monetization() : null)); } catch (e) {} }
-    if (!y) { try { if (typeof YSDK !== 'undefined' && YSDK && YSDK.sdk) y = YSDK.sdk; } catch (e) {} }
-    var pr = Promise.resolve(null);
-    if (y && y.payments && (y.payments.requestPurchase || y.payments.purchase)) {
-      pr = Promise.resolve(y.payments.requestPurchase ? y.payments.requestPurchase({ item: id }) : y.payments.purchase(id))
-        .then(function (r) {
+    function payer() {
+      var y = null;
+      try { y = (typeof ysdk !== 'undefined' && ysdk) ? ysdk : (window.YSDK && window.YSDK.sdk) ? window.YSDK.sdk : null; } catch (e) {}
+      if (!y && window.YaGames && window.YaGames.__ysdk) y = window.YaGames.__ysdk;
+      if (!y) { try { if (typeof YandexGames !== 'undefined' && YandexGames) y = (typeof YandexGames.sdk === 'function' ? YandexGames.sdk() : (typeof YandexGames.monetization === 'function' ? YandexGames.monetization() : null)); } catch (e) {} }
+      if (!y) { try { if (typeof YSDK !== 'undefined' && YSDK && YSDK.sdk) y = YSDK.sdk; } catch (e) {} }
+      if (y && y.payments && (y.payments.requestPurchase || y.payments.purchase)) return Promise.resolve(y.payments);
+      if (window.YaGames && typeof window.YaGames.init === 'function') {
+        try {
+          return Promise.resolve(window.YaGames.init()).then(function (sdk) {
+            return (sdk && sdk.payments && (sdk.payments.requestPurchase || sdk.payments.purchase)) ? sdk.payments : null;
+          }, function () { return null; });
+        } catch (e) {}
+      }
+      return Promise.resolve(null);
+    }
+    var pr = payer().then(function (P) {
+      if (P) {
+        return Promise.resolve(P.requestPurchase ? P.requestPurchase({ item: id }) : P.purchase(id)).then(function (r) {
           var pur = r && (r.purchase || r);
-          if (y.payments.confirmPurchase && pur) { try { y.payments.confirmPurchase(pur); } catch (e) {} }
+          if (P.confirmPurchase && pur) { try { P.confirmPurchase(pur); } catch (e) {} }
           return true;
         });
-    } else if (window.NativeBilling && window.NativeBilling.purchase) {
-      pr = Promise.resolve(window.NativeBilling.purchase(id)).then(function (r) { return !!(r && r.success); });
-    } else { pr = rbk(p); }
+      }
+      if (window.NativeBilling && window.NativeBilling.purchase) {
+        return Promise.resolve(window.NativeBilling.purchase(id)).then(function (r) { return !!(r && r.success); });
+      }
+      return rbk(p);
+    });
     return pr.then(function (ok) {
       if (btn) btn.disabled = false;
       if (ok) { if (owned.indexOf(id) < 0) owned.push(id); put(STORE, owned); toast(T.thanks); overlay('shop'); fire(id); }
