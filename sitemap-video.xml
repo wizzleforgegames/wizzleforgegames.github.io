@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://wizzleforgegames.github.io/watermelon-merge.html</loc>
+    <video:video>
+      <video:content_loc>https://wizzleforgegames.github.io/media/watermelon-merge-720.webm</video:content_loc>
+      <video:thumbnail_loc>https://wizzleforgegames.github.io/screenshots/watermelon-merge-gameplay.webp</video:thumbnail_loc>
+      <video:title>Арбуз 2048: Соедини Фрукты — видео геймплея</video:title>
+      <video:description>Реальные ходы в аркадном мерже фруктов: комбо, бустеры, рекорды.</video:description>
+      <video:publication_date>2026-11-24T00:00:00+03:00</video:publication_date>
+      <video:duration>31</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://wizzleforgegames.github.io/cosmic-defender.html</loc>
+    <video:video>
+      <video:content_loc>https://wizzleforgegames.github.io/media/cosmic-defender-720.webm</video:content_loc>
+      <video:thumbnail_loc>https://wizzleforgegames.github.io/screenshots/cosmic-defender-gameplay.webp</video:thumbnail_loc>
+      <video:title>Космический шутер: Cosmic Defender — видео геймплея</video:title>
+      <video:description>Волны врагов, боссы, прокачка корабля.</video:description>
+      <video:publication_date>2026-11-24T00:00:00+03:00</video:publication_date>
+      <video:duration>31</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://wizzleforgegames.github.io/flappy-space.html</loc>
+    <video:video>
+      <video:content_loc>https://wizzleforgegames.github.io/media/flappy-space-720.webm</video:content_loc>
+      <video:thumbnail_loc>https://wizzleforgegames.github.io/screenshots/flappy-space-gameplay.webp</video:thumbnail_loc>
+      <video:title>Флаппи Космос: аркада в одну кнопку — видео геймплея</video:title>
+      <video:description>Полёт сквозь астероиды в одну кнопку, 31 миссия.</video:description>
+      <video:publication_date>2026-11-24T00:00:00+03:00</video:publication_date>
+      <video:duration>31</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://wizzleforgegames.github.io/candy-carnival.html</loc>
+    <video:video>
+      <video:content_loc>https://wizzleforgegames.github.io/media/candy-carnival-720.webm</video:content_loc>
+      <video:thumbnail_loc>https://wizzleforgegames.github.io/screenshots/candy-carnival-gameplay.webp</video:thumbnail_loc>
+      <video:title>Три в ряд: Candy Carnival — видео геймплея</video:title>
+      <video:description>Матч-3 на 200 уровней: комбо, спец-фигуры, звёзды.</video:description>
+      <video:publication_date>2026-11-24T00:00:00+03:00</video:publication_date>
+      <video:duration>31</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://wizzleforgegames.github.io/blockblastik.html</loc>
+    <video:video>
+      <video:content_loc>https://wizzleforgegames.github.io/media/blockblastik-720.webm</video:content_loc>
+      <video:thumbnail_loc>https://wizzleforgegames.github.io/screenshots/blockblastik-gameplay.webp</video:thumbnail_loc>
+      <video:title>Блок Блиц: Тетрис-головоломка онлайн — видео геймплея</video:title>
+      <video:description>Собирай линии, лови БЛАСТ, 6 режимов.</video:description>
+      <video:publication_date>2026-11-24T00:00:00+03:00</video:publication_date>
+      <video:duration>31</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://wizzleforgegames.github.io/cosmic-station.html</loc>
+    <video:video>
+      <video:content_loc>https://wizzleforgegames.github.io/media/cosmic-station-720.webm</video:content_loc>
+      <video:thumbnail_loc>https://wizzleforgegames.github.io/screenshots/cosmic-station-gameplay.webp</video:thumbnail_loc>
+      <video:title>Звёздная станция: космическая Idle-игра — видео геймплея</video:title>
+      <video:description>Строй станцию, получай офлайн-доход, уходи в престиж.</video:description>
+      <video:publication_date>2026-11-24T00:00:00+03:00</video:publication_date>
+      <video:duration>31</video:duration>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://wizzleforgegames.github.io/memory-match.html</loc>
+    <video:video>
+      <video:content_loc>https://wizzleforgegames.github.io/media/memory-match-1080.mp4</video:content_loc>
+      <video:thumbnail_loc>https://wizzleforgegames.github.io/screenshots/memory-match-gameplay.webp</video:thumbnail_loc>
+      <video:title>Найди Пары: Картинки на Память — видео геймплея</video:title>
+      <video:description>88 уровней, 22 колоды с фотографиями, режимы «Классика», «Комбо» и «На время».</video:description>
+      <video:publication_date>2026-11-24T00:00:00+03:00</video:publication_date>
+      <video:duration>26</video:duration>
+    </video:video>
+  </url>
+</urlset>
