@@ -239,5 +239,64 @@
     }
   };
 
-  console.log('[VK] hooks installed (NativeBilling + NativeAds)');
+
+  /* =====================================================
+     LEADERBOARD — VK Play (mailru core). Пробуем реальные методы
+     api; если их нет — локальная таблица рекордов, чтобы UI работал.
+     ===================================================== */
+  var LB_KEY = 'cd_lb_vk';
+  function localLb() { try { return JSON.parse(localStorage.getItem(LB_KEY) || '[]'); } catch (e) { return []; } }
+  function saveLb(l) { try { localStorage.setItem(LB_KEY, JSON.stringify(l)); } catch (e) {} }
+  function apiCall(name, args) {
+    return new Promise(function (res) {
+      var api = window.vkPlayApi;
+      if (!api || typeof api[name] !== 'function') { res(null); return; }
+      var done = false;
+      var cb = function (r) { if (!done) { done = true; res(r); } };
+      try {
+        var pr = api[name].apply(api, (args || []).concat([cb]));
+        if (pr && typeof pr.then === 'function') pr.then(cb, function () { cb(null); });
+      } catch (e) { cb(null); }
+      setTimeout(function () { cb(null); }, 6000);
+    });
+  }
+  window.NativeBoard = {
+    submit: function (kind, score) {
+      score = Math.max(0, Math.round(score || 0));
+      var l = localLb();
+      l.push({ score: score, date: new Date().toLocaleDateString('ru-RU'), me: true });
+      l.sort(function (a, b) { return b.score - a.score; });
+      saveLb(l.slice(0, 20));
+      var names = ['setScore', 'setTopScore', 'saveScore', 'setLeaderboardScore'];
+      var i = 0;
+      (function next() {
+        if (i >= names.length) return;
+        apiCall(names[i++], [score]).then(function (r) { if (r === null) next(); });
+      })();
+      return Promise.resolve(true);
+    },
+    entries: function (kind) {
+      var names = ['getTopScores', 'getTop', 'getLeaderboard', 'getScores'];
+      var i = 0;
+      return new Promise(function (res) {
+        (function next() {
+          if (i >= names.length) { res(localLb()); return; }
+          apiCall(names[i++], [20]).then(function (r) {
+            if (r && (r.scores || r.entries || Array.isArray(r))) {
+              var arr = r.scores || r.entries || r;
+              res(arr.map(function (x, k) {
+                return { rank: x.rank || k + 1, name: (x.user && (x.user.name || x.user.nick)) || x.name || ('Игрок ' + (k + 1)),
+                         score: x.score || x.points || 0, me: !!x.me };
+              }));
+              return;
+            }
+            next();
+          });
+        })();
+      });
+    },
+    platformAchievements: function () { return Promise.resolve([]); }
+  };
+
+  console.log('[VK] hooks installed (NativeBilling + NativeAds + NativeBoard)');
 })();
