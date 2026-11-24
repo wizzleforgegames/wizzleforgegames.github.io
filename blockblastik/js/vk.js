@@ -9,9 +9,11 @@ let bridge=null, inVK=false, user=null, noAds=false, appId=0, groupId=0, sup={};
 function detect(){
   try{
     const p=new URLSearchParams(location.search);
-    appId=parseInt(p.get('vk_app_id')||p.get('app_id')||'0',10)||0;
+    appId=parseInt(p.get('vk_app_id')||p.get('app_id')||String(window.VK_PLAY_APP_ID||'0'),10)||0;
     groupId=parseInt(p.get('group_id')||'0',10)||0;
-    inVK = !!(appId||window.__vkit||/VKApp|vkWebView|vk.com/i.test(navigator.userAgent));
+    const ref=(document.referrer||''), host=location.hostname||'';
+    const vkHost=/(vkplay\.ru|play\.vk\.com|game\.mail\.ru|odnoklassniki\.ru|(^|\.)vk\.com)$/i;
+    inVK = !!(appId||window.__vkit||vkHost.test(ref)||vkHost.test(host)||/[?&](vk|vkplay)=1/.test(location.search)||/VKApp|vkWebView|MyGamesApp|VKPlay/i.test(navigator.userAgent));
   }catch(e){}
 }
 function loadOne(u){

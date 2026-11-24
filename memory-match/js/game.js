@@ -1085,7 +1085,7 @@
     showResult(deck, lv, stars, wasPerfect, timedOut, mem);
     AudioMgr.play(stars === 0 ? 'lose' : (wasPerfect ? 'win' : 'correct'));
     State.levelsPlayed++;
-    if (stars > 0 && State.levelsPlayed % 3 === 0) YandexGames.interstitialThrottled(90000);
+    if (stars > 0 && State.levelsPlayed % 3 === 0 && !(window.WzShop && WzShop.owned('noads'))) YandexGames.interstitialThrottled(90000);
     if (stars > 0 && deckCleared(deck) && !State.progress.rated) {
       State.progress.rated = 1; await saveProgress();
       setTimeout(() => { try { YandexGames.requestRating(); } catch (e) {} }, 1200);
@@ -1349,6 +1349,15 @@
       x2.classList.toggle('done', !!State.doubled);
       x2.textContent = State.doubled ? ('✓ ' + L('adWatched')) : (L('adX2') + ' +' + State.earned);
     }
+    try{ if(window.WzShop){ WzShop.score(State.score||0);
+      var _c=JSON.parse(localStorage.getItem('mm_cnt')||'{}');
+      if(stars>0){ _c.wins=(_c.wins||0)+1; WzShop.unlock('first_win'); }
+      if(stars===3) WzShop.unlock('perfect');
+      if(State.mode==='blitz'&&stars>0) WzShop.unlock('blitz');
+      _c.decks=_c.decks||{}; if(State.deckId) _c.decks[State.deckId]=1;
+      if(Object.keys(_c.decks).length>=5) WzShop.unlock('collector');
+      if(_c.wins>=10) WzShop.unlock('win10');
+      localStorage.setItem('mm_cnt', JSON.stringify(_c)); } }catch(e){}
     $('#result-modal').classList.add('show');
     if (stars >= 2) spawnConfetti(stars === 3 ? 120 : 60);
     else spawnConfetti(30);

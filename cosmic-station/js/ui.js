@@ -903,7 +903,7 @@ var SEASON_WORDS=['Туманностей','Плазменных штормов'
 function seasonName(id){ return SEASON_WORDS[id%SEASON_WORDS.length]; }
 function fmtLeft(ms){ if(ms<0)ms=0; var d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5); return d>0?d+'д '+h+'ч':(h>0?h+'ч '+Math.floor(ms%36e5/6e4)+'м':Math.floor(ms/1e3)+'с'); }
 function submitSeasonScore(){
-  try{ if(YSDK&&YSDK.submitScoreNamed)YSDK.submitScoreNamed('Сезон',Math.round(G.seasonInfo(state,Date.now()).score),function(){}); }catch(e){}
+  try{ if(YSDK&&YSDK.submitScoreNamed)YSDK.submitScoreNamed('Сезон',Math.round(G.seasonInfo(state,Date.now()).score),function(){}); window.WzShop&&WzShop.unlock('week'); }catch(e){}
 }
 function showSeasonBoard(){
   if(!(YSDK&&YSDK.sdk)){ toast('Таблицы рекордов работают только на Яндекс Играх','err'); return; }
@@ -1272,7 +1272,7 @@ function showDailyModal(){
     [{l:'ЗАБРАТЬ',k:'y',ic:'1f381',fn:function(){ claimDailyUi(false); }},
      {l:'×3 ЗА РЕКЛАМУ',k:'p',ic:'1f3ac',fn:function(){
         var run=function(){ claimDailyUi(true); toast('Утроено!','gold'); };
-        if(YSDK&&YSDK.sdk&&YSDK.isPlayable&&YSDK.isPlayable()){ YSDK.showAds(function(sh){ if(sh){state.stats.adsWatched++;run();} else toast('Реклама недоступна','err'); }); }
+        if(YSDK&&YSDK.sdk&&YSDK.isPlayable&&YSDK.isPlayable()){ YSDK.showAds(function(sh){ if(sh){state.stats.adsWatched++;try{window.WzShop&&state.stats.adsWatched>=5&&WzShop.unlock('ads5')}catch(e){}run();} else toast('Реклама недоступна','err'); }); }
         else run();
         return false;
      }}]);
@@ -2033,11 +2033,13 @@ function doPrestige(){
      var r=G.prestige(state);
      if(r.ok){ boostUntil=0; snd('warp'); buzz([60,40,120]); toast('Варп! +'+G.fmt(r.gain)+' антиматерии','gold'); renderAll(); shake();
        confettiAt(window.innerWidth/2, window.innerHeight*0.4, 40);
+       try{window.WzShop&&WzShop.unlock('prestige1')}catch(e){}
        if(state.prestigeCount===2&&YSDK)YSDK.rateGame();
        if(state.prestigeCount%3===0&&YSDK&&YSDK.sdk)YSDK.interstitial(); }
      else toast(r.msg,'err');
    }}]);
 }
+try{window.WzShop&&G.buildings&&Object.keys(state.b||{}).length&&WzShop.unlock('first')}catch(e){}
 function doReset(){
   openModal('26a0','Сбросить всё?','<p>Весь прогресс будет удалён без возможности возврата.</p>',
    [{l:'Отмена',k:''},{l:'СБРОСИТЬ',k:'y',fn:function(){
@@ -2047,6 +2049,7 @@ function doReset(){
 }
 function showLeaderboard(){
   if(!YSDK||!YSDK.sdk){ toast('Таблицы рекордов доступны на Яндекс Играх','err'); return; }
+  try{window.WzShop&&(WzShop.score(Math.floor(state.stats.totalEnergy)),state.stats.totalEnergy>=1000000&&WzShop.unlock('e1m'))}catch(e){}
   YSDK.submitScore(Math.floor(state.stats.totalEnergy), function(ok){
     if(!ok){ toast('Не удалось отправить счёт','err'); return; }
     YSDK.showLeaderboards(function(sh){ if(!sh)toast('Таблица рекордов недоступна','err'); });
@@ -2165,7 +2168,7 @@ function updateFlare(){
       var run=function(){ var r=G.extendFlare(state,25000);
         if(r.ok){ snd('boost'); toast('Вспышка продлена ещё на 25 секунд','gold'); } else toast(r.msg,'err'); };
       var onPlatform=YSDK&&YSDK.sdk&&YSDK.isPlayable&&YSDK.isPlayable();
-      if(onPlatform){ YSDK.showAds(function(sh){ if(sh){ state.stats.adsWatched++; run(); } else toast('Реклама недоступна','err'); }); }
+      if(onPlatform){ YSDK.showAds(function(sh){ if(sh){ state.stats.adsWatched++; try{window.WzShop&&state.stats.adsWatched>=5&&WzShop.unlock('ads5')}catch(e){} run(); } else toast('Реклама недоступна','err'); }); }
       else run();
     };
   }
@@ -2561,7 +2564,7 @@ function showOffline(off){
    [{l:'ЗАБРАТЬ',k:''},{l:'К ЦЕЛИ',k:'p',ic:'1f3af',fn:function(){ goalJump(nx); }},
     {l:'×2 ЗА РЕКЛАМУ',k:'y',ic:'1f4b5',fn:function(){
       var onPlatform=YSDK&&YSDK.sdk&&YSDK.isPlayable&&YSDK.isPlayable();
-      if(onPlatform){ YSDK.showAds(function(sh){ if(sh){state.stats.adsWatched++;doubleOffline(off);} else toast('Реклама недоступна','err'); }); }
+      if(onPlatform){ YSDK.showAds(function(sh){ if(sh){state.stats.adsWatched++;try{window.WzShop&&state.stats.adsWatched>=5&&WzShop.unlock('ads5')}catch(e){}doubleOffline(off);} else toast('Реклама недоступна','err'); }); }
       else doubleOffline(off);
       return false;
    }}]);

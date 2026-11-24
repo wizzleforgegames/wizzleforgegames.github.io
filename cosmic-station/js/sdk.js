@@ -85,6 +85,7 @@
   /* межстраничная реклама (не чаще раза в 3 минуты — требование разумной частоты) */
   var _lastInter = 0;
   YSDK.interstitial = function (cb) {
+    try { if (window.WzShop && WzShop.owned('noads')) { if (cb) cb(false); return; } } catch (e) {}
     var sdk = YSDK.sdk;
     if (!sdk || !sdk.adv || typeof sdk.adv.showFullscreenAdv !== 'function') { if (cb) cb(false); return; }
     var now = Date.now();
