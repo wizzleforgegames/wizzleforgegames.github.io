@@ -413,3 +413,15 @@ body::after{width:380px;height:380px;background:var(--accent);bottom:-120px;left
   .deck-title{display:none;}
   .menu-foot{padding-top:4px;} .icon-btn{width:38px;height:38px;font-size:16px;}
 }
+
+/* --- пауза --- */
+.pause-ov{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  background:rgba(6,8,18,.72);backdrop-filter:blur(6px);z-index:30;padding:18px}
+.pause-ov.show{display:flex}
+.pause-card{text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center;
+  background:rgba(16,20,38,.92);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:22px 26px;
+  box-shadow:0 18px 48px rgba(0,0,0,.45)}
+.pause-title{font-size:22px;font-weight:800;letter-spacing:.5px}
+.pause-sub{font-size:13px;opacity:.75}
+#screen-game.paused #board{filter:blur(14px) saturate(.7);pointer-events:none}
+#screen-game.paused #powerups{opacity:.35;pointer-events:none}

@@ -705,7 +705,7 @@
 
   // ---------- Геймплей ----------
   function onCardClick(cardEl, card) {
-    if (State.lock || State.finished) return;
+    if (State.lock || State.finished || State.paused) return;
     if (card.open || card.matched) return;
     if (State.flipped.length >= 2) return;
     const wasSeen = card.seen, wasGiven = card.given;
@@ -834,6 +834,28 @@
       if (State.deadline <= 0) { State.deadline = 0; updateHud(); timeUp(); return; }
     }
     updateHud();
+  }
+  function pauseGame() {
+    if (State.finished || State.paused) return;
+    State.paused = true; stopTimer();
+    const scr = $('#screen-game'); if (scr) scr.classList.add('paused');
+    const ov = $('#pause-ov'); if (ov) ov.classList.add('show');
+    const t = $('#pause-title'); if (t) t.textContent = L('pause');
+    const sub = $('#pause-sub'); if (sub) sub.textContent = L('pauseSub');
+    const r = $('#btn-resume'); if (r) r.textContent = L('resume');
+    AudioMgr.play('click');
+  }
+  function resumeGame() {
+    if (!State.paused) return;
+    State.paused = false;
+    const scr = $('#screen-game'); if (scr) scr.classList.remove('paused');
+    const ov = $('#pause-ov'); if (ov) ov.classList.remove('show');
+    if (State.mode === 'blitz' && State.deadline > 0) startTimer(); else if (State.mode) startTimer();
+  }
+  function hidePause() {
+    State.paused = false;
+    const scr = $('#screen-game'); if (scr) scr.classList.remove('paused');
+    const ov = $('#pause-ov'); if (ov) ov.classList.remove('show');
   }
   function startTimer() { stopTimer(); State.timer = setInterval(tick, 1000); }
   function stopTimer() { if (State.timer) { clearInterval(State.timer); State.timer = null; } }
@@ -1369,9 +1391,11 @@
     on('#btn-tutorial', showTutorial);
     on('#btn-backs', openBacks);
     on('#btn-backs-close', hideBacks);
-    on('#btn-back', () => { stopTimer(); show('#screen-menu'); renderDecks(); });
-    on('#btn-levels-back', () => { stopTimer(); show('#screen-menu'); renderDecks(); });
+    on('#btn-back', () => { hidePause(); stopTimer(); show('#screen-menu'); renderDecks(); });
+    on('#btn-levels-back', () => { hidePause(); stopTimer(); show('#screen-menu'); renderDecks(); });
     on('#btn-restart', restartCurrent);
+    on('#btn-pause', pauseGame);
+    on('#btn-resume', resumeGame);
     on('#btn-again', () => { hideResult(); restartCurrent(); });
     on('#btn-share-result', () => shareResult());
     on('#btn-next', () => {
