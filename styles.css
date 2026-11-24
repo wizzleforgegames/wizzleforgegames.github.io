@@ -156,7 +156,7 @@ html.js .reveal.visible{opacity:1;transform:none}
 
 /* ---------- game page ---------- */
 .gpage{padding-top:120px}
-.ghead{position:relative;text-align:center;padding:26px 0 40px;overflow:hidden}
+.ghead{position:relative;text-align:center;padding:132px 0 44px;overflow:hidden}
 .ghead .hero__glow--1{top:-260px;left:-260px}
 .ghead h1{font-size:clamp(28px,4.6vw,50px);font-weight:900;letter-spacing:-1.2px;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff 25%,var(--accent) 70%,var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
 .ghead .lead{color:var(--muted);max-width:760px;margin:0 auto 20px;font-size:16px;line-height:1.7}
