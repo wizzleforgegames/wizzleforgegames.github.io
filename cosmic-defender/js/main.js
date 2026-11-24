@@ -27,6 +27,7 @@
       gameover: "GAME OVER", earned: "EARNED", new_record: "NEW!", record: "RECORD",
       revive: "⟲ REVIVE (AD)", x2_gold: "×2 GOLD (AD)",
       play_again: "PLAY AGAIN", menu: "MENU",
+      share: "SHARE SCORE", sharemsg: "I scored {score} points in Cosmic Defender — a space shooter with waves of enemies and bosses! Play free:", copied: "Link copied",
       ship_shop: "SHIP SHOP", upgrades_title: "UPGRADES", settings_title: "SETTINGS",
       sound: "SOUND", sound_sub: "Music & effects",
       vibration: "VIBRATION", vibration_sub: "Haptic feedback",
@@ -64,6 +65,7 @@
       gameover: "ИГРА ОКОНЧЕНА", earned: "ЗАРАБОТАНО", new_record: "НОВЫЙ!", record: "РЕКОРД",
       revive: "⟲ ВОЗРОДИТЬСЯ (РЕКЛ)", x2_gold: "×2 ЗОЛОТА (РЕКЛ)",
       play_again: "ЕЩЁ РАЗ", menu: "МЕНЮ",
+      share: "ПОДЕЛИТЬСЯ", sharemsg: "Я набрал {score} очков в «Cosmic Defender» — космический шутер с волнами врагов и боссами! Играй бесплатно:", copied: "Ссылка скопирована",
       ship_shop: "МАГАЗИН КОРАБЛЕЙ", upgrades_title: "УЛУЧШЕНИЯ", settings_title: "НАСТРОЙКИ",
       sound: "ЗВУК", sound_sub: "Музыка и эффекты",
       vibration: "ВИБРАЦИЯ", vibration_sub: "Тактильный отклик",
@@ -1936,6 +1938,26 @@
     document.getElementById("btn-quit").onclick   = function(){ SFX.click(); quitToMenu(); };
   }
 
+  function shareRun(score){
+    var msg = t("sharemsg").replace("{score}", (score||0).toLocaleString());
+    var url = "https://wizzleforgegames.github.io/cosmic-defender/";
+    var done = function(ok){ try { addFloat(LOG_W/2, LOG_H/2, t("copied"), "#4ad9ff", 22); } catch(e){} };
+    try {
+      if (navigator.share) {
+        navigator.share({ title: "Cosmic Defender", text: msg, url: url }).then(function(){}, function(){});
+        return;
+      }
+    } catch(e){}
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = msg + " " + url;
+      ta.style.position = "fixed"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta);
+      done(true);
+    } catch(e){}
+  }
+
   function showGameOver(isNewBest){
     showCenter();
     var reviveBtn = persistent.reviveUsed ? "" :
@@ -1958,11 +1980,16 @@
       '<div class="btn-row">' +
         '<button class="btn" id="btn-retry">' + t("play_again") + '</button>' +
         '<button class="btn ghost" id="btn-menu">' + t("menu") + '</button>' +
+      '</div>' +
+      '<div class="btn-row">' +
+        '<button class="btn ghost" id="btn-share">{share} ' + t("share") + '</button>' +
       '</div>'
     );
 
     document.getElementById("btn-retry").onclick = function(){ SFX.click(); startRun(); };
     document.getElementById("btn-menu").onclick  = function(){ SFX.click(); quitToMenu(); };
+    var sh = document.getElementById("btn-share");
+    if (sh) sh.onclick = function(){ SFX.click(); shareRun(game.score || persistent.best || 0); };
 
     if (reviveBtn) {
       document.getElementById("btn-revive").onclick = function(){
