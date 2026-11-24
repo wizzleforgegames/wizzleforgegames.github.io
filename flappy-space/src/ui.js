@@ -12,6 +12,13 @@ function setGlyph(node, id){ const u = node && node.querySelector("use"); if (!u
 function showScreen(id){ screens.forEach(s=>{ const n = el(s); if(!n) return; s===id ? n.classList.remove("hidden") : n.classList.add("hidden"); }); }
 function hideAllScreens(){ screens.forEach(s=>{ const n = el(s); if(n) n.classList.add("hidden"); }); }
 let toastTimer = null;
+async function shareRun(){
+  const url = "https://wizzleforgegames.github.io/flappy-space/";
+  const sc = el("goScore").textContent, ds = el("goDist").textContent;
+  const text = tr("sharemsg") + ": " + sc + " · " + ds;
+  try { if (navigator.share) { await navigator.share({ title: tr("title"), text: text + " " + url, url }); return; } } catch (e) { return; }
+  try { await navigator.clipboard.writeText(text + " " + url); toast(tr("copied")); } catch (e) { toast(url); }
+}
 function toast(msg){ const t = el("toast"); t.textContent = msg; t.classList.remove("hidden");
   clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.add("hidden"), 2200); }
 
@@ -1028,6 +1035,8 @@ function bindUI(){
   el("pauseMenuBtn").onclick = ()=>{ AU.play("back",.5); toMenu(); };
   el("pauseLeaderboardBtn").onclick = ()=>{ AU.play("click",.5); openLeaderboard(); };
   el("retryBtn").onclick = ()=>{ AU.play("select",.6); startPlay(); };
+  const sb = el("shareBtn");
+  if (sb) sb.onclick = ()=>{ AU.play("select",.5); shareRun(); };
   el("menuBtn").onclick = ()=>{ AU.play("back",.5); toMenu(); };
   el("overLeaderboardBtn").onclick = ()=>{ AU.play("click",.5); openLeaderboard(); };
   el("reviveBtn").onclick = async ()=>{
