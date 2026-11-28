@@ -35,8 +35,12 @@
   function detectVK() {
     try {
       var q = new URLSearchParams(location.search);
-      var appId = parseInt(q.get('vk_app_id') || q.get('app_id') || '0', 10) || 0;
-      inVK = !!(appId || window.__vkit || /VKApp|vkWebView|vk[.]com|vkplay/i.test(navigator.userAgent));
+      var appId = parseInt(q.get('vk_app_id') || q.get('app_id') || window.VK_PLAY_APP_ID || '0', 10) || 0;
+      var ref = ''; try { ref = document.referrer || ''; } catch (e) {}
+      /* referrer площадки — главный признак; плюс явный ?vk=1 для тестов и сборок */
+      var refVK = /vkplay[.]ru|play[.]vk[.]com|game[.]mail[.]ru|odnoklassniki[.]ru/i.test(ref);
+      inVK = !!(appId || window.__vkit || refVK || q.get('vk') === '1' ||
+                /VKApp|vkWebView|vk[.]com|vkplay/i.test(navigator.userAgent));
     } catch (e) {}
   }
   function loadOne(u) {
