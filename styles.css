@@ -215,3 +215,10 @@ html.js .reveal.visible{opacity:1;transform:none}
 .bcard__meta{color:#6f7690;font-size:12.5px}
 .blog-all{display:inline-flex;align-items:center;gap:8px;color:#a78bfa;font-size:14px;margin:0 0 18px}
 .blog-all:hover{color:#c4b5fd}
+
+.arts{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.art{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;transition:.25s;color:inherit}
+.art:hover{border-color:#22d3ee;transform:translateY(-3px)}
+.art i{color:#22d3ee;font-size:16px;margin-top:3px}
+.art b{display:block;font-size:15px;margin-bottom:6px;line-height:1.4}
+.art span span{display:block;color:#8b93a8;font-size:13px;line-height:1.5}
