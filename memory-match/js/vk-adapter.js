@@ -222,6 +222,24 @@
       },
       consumePurchase: function () { return Promise.resolve(); }
     };
+    var ACH_KEY = 'vkplay_ach';
+    function achLoad() { try { return JSON.parse(localStorage.getItem(ACH_KEY) || '{}'); } catch (e) { return {}; } }
+    function achSave(o) { try { localStorage.setItem(ACH_KEY, JSON.stringify(o)); } catch (e) {} }
+    var ach = {
+      getAchievements: function (list) {
+        var have = achLoad();
+        return Promise.resolve((list || []).map(function (n) {
+          return { title: n, description: n, unlocked: !!have[n], progress: have[n] ? 1 : 0, steps: have[n] ? 1 : 0, image: null };
+        }));
+      },
+      setAchievement: function (name) {
+        var have = achLoad();
+        if (have[name]) return Promise.resolve({ changed: false, unlocked: true });
+        have[name] = Date.now(); achSave(have);
+        return Promise.resolve({ changed: true, unlocked: true });
+      },
+      flushAchievements: function () { return Promise.resolve({ total: Object.keys(achLoad()).length }); }
+    };
     var ysdk = {
       app: { id: String(APP) },
       adv: adv, payments: payments, player: player,
@@ -249,7 +267,13 @@
                            isControlExperiment: function () { return true; } } },
       auth: { openAuthDialog: function () { return Promise.resolve(); } },
       fullscreen: { request: function () { try { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); } catch (e) {} } },
-      share: function () {}, shareUrl: function () {}, feedback: function () {},
+      share: function (payload) {
+        var link = (payload && (payload.link || payload.url)) || location.href;
+        return send('VKWebAppShare', { link: link }, 15000).then(function (r) { return r.ok ? { result: 'OK' } : { result: 'FAILED' }; });
+      },
+      shareUrl: function (url) { return ysdk.share({ link: url || location.href }); },
+      feedback: function () {},
+      getAchievements: function () { return Promise.resolve(ach); },
       readyGame: function () {}, rateGame: function () {}, loadingReady: function () {},
       isAvailableMethod: function () { return false; },
       on: function () {}, setAdvSettings: function () {},
