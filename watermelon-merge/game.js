@@ -427,17 +427,29 @@ async function initPayments() {
   if ($("#ov-shop") && !$("#ov-shop").classList.contains("hidden")) renderShop();
 }
 async function restorePurchases() {
-  if (!player || !player.getPurchases) return;
-  try {
-    const p = await player.getPurchases();
-    if (!p) return;
-    let got = 0;
-    for (const k in p) {
-      const key = (p[k] && (p[k].id || p[k].itemKey)) || k;
-      if (IAP_BY_ID[key] && !iapOwned(key)) { grantIap(key, 1); got++; }
-    }
-    if (got) { save(); refreshMenu(); }
-  } catch (e) { }
+  /* покупки восстанавливаем и через player.getPurchases(), и через payments.getPurchases() */
+  let p = null;
+  try { if (player && player.getPurchases) p = await player.getPurchases(); } catch (e) { }
+  let arr = [];
+  if (p) arr = Array.isArray(p) ? p : Object.keys(p).map(k => p[k]);
+  if (!arr.length) {
+    try {
+      const pay = window.ysdk && window.ysdk.payments;
+      if (pay && pay.getPurchases) {
+        const r = await pay.getPurchases();
+        arr = (r && (r.purchases || r.products)) || r || [];
+        if (!Array.isArray(arr)) arr = Object.keys(arr).map(k => arr[k]);
+      }
+    } catch (e) { }
+  }
+  if (!arr.length) return;
+  let got = 0;
+  for (const it of arr) {
+    if (!it) continue;
+    const key = it.id || it.itemKey || it.item || it.productId;
+    if (IAP_BY_ID[key] && !iapOwned(key)) { grantIap(key, 1); got++; }
+  }
+  if (got) { save(); refreshMenu(); }
 }
 function grantIap(id, quiet) {
   const it = IAP_BY_ID[id]; if (!it) return;
