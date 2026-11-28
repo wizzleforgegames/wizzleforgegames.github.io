@@ -84,7 +84,8 @@
   </div>
 
   <!-- 1. VK Play iframe API (mailru.core.js) -->
-  <script src="https://vkplay.ru/app/51212/static/mailru.core.js" onerror="console.warn('[VK Play] mailru.core.js failed to load — using mock')"></script>
+  <script>window.VK_PLAY_PRODUCTS={"novaPrime":{"amount":199,"title":"Nova Prime — набор"},"noads":{"amount":149,"title":"Игра без рекламы"},"revive":{"amount":59,"title":"Возрождение"}};</script>
+<script src="https://vkplay.ru/app/51212/static/mailru.core.js" onerror="console.warn('[VK Play] mailru.core.js failed to load — using mock')"></script>
 
   <!-- 2. Обёртка VK Play API (инициализирует window.vkPlayApi) -->
   <script src="js/vk-play-api.js"></script>
