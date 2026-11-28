@@ -1,119 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>Wizzle Forge Games — блог</title>
-<link>https://wizzleforgegames.github.io/</link>
+<link>https://wizzleforgegames.github.io/blog/</link>
 <description>Статьи о жанрах браузерных и мобильных игр от студии Wizzle Forge Games</description>
 <language>ru</language>
   <item>
-    <title>Как отключить рекламу в игре и не остаться без разработчика</title>
-    <link>https://wizzleforgegames.github.io/blog/kak-otklyuchit-reklamu-v-igre.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/kak-otklyuchit-reklamu-v-igre.html</guid>
-    <pubDate>2026-11-28T10:30:00+03:00</pubDate>
-    <description>Что такое реклама внутри бесплатных игр, почему она показывается и что именно перестаёт показываться после покупки.</description>
-  </item>
-  <item>
-    <title>Ежедневные награды в играх: зачем заходить каждый день</title>
-    <link>https://wizzleforgegames.github.io/blog/ezhednevnye-nagrady-v-igrakh.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/ezhednevnye-nagrady-v-igrakh.html</guid>
-    <pubDate>2026-11-28T10:30:00+03:00</pubDate>
-    <description>Календарь наград, серия дней и напоминания в приложении: разбор на примере наших семи игр.</description>
-  </item>
-  <item>
-    <title>Игры без интернета на телефон</title>
-    <link>https://wizzleforgegames.github.io/blog/igry-bez-interneta-na-telefon.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/igry-bez-interneta-na-telefon.html</guid>
-    <pubDate>2026-11-28T10:30:00+03:00</pubDate>
-    <description>Семь игр, которые работают офлайн: что доступно без сети и как подготовить игру к поездке.</description>
-  </item>
-  <item>
-    <title>«Арбуз 2048»: скачать на Android бесплатно</title>
-    <link>https://wizzleforgegames.github.io/blog/arbuz-2048-skachat-na-android.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/arbuz-2048-skachat-na-android.html</guid>
-    <pubDate>2026-11-28T09:00:00+03:00</pubDate>
-    <description>Два способа получить игру на телефон бесплатно: установка из RuStore и игра по ссылке в браузере — и чем они отличаются.</description>
-  </item>
-  <item>
-    <title>Игры на двоих на одном телефоне</title>
+    <title>Игры на двоих на одном телефоне: как играть вместе без интернета</title>
     <link>https://wizzleforgegames.github.io/blog/igry-na-dvoih-na-odnom-telefone.html</link>
+    <description>Подборка игр, в которые можно играть вдвоём на одном устройстве — по очереди и наперегонки: «Блок Блиц», «Арбуз 2048», «Три в ряд» и «Найди Пары».</description>
     <guid>https://wizzleforgegames.github.io/blog/igry-na-dvoih-na-odnom-telefone.html</guid>
-    <pubDate>2026-11-28T09:00:00+03:00</pubDate>
-    <description>Во что играть вдвоём без интернета на одном устройстве: по очереди, наперегонки и на один экран.</description>
   </item>
   <item>
-    <title>Игры про космос на телефон</title>
+    <title>Игры про космос на телефон: шутер, аркада и idle-станция</title>
     <link>https://wizzleforgegames.github.io/blog/igry-pro-kosmos-na-telefon.html</link>
+    <description>Три космические игры студии: «Космический шутер: Cosmic Defender», «Флаппи Космос» и «Звёздная станция» — жанры, управление и чем они отличаются.</description>
     <guid>https://wizzleforgegames.github.io/blog/igry-pro-kosmos-na-telefon.html</guid>
-    <pubDate>2026-11-28T09:00:00+03:00</pubDate>
-    <description>Три космические игры студии: шутер с боссами, аркада в одну кнопку и idle-станция с офлайн-доходом.</description>
   </item>
   <item>
-    <title>Блок-пазлы онлайн: как играть и почему они затягивают</title>
-    <link>https://wizzleforgegames.github.io/blog/blok-pazly-onlayn.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/blok-pazly-onlayn.html</guid>
-    <pubDate>2026-11-24T12:00:00+03:00</pubDate>
-    <description>Блок-пазл — это поле 8×8, три фигуры в лотке и одна мысль: куда поставить, чтобы сгорела линия. Разбираем жанр и объясняем три приёма, после которых счёт вырастет вдвое.</description>
-  </item>
-  <item>
-    <title>Игры на память: как тренировать внимание карточками</title>
-    <link>https://wizzleforgegames.github.io/blog/igry-na-pamyat.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/igry-na-pamyat.html</guid>
-    <pubDate>2026-11-24T12:00:00+03:00</pubDate>
-    <description>Правила на десять секунд: переверни две карты, совпало — забираешь. Но держится всё в голове: где какая карта и в каком порядке её искать. Разбираем, как устроен жанр и почему 88 уровней не надоедают.</description>
-  </item>
-  <item>
-    <title>Idle-игры: что это и как расти, пока ты не играешь</title>
-    <link>https://wizzleforgegames.github.io/blog/idle-igry.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/idle-igry.html</guid>
-    <pubDate>2026-11-24T12:00:00+03:00</pubDate>
-    <description>Idle-игра — это игра, которая зарабатывает ресурсы даже с закрытым экраном. Заходишь на минуту, покупаешь улучшение, и станция растёт сама. Объясняем механики на примере «Звёздной станции».</description>
-  </item>
-  <item>
-    <title>Игры «три в ряд»: почему они затягивают</title>
-    <link>https://wizzleforgegames.github.io/blog/igry-tri-v-ryad.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/igry-tri-v-ryad.html</guid>
-    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
-    <description>Подборка match-3 игр студии: менять конфеты местами, собирать каскады и бонусные фигуры. Запускаются в браузере на телефоне и компьютере, работают без интернета, аккаунт не нужен.</description>
-  </item>
-  <item>
-    <title>Игры 2048 и мерж-аркады: как дорасти до арбуза</title>
-    <link>https://wizzleforgegames.github.io/blog/igry-2048.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/igry-2048.html</guid>
-    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
-    <description>Во всех играх подборки механика одна: соединять одинаковые объекты в следующий по размеру. Это merge-головоломки — самые засидчивые жанры в браузере.</description>
-  </item>
-  <item>
-    <title>Логические игры для детей: что развивать игрой</title>
-    <link>https://wizzleforgegames.github.io/blog/logicheskie-igry-dlya-detey.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/logicheskie-igry-dlya-detey.html</guid>
-    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
-    <description>Игры, которые развивают память, внимание и пространственное мышление и при этом не требуют интернета. Управляются одним пальцем, подходят для дороги и очереди.</description>
-  </item>
-  <item>
-    <title>Космические игры онлайн: шутеры и idle</title>
-    <link>https://wizzleforgegames.github.io/blog/kosmicheskie-igry-onlayn.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/kosmicheskie-igry-onlayn.html</guid>
-    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
-    <description>Две космические игры студии: быстрый вертикальный шутер и неторопливый идл про станцию. Обе запускаются в браузере, без установки и регистрации.</description>
-  </item>
-  <item>
-    <title>Игры на один тап: аркады в одну кнопку</title>
-    <link>https://wizzleforgegames.github.io/blog/igry-na-odin-tap.html</link>
-    <guid>https://wizzleforgegames.github.io/blog/igry-na-odin-tap.html</guid>
-    <pubDate>2026-11-20T12:00:00+03:00</pubDate>
-    <description>Игры, где нужно только тапать или тянуть: флаппи-сёрфер, блок-пазл и merge-аркада. Идеальны для дороги — одна рука, никаких правил.</description>
-  </item>
-  <item>
-    <title>Браузерные игры без скачивания и регистрации</title>
+    <title>Браузерные игры без скачивания и регистрации: во что играть прямо сейчас</title>
     <link>https://wizzleforgegames.github.io/blog/igry-bez-skachivaniya.html</link>
+    <description>Никаких установок, аккаунтов и ожиданий: как устроены браузерные игры, почему они не занимают память и во что играть у нас — 7 игр в один клик.</description>
     <guid>https://wizzleforgegames.github.io/blog/igry-bez-skachivaniya.html</guid>
-    <pubDate>2026-11-27T12:00:00+03:00</pubDate>
-    <description>Браузерные игры без скачивания и регистрации</description>
   </item>
   <item>
     <title>Игры на слабый телефон: что не тормозит и не греется</title>
     <link>https://wizzleforgegames.github.io/blog/igry-na-slabyy-telefon.html</link>
+    <description>Как подобрать игру, которая не сажает батарею и не лагает на старом Android: лёгкая графика, один тап, отсутствие 3D и наш каталог из 7 игр.</description>
     <guid>https://wizzleforgegames.github.io/blog/igry-na-slabyy-telefon.html</guid>
-    <pubDate>2026-11-27T12:00:00+03:00</pubDate>
-    <description>Игры на слабый телефон: что не тормозит и не греется</description>
+  </item>
+  <item>
+    <title>Арбуз 2048: скачать на Android бесплатно — игра без рекламы и регистрации</title>
+    <link>https://wizzleforgegames.github.io/blog/arbuz-2048-skachat-na-android.html</link>
+    <description>Как установить «Арбуз 2048: Соедини Фрукты» на телефон бесплатно: версия из RuStore и браузерная версия, чем они отличаются и где прогресс.</description>
+    <guid>https://wizzleforgegames.github.io/blog/arbuz-2048-skachat-na-android.html</guid>
+  </item>
+  <item>
+    <title>Ежедневные награды в играх: зачем заходить каждый день</title>
+    <link>https://wizzleforgegames.github.io/blog/ezhednevnye-nagrady-v-igrakh.html</link>
+    <description>Что дают ежедневные награды и серии заходов: разбор на примере наших семи игр — календарь наград, стрик, бонусы и напоминания в приложении.</description>
+    <guid>https://wizzleforgegames.github.io/blog/ezhednevnye-nagrady-v-igrakh.html</guid>
+  </item>
+  <item>
+    <title>Idle-игры: что это и как расти, пока ты не играешь</title>
+    <link>https://wizzleforgegames.github.io/blog/idle-igry.html</link>
+    <description>Офлайн-доход, престиж, множители и сезон: объясняем жанр idle-игр на примере «Звёздной станции» и говорим, как не превратить игру в рутину.</description>
+    <guid>https://wizzleforgegames.github.io/blog/idle-igry.html</guid>
+  </item>
+  <item>
+    <title>Игры без интернета на телефон: семь игр, которые работают офлайн</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-bez-interneta-na-telefon.html</link>
+    <description>Какие игры запускаются на телефоне без сети: как устроен офлайн-режим, что работает без интернета и что появится, когда сеть вернётся.</description>
+    <guid>https://wizzleforgegames.github.io/blog/igry-bez-interneta-na-telefon.html</guid>
+  </item>
+  <item>
+    <title>Головоломки для взрослых: логика, наблюдательность, память</title>
+    <link>https://wizzleforgegames.github.io/blog/golovolomki-dlya-vzroslyh.html</link>
+    <description>Подборка жанров головоломок для взрослых: числа и слияния, блок-пазлы, игры на память и idle-расчёты — что тренирует и во что играть.</description>
+    <guid>https://wizzleforgegames.github.io/blog/golovolomki-dlya-vzroslyh.html</guid>
+  </item>
+  <item>
+    <title>Блок-пазлы онлайн: как играть и почему они затягивают</title>
+    <link>https://wizzleforgegames.github.io/blog/blok-pazly-onlayn.html</link>
+    <description>Поле 8×8, три фигуры за ход и шкала БЛАСТ: разбираем жанр блок-пазлов и объясняем, как ставить фигуры, чтобы линии сгорали сами.</description>
+    <guid>https://wizzleforgegames.github.io/blog/blok-pazly-onlayn.html</guid>
+  </item>
+  <item>
+    <title>Игры на планшет: что удобно играть с большого экрана</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-na-planshet.html</link>
+    <description>Какие игры не тормозят на планшете, как подстраивается интерфейс под горизонтальный экран и что удобно играть пальцами без мыши.</description>
+    <guid>https://wizzleforgegames.github.io/blog/igry-na-planshet.html</guid>
+  </item>
+  <item>
+    <title>Игры на память: как тренировать внимание карточками</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-na-pamyat.html</link>
+    <description>Метод пар, колоды тем, режимы на время и комбо: как устроены игры на память и как устроен наш «Найди Пары: Картинки на Память».</description>
+    <guid>https://wizzleforgegames.github.io/blog/igry-na-pamyat.html</guid>
+  </item>
+  <item>
+    <title>Как отключить рекламу в игре и не остаться без разработчика</title>
+    <link>https://wizzleforgegames.github.io/blog/kak-otklyuchit-reklamu-v-igre.html</link>
+    <description>Что такое реклама внутри бесплатных игр, почему она показывается, как отключить её покупкой и что при этом меняется для игрока.</description>
+    <guid>https://wizzleforgegames.github.io/blog/kak-otklyuchit-reklamu-v-igre.html</guid>
+  </item>
+  <item>
+    <title>Тетрис онлайн: современные версии классической головоломки</title>
+    <link>https://wizzleforgegames.github.io/blog/tetris-onlayn.html</link>
+    <description>Как устроен тетрис, чем блок-пазлы отличаются от классики и во что играть бесплатно в браузере без установки и регистрации.</description>
+    <guid>https://wizzleforgegames.github.io/blog/tetris-onlayn.html</guid>
+  </item>
+  <item>
+    <title>Игры «три в ряд» бесплатно без скачивания — Wizzle Forge Games</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-tri-v-ryad.html</link>
+    <description>Играть в «три в ряд» бесплатно: 200 уровней, каскады, бустеры ракета, бомба и радуга. Без регистрации, работает офлайн.</description>
+    <guid>https://wizzleforgegames.github.io/blog/igry-tri-v-ryad.html</guid>
+  </item>
+  <item>
+    <title>Космические игры онлайн: шутер и идл — Wizzle Forge Games</title>
+    <link>https://wizzleforgegames.github.io/blog/kosmicheskie-igry-onlayn.html</link>
+    <description>Космические игры онлайн: вертикальный шутер с боссами и идл про космическую станцию. Бесплатно, без установки.</description>
+    <guid>https://wizzleforgegames.github.io/blog/kosmicheskie-igry-onlayn.html</guid>
+  </item>
+  <item>
+    <title>Логические игры для детей на телефон — Wizzle Forge Games</title>
+    <link>https://wizzleforgegames.github.io/blog/logicheskie-igry-dlya-detey.html</link>
+    <description>Логические игры для детей на телефон: память, блоки, merge-фрукты. Без регистрации и интернета, бесплатно.</description>
+    <guid>https://wizzleforgegames.github.io/blog/logicheskie-igry-dlya-detey.html</guid>
+  </item>
+  <item>
+    <title>Игры 2048 и merge-головоломки — Wizzle Forge Games</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-2048.html</link>
+    <description>Играть в 2048 и merge-головоломки бесплатно: арбузы, блоки с числами, комбо и рекорды. Без установки.</description>
+    <guid>https://wizzleforgegames.github.io/blog/igry-2048.html</guid>
+  </item>
+  <item>
+    <title>Аркады в одну кнопку — Wizzle Forge Games</title>
+    <link>https://wizzleforgegames.github.io/blog/igry-na-odin-tap.html</link>
+    <description>Аркады в одну кнопку: флаппи в космосе, блок-пазл 8×8 и merge-фрукты. Играть бесплатно в браузере.</description>
+    <guid>https://wizzleforgegames.github.io/blog/igry-na-odin-tap.html</guid>
   </item>
 </channel></rss>

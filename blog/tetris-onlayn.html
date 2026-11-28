@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Тетрис онлайн: современные версии классической головоломки</title>
+<meta name="description" content="Как устроен тетрис, чем блок-пазлы отличаются от классики и во что играть бесплатно в браузере без установки и регистрации.">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wizzle Forge Games">
+<meta property="og:title" content="Тетрис онлайн: современные версии классической головоломки">
+<meta property="og:description" content="Как устроен тетрис, чем блок-пазлы отличаются от классики и во что играть бесплатно в браузере без установки и регистрации.">
+<meta property="og:image" content="https://wizzleforgegames.github.io/og/blockblastik.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:url" content="https://wizzleforgegames.github.io/blog/tetris-onlayn.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wizzleforgegames.github.io/og/blockblastik.png">
+<link rel="canonical" href="https://wizzleforgegames.github.io/blog/tetris-onlayn.html">
+<link rel="alternate" hreflang="ru" href="https://wizzleforgegames.github.io/blog/tetris-onlayn.html">
+<link rel="alternate" hreflang="x-default" href="https://wizzleforgegames.github.io/blog/tetris-onlayn.html">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/inter.css">
+<link rel="stylesheet" href="/vendor/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="alternate" type="application/rss+xml" title="Блог Wizzle Forge Games" href="/rss.xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Тетрис онлайн: современные версии классической головоломки", "description": "Как устроен тетрис, чем блок-пазлы отличаются от классики и во что играть бесплатно в браузере без установки и регистрации.", "image": "https://wizzleforgegames.github.io/og/blockblastik.png", "author": {"@type": "Organization", "name": "Wizzle Forge Games"}, "publisher": {"@type": "Organization", "name": "Wizzle Forge Games", "logo": {"@type": "ImageObject", "url": "https://wizzleforgegames.github.io/logo.png"}}, "mainEntityOfPage": "https://wizzleforgegames.github.io/blog/tetris-onlayn.html", "inLanguage": "ru"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://wizzleforgegames.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://wizzleforgegames.github.io/blog/"}, {"@type": "ListItem", "position": 3, "name": "Тетрис онлайн: современные версии классической головоломки", "item": "https://wizzleforgegames.github.io/blog/tetris-onlayn.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Block Blastik: Блоки в ряд", "url": "https://wizzleforgegames.github.io/blockblastik.html"}, {"@type": "ListItem", "position": 2, "name": "Арбуз 2048: Соедини Фрукты", "url": "https://wizzleforgegames.github.io/watermelon-merge.html"}, {"@type": "ListItem", "position": 3, "name": "Три в ряд: Candy Carnival", "url": "https://wizzleforgegames.github.io/candy-carnival.html"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Это тот же самый тетрис, что был на старых консолях?", "acceptedAnswer": {"@type": "Answer", "text": "Механика та же — заполнение рядов фигурами из квадратиков. Отличается подача: фигуры не падают, а ставятся игроком, и очищаются не только ряды, но и квадраты."}}, {"@type": "Question", "name": "Нужно ли регистрироваться, чтобы играть онлайн?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Игра открывается по ссылке и сразу работает, прогресс хранится в браузере устройства."}}, {"@type": "Question", "name": "Чем отличаются режимы «Классика», «Блиц» и «2048»?", "acceptedAnswer": {"@type": "Answer", "text": "«Классика» — бесконечная игра на рекорд, «Блиц» — 60 секунд на максимум линий, «2048» — те же фигуры, но с числами и слияниями."}}, {"@type": "Question", "name": "Работает ли игра на слабом телефоне?", "acceptedAnswer": {"@type": "Answer", "text": "Да: графика простая, поле и фигуры рисуются на canvas, интернет нужен только для открытия ссылки."}}]}</script>
+<meta name="yandex-verification" content="7e10c3d8b7dd8776" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=114655120', 'ym');
+ym(114655120, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/114655120" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body><header class="header" id="top">
+  <div class="container header__inner">
+    <a class="logo" href="..//"><img src="/logo.png" alt="Wizzle Forge Games"><span>Wizzle&nbsp;Forge&nbsp;Games</span></a>
+    <nav class="nav"><a href="../#games">Игры</a><a href="../#platforms">Где играть</a><a href="../#about">Студия</a><a href="../#blog">Блог</a></nav>
+    <div class="header__actions">
+      <a class="lang-btn" href="/en/"><i class="fa-solid fa-language"></i><span class="t">EN</span></a>
+      <button class="burger" type="button" aria-label="menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+<section class="ghead">
+  <div class="hero__glow hero__glow--1"></div><div class="hero__glow hero__glow--2"></div>
+  <div class="container hero__inner">
+    <div class="crumbs reveal"><a href="../">Студия</a> / <a href="../blog/">Блог</a> / <span>Тетрис онлайн: современные версии классической головоломки</span></div>
+    <span class="tag reveal">Статья</span>
+    <h1 class="reveal d1">Тетрис онлайн: современные версии классической головоломки</h1>
+    <p class="lead reveal d2">Тетрис — самая копируемая головоломка в истории. Разбираем, что в ней работает, как жанр evolved в блок-пазлы и чем «Блок Блиц» отличается от классических падающих фигур.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:10px">
+  <div class="container prose reveal"><h2>Почему тетрис работает уже сорок лет</h2><p>Суть игры простая: фигуры падают, их нужно поворачивать и ставить так, чтобы ряды заполнялись и исчезали. Мозг получает законченный цикл: поставил — исчезло — получил очки. Такие короткие циклы затягивают лучше, чем длинная история.</p><p>Второй секрет — растущее давление: чем дольше играешь, тем быстрее падают фигуры и тем меньше места на поле. Напряжение растёт само, без врагов и сюжета.</p><h2>Чем блок-пазлы отличаются от падающего тетриса</h2><p>В современных версиях фигуры не падают сверху: вы сами перетаскиваете их на поле из панели. Это меняет характер игры — вместо реакции на скорость работает планирование: куда поставить фигуру, чтобы следующие две тоже влезли.</p><p>В «Блок Блице» поле 8×8, фигуры из одного-пяти квадратиков, а очищаются не только ряды, но и квадраты 3×3 и 4×4. За несколько очищений подряд включается множитель, а шкала БЛАСТ устраивает чистку всего поля, когда тот уже почти заполнен.</p><p>Ещё одно отличие — нет проигрыша от скорости: партия заканчивается, только если ни одна из трёх доступных фигур не влезает. Ошибиться можно, но времени подумать достаточно.</p><h2>Как играть бесплатно и без установки</h2><p>Классические версии тетриса живут в браузере: открываете ссылку и играете, ничего не скачивая. Так же работает и «Блок Блиц»: игра открывается по ссылке на сайте студии, на телефоне и на компьютере.</p><p>Если нужен офлайн-режим, есть Android-сборка: она ставится как обычное приложение и работает без интернета, а прогресс сохраняется на устройстве.</p><h2>Советы, которые реально помогают</h2><p>Держите одну «колодец»-полосу свободной: в блок-пазлах, как и в тетрисе, длинная узкая выемка — главная причина проигрыша. Лучше закрыть три ряда и освободить место, чем жадничать.</p><p>Смотрите не на фигуру, которую ставите сейчас, а на две следующие в панели: планируйте на два хода вперёд. И не бойтесь использовать БЛАСТ: шкала копится именно для моментов, когда поле уже почти заполнено.</p></div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <h2 class="section__title reveal">Игры из подборки</h2>
+    <div class="other"><a class="reveal d1" href="/blockblastik.html"><img src="/screenshots/blockblastik-s1.webp" alt=""><span><b>Block Blastik: Блоки в ряд</b><span>Блок-пазл</span></span></a><a class="reveal d2" href="/watermelon-merge.html"><img src="/screenshots/watermelon-merge-s1.webp" alt=""><span><b>Арбуз 2048: Соедини Фрукты</b><span>Пазл</span></span></a><a class="reveal d3" href="/candy-carnival.html"><img src="/screenshots/candy-carnival-s1.webp" alt=""><span><b>Три в ряд: Candy Carnival</b><span>Три в ряд</span></span></a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section__title reveal">Частые вопросы</h2>
+    <div class="faq"><div class="faq__item open"><button class="faq__q" type="button">Это тот же самый тетрис, что был на старых консолях?<i class="fa-solid fa-chevron-down"></i></button><div class="faq__a"><div>Механика та же — заполнение рядов фигурами из квадратиков. Отличается подача: фигуры не падают, а ставятся игроком, и очищаются не только ряды, но и квадраты.</div></div></div>
+<div class="faq__item"><button class="faq__q" type="button">Нужно ли регистрироваться, чтобы играть онлайн?<i class="fa-solid fa-chevron-down"></i></button><div class="faq__a"><div>Нет. Игра открывается по ссылке и сразу работает, прогресс хранится в браузере устройства.</div></div></div>
+<div class="faq__item"><button class="faq__q" type="button">Чем отличаются режимы «Классика», «Блиц» и «2048»?<i class="fa-solid fa-chevron-down"></i></button><div class="faq__a"><div>«Классика» — бесконечная игра на рекорд, «Блиц» — 60 секунд на максимум линий, «2048» — те же фигуры, но с числами и слияниями.</div></div></div>
+<div class="faq__item"><button class="faq__q" type="button">Работает ли игра на слабом телефоне?<i class="fa-solid fa-chevron-down"></i></button><div class="faq__a"><div>Да: графика простая, поле и фигуры рисуются на canvas, интернет нужен только для открытия ссылки.</div></div></div></div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <h2 class="section__title reveal">Читайте также</h2>
+    <div class="blog"><a class="bcard reveal d1" href="/blog/igry-na-planshet.html"><h3>Игры на планшет: что удобно играть с большого экрана</h3><p>Управление пальцами, горизонтальный режим и тяжёлая графика: какие игры не тормозят на планшете.</p><span>Читать <i class="fa-solid fa-arrow-right"></i></span></a><a class="bcard reveal d2" href="/blog/golovolomki-dlya-vzroslyh.html"><h3>Головоломки для взрослых: логика, наблюдательность, память</h3><p>Подборка жанров для тех, кто любит думать: числа, блоки, пары и idle-расчёты.</p><span>Читать <i class="fa-solid fa-arrow-right"></i></span></a><a class="bcard reveal d3" href="/blog/igry-tri-v-ryad.html"><h3>Игры «три в ряд»: почему они затягивают</h3><p>Каскады, комбо и бустеры: как устроены матчи-3 и во что играть бесплатно.</p><span>Читать <i class="fa-solid fa-arrow-right"></i></span></a></div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container footer__inner">
+    <div><span class="footer__tag">Wizzle Forge Games</span> · Делаем игры с 2026 года · © <span id="year">2026</span></div>
+    <div class="footer__links">
+      <a href="../blog/"><i class="fa-regular fa-newspaper"></i> Блог</a>
+      <a href="../press/">ⓘ Пресс-кит</a>
+      <a href="../privacy.html">Конфиденциальность</a>
+      <a href="../pay/test.html">Оплата</a>
+      <a href="mailto:wizzleforgegames@gmail.com"><i class="fa-regular fa-envelope"></i> wizzleforgegames@gmail.com</a>
+    </div>
+  </div>
+</footer>
+<div class="lb"><button class="lb__close" type="button"><i class="fa-solid fa-xmark"></i></button><button class="lb__nav prev" type="button"><i class="fa-solid fa-chevron-left"></i></button><img src="" alt=""><button class="lb__nav next" type="button"><i class="fa-solid fa-chevron-right"></i></button></div>
+<script src="/site.js"></script>
+</body></html>
