@@ -215,6 +215,7 @@
           callback: function (result) {
             console.log('[VK IAP] payment result:', result);
             if (result && (result.success || result.status === 'success')) {
+              rememberPurch(productId);   // чтобы «NOVA PRIME» не терялся после перезагрузки
               clearPending(true);
             } else {
               clearPending(false);
@@ -235,12 +236,20 @@
     });
   }
 
+  var PURCH_KEY = 'cd_purchases';
+  function loadPurch() { try { return JSON.parse(localStorage.getItem(PURCH_KEY) || '[]'); } catch (e) { return []; } }
+  function savePurch(l) { try { localStorage.setItem(PURCH_KEY, JSON.stringify(l)); } catch (e) {} }
+  function rememberPurch(productId) {
+    var l = loadPurch();
+    if (!l.some(function (p) { return (p.productID || p.id) === productId; })) {
+      l.push({ productID: productId, id: productId, purchaseToken: 'vk-' + Date.now(), at: Date.now() });
+      savePurch(l);
+    }
+  }
   window.NativeBilling = {
     purchase: function (productId) { return startPurchase(productId); },
-    getPurchases: function () {
-      // VK Play хранит покупки на своей стороне; для MVP — пусто.
-      return Promise.resolve([]);
-    }
+    requestPurchase: function (productId) { return startPurchase(productId); },
+    getPurchases: function () { return Promise.resolve(loadPurch()); }
   };
 
 

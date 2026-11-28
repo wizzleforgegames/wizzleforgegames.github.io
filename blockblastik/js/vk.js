@@ -189,6 +189,15 @@ const VK={
   },
   /* ---------- PAYMENTS ---------- */
   async pay(item,amount){
+    /* VK Play: сначала нормальный платёжный фрейм площадки (paymentFrame из
+       mailru.core.js, его ставит js/vk-adapter.js), потом старый VK Games путь */
+    try{
+      if(window.VK_PLAY&&window.VK_PLAY.pay&&typeof window.VK_PLAY.pay.buy==='function'){
+        const r=await window.VK_PLAY.pay.buy({id:String(item),amount:Number(amount)||0,title:String(item)});
+        if(r&&r.success)return {ok:true,data:r};
+        if(r&&r.canceled)return {ok:false,canceled:true};
+      }
+    }catch(e){console.warn('[VK] paymentFrame:',e)}
     if(!inVK||!bridge)return {ok:false};
     const r=await send('VKWebAppShowOrderBox',{type:'item',item:String(item)},60000);
     if(r.ok&&r.data&&r.data.status&&r.data.status!=='cancelled')return {ok:true,data:r.data};
