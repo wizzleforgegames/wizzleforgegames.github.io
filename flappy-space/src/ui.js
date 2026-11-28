@@ -784,7 +784,7 @@ function renderStationNext(){
 /* п.12-13: one screen for rewarded speed-ups and real-money automation */
 function openStore(){ AU.play("click", .5); renderStore(); showScreen("store"); }
 function storeSig(){ return [lang, hasPayments(), adLeft("speed"), adLeft("dock"), adLeft("bank"), adLeft("crate"),
-  adLeft("trial"), iapTokens("skips"), iapTokens("cds"), iapOn("drone"), iapOn("noAds"), iapOn("bot"),
+  adLeft("trial"), iapTokens("skips"), iapTokens("cds"), iapOn("drone"), iapOn("noads"), iapOn("bot"),
   iapOn("operator"), iapOn("dispatcher"), iapOn("pass"), iapOn("starter"), autoReady()?1:0,
   save.building?1:0, expPhase().phase].join("|"); }
 /* п.1.13.2/1.13.4: цифра цены + иконка портальной валюты из каталога SDK */

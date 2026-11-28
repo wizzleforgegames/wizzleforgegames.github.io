@@ -619,7 +619,7 @@ function droneTick(){
 }
 /* ---- interstitials: between screens only, never more than once per 3 runs / 2 min ---- */
 const INTER_GAP_S = 120, INTER_RUNS = 3;
-const noInter = () => iapOn("noAds") || iapOn("pass");
+const noInter = () => iapOn("noads") || iapOn("noAds") || iapOn("pass");
 function queueInter(tag){ if (!noInter()) save.pendingInter = tag; }
 function interOk(){
   if (noInter()) return false;
