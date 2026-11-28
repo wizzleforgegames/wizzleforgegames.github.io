@@ -54,4 +54,8 @@ var METRIA_ID=114655120;
     });
   }
   var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+/*sw*/
+  if('serviceWorker' in navigator && location.protocol==='https:'){
+    try{ navigator.serviceWorker.register('/sw.js'); }catch(e){}
+  }
 })();
