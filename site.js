@@ -1,3 +1,4 @@
+var METRIA_ID=114655120;
 (function(){
   document.documentElement.classList.add('js');
   var h=document.querySelector('.header');
@@ -24,7 +25,12 @@
       ifr.setAttribute('allow','fullscreen; autoplay; gamepad');
       ifr.setAttribute('allowfullscreen','');
       ifr.src=src; f.innerHTML=''; f.appendChild(ifr);
+      try{ if(window.ym) ym(METRIA_ID,'reachGoal','play'); }catch(e){}
     });
+  });
+
+  document.querySelectorAll('video').forEach(function(v){
+    v.addEventListener('play', function(){ try{ if(window.ym) ym(METRIA_ID,'reachGoal','video'); }catch(e){} }, {once:true});
   });
 
   var imgs=[], idx=0;
