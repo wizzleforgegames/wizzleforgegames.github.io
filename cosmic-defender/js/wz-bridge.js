@@ -33,7 +33,7 @@
   (function initFacade() {
     try {
       if (typeof YaGames === 'undefined' || !YaGames || !YaGames.init) { finish(); return; }
-      Promise.resolve(YaGames.init()).then(function (f) { y = f || null; finish(); },
+      Promise.resolve(YaGames.init()).then(function (f) { y = f || null; try { if (y && !window.ysdk) window.ysdk = y; } catch (e) {} finish(); },
                                              function () { finish(); });
     } catch (e) { finish(); }
     setTimeout(finish, 6000);

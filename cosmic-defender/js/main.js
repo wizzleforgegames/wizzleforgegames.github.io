@@ -1882,6 +1882,7 @@
       '<div class="btn-row">' +
         '<button class="btn ghost" id="btn-ach">' + t("ach") + '</button>' +
         '<button class="btn ghost" id="btn-lb">' + t("records") + '</button>' +
+        '<button class="btn ghost" id="btn-share">' + t("share") + '</button>' +
       '</div>' +
       '<div class="controls-hint">' + t("controls") + '</div>';
 
@@ -1900,6 +1901,8 @@
       if (_ba) _ba.onclick = function(){ SFX.click(); WzMeta.openAch(); };
       if (_bl) _bl.onclick = function(){ SFX.click(); WzMeta.openLb(); };
     }
+    var _bs = document.getElementById("btn-share");
+    if (_bs) _bs.onclick = function(){ SFX.click(); shareRun(persistent.best || 0); };
   }
 
   function refreshCarousel(){
@@ -1942,6 +1945,13 @@
     var msg = t("sharemsg").replace("{score}", (score||0).toLocaleString());
     var url = "https://wizzleforgegames.github.io/cosmic-defender/";
     var done = function(ok){ try { addFloat(LOG_W/2, LOG_H/2, t("copied"), "#4ad9ff", 22); } catch(e){} };
+    try {
+      var ys = window.ysdk;
+      if (ys && ys.share) {
+        ys.share({ title: "Cosmic Defender", text: msg, link: url, url: url }).then(function(){}, function(){});
+        return;
+      }
+    } catch(e){}
     try {
       if (navigator.share) {
         navigator.share({ title: "Cosmic Defender", text: msg, url: url }).then(function(){}, function(){});
