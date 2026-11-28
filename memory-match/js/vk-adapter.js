@@ -301,21 +301,30 @@
     ads: { interstitial: showInterstitial, rewarded: showRewarded, banner: showBanner },
     pay: { buy: buy, catalog: CATALOG },
     ready: Promise.all([loadBridge(), initIframeApi()]).then(function () {
-      if (!window.YaGames) {
-        window.YaGames = { init: function () { return Promise.resolve(makeYsdk()); } };
-        info('window.YaGames установлен (VK-фасад)');
-      }
+      if (!window.YaGames) { window.YaGames = { init: sdkOnce }; }
+      return sdkOnce();
       return true;
     })
   };
+  /* единый экземпляр фасада: init() у Яндекса можно вызывать многократно */
+  var _sdk = null;
+  function sdkOnce() {
+    if (_sdk) return Promise.resolve(_sdk);
+    return window.VK_PLAY.ready.catch(function () { return null; }).then(function () {
+      _sdk = makeYsdk();
+      /* wz-shop и другие общие модули ищут фасад по window.ysdk / YaGames.__ysdk —
+         без этого они уходят в Robokassa вместо paymentFrame */
+      try { window.ysdk = _sdk; } catch (e) {}
+      try { window.YaGames.__ysdk = _sdk; } catch (e) {}
+      info('ysdk-фасад выложен в window.ysdk');
+      return _sdk;
+    });
+  }
+  window.VK_PLAY.getSdk = sdkOnce;
   /* window.YaGames ставим СРАЗУ, не дожидаясь bridge/iframeApi: игра вполне
      может вызвать YaGames.init() раньше. init() сам дождётся готовности. */
   if (!window.YaGames) {
-    window.YaGames = {
-      init: function () {
-        return window.VK_PLAY.ready.catch(function () { return null; }).then(function () { return makeYsdk(); });
-      }
-    };
+    window.YaGames = { init: sdkOnce };
     info('window.YaGames установлен синхронно (VK-фасад)');
   }
   if (window.VK_PLAY_AUTOINIT !== false) { window.VK_PLAY.ready.catch(function () {}); }
